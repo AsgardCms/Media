@@ -11,7 +11,8 @@
   "providers": [
     "Modules\\Media\\Providers\\MediaServiceProvider",
     "Modules\\Media\\Providers\\RouteServiceProvider",
-    "Modules\\Media\\Image\\ImageServiceProvider"
+    "Modules\\Media\\Image\\ImageServiceProvider",
+    "Intervention\\Image\\ImageServiceProvider"
   ],
   "files": [
     "start.php"
