@@ -19,6 +19,6 @@ class File extends Model
         'width',
         'height',
         'filesize',
-        'folder_id'
+        'folder_id',
     ];
 }

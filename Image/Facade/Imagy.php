@@ -4,5 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 class Imagy extends Facade
 {
-    protected static function getFacadeAccessor() { return 'imagy'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'imagy';
+    }
 }

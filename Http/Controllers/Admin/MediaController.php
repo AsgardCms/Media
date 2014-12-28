@@ -76,7 +76,7 @@ class MediaController extends AdminBaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param File $file
+     * @param  File     $file
      * @return Response
      */
     public function edit(File $file)
@@ -87,8 +87,8 @@ class MediaController extends AdminBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param File $file
-     * @param UpdateMediaRequest $request
+     * @param  File               $file
+     * @param  UpdateMediaRequest $request
      * @return Response
      */
     public function update(File $file, UpdateMediaRequest $request)
@@ -96,13 +96,14 @@ class MediaController extends AdminBaseController
         $this->file->update($file, $request->all());
 
         Flash::success(trans('media::messages.file updated'));
+
         return Redirect::route('dashboard.media.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param File $file
+     * @param  File     $file
      * @internal param int $id
      * @return Response
      */
@@ -112,6 +113,7 @@ class MediaController extends AdminBaseController
         $this->file->destroy($file);
 
         Flash::success(trans('media::messages.file deleted'));
+
         return Redirect::route('dashboard.media.index');
     }
 }

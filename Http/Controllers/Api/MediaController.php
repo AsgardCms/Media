@@ -19,7 +19,7 @@ class MediaController
     /**
      * Store a newly created resource in storage.
      *
-     * @param UploadMediaRequest $request
+     * @param  UploadMediaRequest $request
      * @return Response
      */
     public function store(UploadMediaRequest $request)

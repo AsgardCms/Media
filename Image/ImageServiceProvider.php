@@ -24,14 +24,13 @@ class ImageServiceProvider extends ServiceProvider
         );
 
         $this->app['imagy'] = $this->app->share(function ($app) {
-            $factory = new InterventionFactory;
+            $factory = new InterventionFactory();
             $thumbnailManager = new ThumbnailsManager($app['config'], $app['modules']);
 
             return new Imagy($factory, $thumbnailManager, $app['config']);
         });
 
-        $this->app->booting(function()
-        {
+        $this->app->booting(function () {
             $loader = AliasLoader::getInstance();
             $loader->alias('Imagy', 'Modules\Media\Image\Facade\Imagy');
         });

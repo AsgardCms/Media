@@ -7,7 +7,7 @@ interface FileRepository extends BaseRepository
 {
     /**
      * Create a file row from the given file
-     * @param UploadedFile $file
+     * @param  UploadedFile $file
      * @return mixed
      */
     public function createFromFile(UploadedFile $file);

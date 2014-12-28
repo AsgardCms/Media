@@ -5,13 +5,13 @@ use Modules\Media\Image\ImageHandlerInterface;
 class Sharpen implements ImageHandlerInterface
 {
     private $defaults = [
-        'amount' => 10
+        'amount' => 10,
     ];
 
     /**
      * Handle the image manipulation request
-     * @param \Intervention\Image\Image $image
-     * @param array $options
+     * @param  \Intervention\Image\Image $image
+     * @param  array                     $options
      * @return \Intervention\Image\Image
      */
     public function handle($image, $options)

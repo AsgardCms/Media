@@ -5,13 +5,13 @@ use Modules\Media\Image\ImageHandlerInterface;
 class Brightness implements ImageHandlerInterface
 {
     private $defaults = [
-        'level' => 1
+        'level' => 1,
     ];
 
     /**
      * Handle the image manipulation request
-     * @param \Intervention\Image\Image $image
-     * @param array $options
+     * @param  \Intervention\Image\Image $image
+     * @param  array                     $options
      * @return \Intervention\Image\Image
      */
     public function handle($image, $options)

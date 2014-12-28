@@ -39,5 +39,4 @@ class RefreshThumbnailCommand extends Command
 
         $this->info('All thumbnails refreshed');
     }
-
 }

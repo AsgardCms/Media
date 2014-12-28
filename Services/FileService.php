@@ -33,7 +33,7 @@ class FileService
     }
 
     /**
-     * @param UploadedFile $file
+     * @param  UploadedFile $file
      * @return mixed
      */
     public function store(UploadedFile $file)
@@ -42,7 +42,7 @@ class FileService
         $savedFile = $this->file->createFromFile($file);
 
         // Move the uploaded file to files path
-        $file->move(public_path() . $this->config->get('media::config.files-path'), $savedFile->filename);
+        $file->move(public_path().$this->config->get('media::config.files-path'), $savedFile->filename);
 
         $this->createThumbnails($savedFile);
 
@@ -55,11 +55,9 @@ class FileService
      */
     private function createThumbnails($savedFile)
     {
-        $this->queue->push(function(Job $job) use ($savedFile)
-        {
+        $this->queue->push(function (Job $job) use ($savedFile) {
             App::make('imagy')->createAll($savedFile->path);
             $job->delete();
         });
     }
-
 }

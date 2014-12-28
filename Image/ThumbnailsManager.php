@@ -30,8 +30,10 @@ class ThumbnailsManager
     {
         $thumbnails = [];
         foreach ($this->module->enabled() as $enabledModule) {
-            $configuration = $this->config->get(strtolower($enabledModule->getName()) . '::thumbnails');
-            if (!is_null($configuration)) $thumbnails = array_merge($thumbnails, $configuration);
+            $configuration = $this->config->get(strtolower($enabledModule->getName()).'::thumbnails');
+            if (!is_null($configuration)) {
+                $thumbnails = array_merge($thumbnails, $configuration);
+            }
         }
 
         return $thumbnails;
@@ -49,5 +51,4 @@ class ThumbnailsManager
             }
         }
     }
-
 }

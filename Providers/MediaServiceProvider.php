@@ -44,8 +44,8 @@ class MediaServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             'Modules\Media\Repositories\FileRepository',
-            function($app) {
-                return new EloquentFileRepository(new File, $app['filesystem.disk']);
+            function ($app) {
+                return new EloquentFileRepository(new File(), $app['filesystem.disk']);
             }
         );
     }
@@ -63,9 +63,10 @@ class MediaServiceProvider extends ServiceProvider
      */
     private function registerRefreshCommand()
     {
-        $this->app->bindShared('command.media.refresh', function($app) {
+        $this->app->bindShared('command.media.refresh', function ($app) {
             $thumbnailManager = new ThumbnailsManager($app['config'], $app['modules']);
-            $imagy = new Imagy(new InterventionFactory, $thumbnailManager, $app['config']);
+            $imagy = new Imagy(new InterventionFactory(), $thumbnailManager, $app['config']);
+
             return new RefreshThumbnailCommand($imagy, $app['Modules\Media\Repositories\FileRepository']);
         });
 

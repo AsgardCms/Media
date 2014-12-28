@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class MediaDatabaseSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -15,5 +14,4 @@ class MediaDatabaseSeeder extends Seeder
     {
         Model::unguard();
     }
-
 }

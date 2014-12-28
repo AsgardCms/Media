@@ -16,7 +16,7 @@
 
             <?php if ($files): ?>
             <ul class="list-unstyled">
-              <?php foreach($files as $file): ?>
+              <?php foreach ($files as $file): ?>
                   <li class="pull-left" style="margin-right: 20px">
                       <img src="{{ $file->path }}" alt="" class="img-thumbnail" style="width: 250px;"/>
                       <a class="jsInsertImage btn btn-primary btn-flat" href="#" style="display: block">{{ trans('media::media.insert') }}</a>

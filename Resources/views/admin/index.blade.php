@@ -43,7 +43,7 @@
                     </thead>
                     <tbody>
                         <?php if ($files): ?>
-                            <?php foreach($files as $file): ?>
+                            <?php foreach ($files as $file): ?>
                                 <tr>
                                     <td>
                                         <a href="{{ URL::route('dashboard.media.edit', [$file->id]) }}">
@@ -83,7 +83,7 @@
     </div>
 </div>
 <?php if ($files): ?>
-    <?php foreach($files as $file): ?>
+    <?php foreach ($files as $file): ?>
     <!-- Modal -->
     <div class="modal fade" id="confirmation-{{ $file->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

@@ -3,15 +3,15 @@
 return [
     'title' => [
         'media' => 'Média',
-        'edit media' => 'Edition de média'
+        'edit media' => 'Edition de média',
     ],
     'breadcrumb' => [
-        'media' => 'Média'
+        'media' => 'Média',
     ],
     'table' => [
         'filename' => 'Nom de fichier',
         'width' => 'Largeur',
-        'height' => 'Hauteur'
+        'height' => 'Hauteur',
     ],
     'choose file' => 'Choissisez un fichier',
     'insert' => 'Sélectionner ce fichier',

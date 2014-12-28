@@ -5,13 +5,13 @@ use Modules\Media\Image\ImageHandlerInterface;
 class Pixelate implements ImageHandlerInterface
 {
     private $defaults = [
-        'size' => 0
+        'size' => 0,
     ];
 
     /**
      * Handle the image manipulation request
-     * @param \Intervention\Image\Image $image
-     * @param array $options
+     * @param  \Intervention\Image\Image $image
+     * @param  array                     $options
      * @return \Intervention\Image\Image
      */
     public function handle($image, $options)

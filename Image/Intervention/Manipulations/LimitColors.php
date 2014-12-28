@@ -6,13 +6,13 @@ class LimitColors implements ImageHandlerInterface
 {
     private $defaults = [
         'count' => 255,
-        'matte' => null
+        'matte' => null,
     ];
 
     /**
      * Handle the image manipulation request
-     * @param \Intervention\Image\Image $image
-     * @param array $options
+     * @param  \Intervention\Image\Image $image
+     * @param  array                     $options
      * @return \Intervention\Image\Image
      */
     public function handle($image, $options)

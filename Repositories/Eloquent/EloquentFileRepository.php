@@ -10,7 +10,7 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
 {
     /**
      * Update a resource
-     * @param File $file
+     * @param  File  $file
      * @param $data
      * @return mixed
      */
@@ -23,7 +23,7 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
 
     /**
      * Create a file row from the given file
-     * @param UploadedFile $file
+     * @param  UploadedFile $file
      * @return mixed
      */
     public function createFromFile(UploadedFile $file)

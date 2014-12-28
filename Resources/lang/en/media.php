@@ -3,15 +3,15 @@
 return [
     'title' => [
         'media' => 'Media',
-        'edit media' => 'Edit media'
+        'edit media' => 'Edit media',
     ],
     'breadcrumb' => [
-        'media' => 'Media'
+        'media' => 'Media',
     ],
     'table' => [
         'filename' => 'Filename',
         'width' => 'Width',
-        'height' => 'Height'
+        'height' => 'Height',
     ],
     'form' => [
         'alt_attribute' => 'Alt attribute',
