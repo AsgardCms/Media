@@ -5,6 +5,7 @@
   "keywords": [
   ],
   "active": 1,
+  "priority": 1,
   "require": {
     "intervention/image": "~2.0"
   },
