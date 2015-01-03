@@ -1,26 +1,25 @@
 {
-  "name": "Media",
-  "alias": "media",
-  "description": "",
-  "keywords": [
-  ],
-  "active": 1,
-  "priority": 1,
-  "require": {
-    "intervention/image": "~2.0"
-  },
-  "providers": [
-    "Modules\\Media\\Providers\\MediaServiceProvider",
-    "Modules\\Media\\Providers\\RouteServiceProvider",
-    "Modules\\Media\\Image\\ImageServiceProvider",
-    "Intervention\\Image\\ImageServiceProvider"
-  ],
-  "aliases": {
-    "Image": "Intervention\\Image\\Facades\\Image",
-    "Flash": "Laracasts\\Flash\\Flash",
-    "Imagy": "Modules\\Media\\Image\\Facade\\Imagy"
-  },
-  "files": [
-    "start.php"
-  ]
+    "name": "Media",
+    "alias": "media",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "priority": 1,
+    "require": {
+        "intervention\/image": "~2.0"
+    },
+    "providers": [
+        "Modules\\Media\\Providers\\MediaServiceProvider",
+        "Modules\\Media\\Providers\\RouteServiceProvider",
+        "Modules\\Media\\Image\\ImageServiceProvider",
+        "Intervention\\Image\\ImageServiceProvider"
+    ],
+    "aliases": {
+        "Image": "Intervention\\Image\\Facades\\Image",
+        "Flash": "Laracasts\\Flash\\Flash",
+        "Imagy": "Modules\\Media\\Image\\Facade\\Imagy"
+    },
+    "files": [
+        "start.php"
+    ]
 }

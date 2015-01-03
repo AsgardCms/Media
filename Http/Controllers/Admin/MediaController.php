@@ -97,7 +97,7 @@ class MediaController extends AdminBaseController
 
         Flash::success(trans('media::messages.file updated'));
 
-        return Redirect::route('dashboard.media.index');
+        return Redirect::route('admin.media.media.index');
     }
 
     /**
@@ -114,6 +114,6 @@ class MediaController extends AdminBaseController
 
         Flash::success(trans('media::messages.file deleted'));
 
-        return Redirect::route('dashboard.media.index');
+        return Redirect::route('admin.media.media.index');
     }
 }

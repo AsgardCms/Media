@@ -5,14 +5,14 @@ use Illuminate\Routing\Router;
 $router->model('media', 'Modules\Media\Entities\File');
 
 $router->group(['prefix' => LaravelLocalization::setLocale(), 'before' => 'LaravelLocalizationRedirectFilter|auth.admin|permissions'], function (Router $router) {
-    $router->group(['prefix' => Config::get('core::core.admin-prefix'), 'namespace' => 'Modules\Media\Http\Controllers'], function (Router $router) {
+    $router->group(['prefix' => Config::get('core::core.admin-prefix') . '/media', 'namespace' => 'Modules\Media\Http\Controllers'], function (Router $router) {
         $router->resource('media', 'Admin\MediaController', ['except' => ['show'], 'names' => [
-                'index' => 'dashboard.media.index',
-                'create' => 'dashboard.media.create',
-                'store' => 'dashboard.media.store',
-                'edit' => 'dashboard.media.edit',
-                'update' => 'dashboard.media.update',
-                'destroy' => 'dashboard.media.destroy',
+                'index' => 'admin.media.media.index',
+                'create' => 'admin.media.media.create',
+                'store' => 'admin.media.media.store',
+                'edit' => 'admin.media.media.edit',
+                'update' => 'admin.media.media.update',
+                'destroy' => 'admin.media.media.destroy',
             ]]);
     });
 });

@@ -1,6 +1,6 @@
 <?php
 return [
-    'media' => [
+    'media.media' => [
         'index',
         'create',
         'store',

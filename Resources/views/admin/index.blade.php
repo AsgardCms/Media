@@ -46,7 +46,7 @@
                             <?php foreach ($files as $file): ?>
                                 <tr>
                                     <td>
-                                        <a href="{{ URL::route('dashboard.media.edit', [$file->id]) }}">
+                                        <a href="{{ URL::route('admin.media.media.edit', [$file->id]) }}">
                                             {{ $file->created_at }}
                                         </a>
                                     </td>
@@ -54,13 +54,13 @@
                                         <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
                                     </td>
                                     <td>
-                                        <a href="{{ URL::route('dashboard.media.edit', [$file->id]) }}">
+                                        <a href="{{ URL::route('admin.media.media.edit', [$file->id]) }}">
                                             {{ $file->filename }}
                                         </a>
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{ URL::route('dashboard.media.edit', [$file->id]) }}" class="btn btn-default btn-flat"><i class="glyphicon glyphicon-pencil"></i></a>
+                                            <a href="{{ URL::route('admin.media.media.edit', [$file->id]) }}" class="btn btn-default btn-flat"><i class="glyphicon glyphicon-pencil"></i></a>
                                             <button class="btn btn-danger btn-flat" data-toggle="modal" data-target="#confirmation-{{ $file->id }}"><i class="glyphicon glyphicon-trash"></i></button>
                                         </div>
                                     </td>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('core::core.button.cancel') }}</button>
-                    {!! Form::open(['route' => ['dashboard.media.destroy', $file->id], 'method' => 'delete', 'class' => 'pull-left']) !!}
+                    {!! Form::open(['route' => ['admin.media.media.destroy', $file->id], 'method' => 'delete', 'class' => 'pull-left']) !!}
                         <button type="submit" class="btn btn-danger btn-flat"><i class="glyphicon glyphicon-trash"></i> {{ trans('core::core.button.delete') }}</button>
                     {!! Form::close() !!}
                 </div>
