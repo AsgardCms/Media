@@ -5,7 +5,7 @@ use Illuminate\Routing\Router;
 $router->model('media', 'Modules\Media\Entities\File');
 
 $router->group(['prefix' => LaravelLocalization::setLocale(), 'before' => 'LaravelLocalizationRedirectFilter|auth.admin|permissions'], function (Router $router) {
-    $router->group(['prefix' => Config::get('core::core.admin-prefix') . '/media', 'namespace' => 'Modules\Media\Http\Controllers'], function (Router $router) {
+    $router->group(['prefix' => Config::get('core::core.admin-prefix').'/media', 'namespace' => 'Modules\Media\Http\Controllers'], function (Router $router) {
         $router->resource('media', 'Admin\MediaController', ['except' => ['show'], 'names' => [
                 'index' => 'admin.media.media.index',
                 'create' => 'admin.media.media.create',
