@@ -5,9 +5,6 @@
     "keywords": [],
     "active": 1,
     "priority": 1,
-    "require": {
-        "intervention\/image": "~2.0"
-    },
     "providers": [
         "Modules\\Media\\Providers\\MediaServiceProvider",
         "Modules\\Media\\Providers\\RouteServiceProvider",
