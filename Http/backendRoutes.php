@@ -18,4 +18,4 @@ $router->group(['prefix' => '/media'], function (Router $router) {
     ]);
 });
 
-$router->get('admin/grid-files', 'Modules\Media\Http\Controllers\Admin\MediaController@gridFiles');
+$router->get('admin/grid-files', 'MediaController@gridFiles');
