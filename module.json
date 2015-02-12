@@ -17,6 +17,6 @@
         "Imagy": "Modules\\Media\\Image\\Facade\\Imagy"
     },
     "files": [
-        "start.php"
+        "composers.php"
     ]
 }
