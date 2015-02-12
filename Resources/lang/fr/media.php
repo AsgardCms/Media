@@ -15,5 +15,5 @@ return [
     ],
     'choose file' => 'Choissisez un fichier',
     'insert' => 'Sélectionner ce fichier',
-    'file picker' => 'Sélectionneur de fichier'
+    'file picker' => 'Sélectionneur de fichier',
 ];

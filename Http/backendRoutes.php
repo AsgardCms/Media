@@ -14,7 +14,7 @@ $router->group(['prefix' => '/media'], function (Router $router) {
             'edit' => 'admin.media.media.edit',
             'update' => 'admin.media.media.update',
             'destroy' => 'admin.media.media.destroy',
-        ]
+        ],
     ]);
 });
 
