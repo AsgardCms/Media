@@ -56,7 +56,7 @@ class FileService
     private function createThumbnails($savedFile)
     {
         $this->queue->push(function (Job $job) use ($savedFile) {
-            App::make('imagy')->createAll($savedFile->path);
+            app('imagy')->createAll($savedFile->path);
             $job->delete();
         });
     }
