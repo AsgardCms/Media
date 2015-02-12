@@ -30,7 +30,7 @@ class ThumbnailsManager
     {
         $thumbnails = [];
         foreach ($this->module->enabled() as $enabledModule) {
-            $configuration = $this->config->get(strtolower($enabledModule->getName()).'::thumbnails');
+            $configuration = $this->config->get(strtolower('asgard.'.$enabledModule->getName()).'.thumbnails');
             if (!is_null($configuration)) {
                 $thumbnails = array_merge($thumbnails, $configuration);
             }
