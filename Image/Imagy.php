@@ -40,8 +40,8 @@ class Imagy
      */
     public function __construct(ImageFactoryInterface $imageFactory, ThumbnailsManager $manager, Repository $config)
     {
-        $this->image = App::make('Intervention\Image\ImageManager');
-        $this->finder = App::make('Illuminate\Filesystem\Filesystem');
+        $this->image = app('Intervention\Image\ImageManager');
+        $this->finder = app('Illuminate\Filesystem\Filesystem');
         $this->imageFactory = $imageFactory;
         $this->manager = $manager;
         $this->config = $config;
