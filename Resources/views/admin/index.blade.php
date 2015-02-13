@@ -23,7 +23,7 @@
 
 @section('content')
 <div class="row col-md-12">
-    <form action="{{ URL::route('api.file.store')}}" method="POST" class="dropzone">
+    <form method="POST" class="dropzone">
         {!! Form::token() !!}
     </form>
 </div>
@@ -113,9 +113,8 @@
 <script>
 $( document ).ready(function() {
     Dropzone.autoDiscover = false;
-
     var myDropzone = new Dropzone(".dropzone", {
-        url: $(this).attr('action'),
+        url: '/api/file',
         autoProcessQueue: true,
         maxFilesize: '<?php echo $config["max-file-size"] ?>',
         acceptedFiles : '<?php echo $config["allowed-types"] ?>'

@@ -6,11 +6,6 @@ use Modules\Media\Image\Intervention\InterventionFactory;
 
 class ImageServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-        $this->package('nwidart/imagy');
-    }
-
     /**
      * Register the service provider.
      *

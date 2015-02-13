@@ -1,10 +1,11 @@
 <?php namespace Modules\Media\Http\Controllers\Api;
 
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use Modules\Media\Http\Requests\UploadMediaRequest;
 use Modules\Media\Services\FileService;
 
-class MediaController
+class MediaController extends Controller
 {
     /**
      * @var FileService

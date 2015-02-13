@@ -7,5 +7,5 @@ return [
         'edit',
         'update',
         'destroy',
-    ]
+    ],
 ];

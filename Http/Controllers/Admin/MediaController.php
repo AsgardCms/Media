@@ -41,7 +41,7 @@ class MediaController extends AdminBaseController
     {
         $files = $this->file->all();
 
-        $config = $this->config->get('media::config');
+        $config = $this->config->get('asgard.media.config');
 
         return View::make('media::admin.index', compact('files', 'config'));
     }

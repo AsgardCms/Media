@@ -40,8 +40,8 @@ class Imagy
      */
     public function __construct(ImageFactoryInterface $imageFactory, ThumbnailsManager $manager, Repository $config)
     {
-        $this->image = App::make('Intervention\Image\ImageManager');
-        $this->finder = App::make('Illuminate\Filesystem\Filesystem');
+        $this->image = app('Intervention\Image\ImageManager');
+        $this->finder = app('Illuminate\Filesystem\Filesystem');
         $this->imageFactory = $imageFactory;
         $this->manager = $manager;
         $this->config = $config;
@@ -60,7 +60,7 @@ class Imagy
             return;
         }
 
-        $filename = $this->config->get('media::config.files-path').$this->newFilename($path, $thumbnail);
+        $filename = $this->config->get('asgard.media.config.files-path').$this->newFilename($path, $thumbnail);
 
         if ($this->returnCreatedFile($filename, $forceCreate)) {
             return $filename;
@@ -83,7 +83,7 @@ class Imagy
             return $originalImage;
         }
 
-        return $this->config->get('media::config.files-path').$this->newFilename($originalImage, $thumbnail);
+        return $this->config->get('asgard.media.config.files-path').$this->newFilename($originalImage, $thumbnail);
     }
 
     /**
@@ -98,7 +98,7 @@ class Imagy
 
         foreach ($this->manager->all() as $thumbName => $filters) {
             $image = $this->image->make(public_path().$path);
-            $filename = $this->config->get('media::config.files-path').$this->newFilename($path, $thumbName);
+            $filename = $this->config->get('asgard.media.config.files-path').$this->newFilename($path, $thumbName);
             foreach ($filters as $manipulation => $options) {
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
@@ -186,7 +186,7 @@ class Imagy
         $extension = pathinfo($file->path, PATHINFO_EXTENSION);
         foreach ($this->manager->all() as $thumbnail => $filters) {
             $paths[] = public_path().$this->config->get(
-                    'media::config.files-path'
+                    'asgard.media.config.files-path'
                 )."{$fileName}_{$thumbnail}.{$extension}";
         }
 
