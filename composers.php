@@ -1,3 +1,3 @@
 <?php
 
-View::composer('core::partials.sidebar-nav', 'Modules\Media\Composers\SidebarViewComposer');
+View::composer('partials.sidebar-nav', 'Modules\Media\Composers\SidebarViewComposer');

@@ -1,19 +1,27 @@
 <?php namespace Modules\Media\Composers;
 
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Sidebar\SidebarGroup;
+use Maatwebsite\Sidebar\SidebarItem;
 use Modules\Core\Composers\BaseSidebarViewComposer;
 
 class SidebarViewComposer extends BaseSidebarViewComposer
 {
     public function compose(View $view)
     {
-        $view->items->put('medias', [
-            'weight' => 6,
-            'request' => "*/$view->prefix/media/media*",
-            'route' => 'admin.media.media.index',
-            'icon-class' => 'fa fa-camera',
-            'title' => 'Medias',
-            'permission' => $this->auth->hasAccess('media.media.index'),
-        ]);
+        $view->sidebar->group('Medias', function (SidebarGroup $group) {
+            $group->enabled = false;
+            $group->weight = 2;
+
+            $group->addItem('Medias', function (SidebarItem $item) {
+                $item->route('admin.media.media.index');
+                $item->icon = 'fa fa-camera';
+                $item->name = 'Medias';
+                $item->authorize(
+                    $this->auth->hasAccess('media.media.index')
+                );
+            });
+
+        });
     }
 }
