@@ -11,6 +11,7 @@ class SidebarViewComposer extends BaseSidebarViewComposer
     {
         $view->sidebar->group('Medias', function (SidebarGroup $group) {
             $group->enabled = false;
+            $group->weight = 2;
 
             $group->addItem('Medias', function (SidebarItem $item) {
                 $item->route('admin.media.media.index');
