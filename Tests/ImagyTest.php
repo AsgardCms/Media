@@ -42,13 +42,13 @@ class ImagyTest extends BaseTestCase
     /** @test */
     public function it_should_create_a_file()
     {
-        if ($this->finder->isFile(public_path()."{$this->mediaPath}google-map_smallThumb.png")) {
-            $this->finder->delete(public_path()."{$this->mediaPath}google-map_smallThumb.png");
+        if ($this->finder->isFile(public_path() . "{$this->mediaPath}google-map_smallThumb.png")) {
+            $this->finder->delete(public_path() . "{$this->mediaPath}google-map_smallThumb.png");
         }
 
         $this->imagy->get("{$this->mediaPath}google-map.png", 'smallThumb', true);
 
-        $this->assertTrue($this->finder->isFile(public_path()."{$this->mediaPath}google-map_smallThumb.png"));
+        $this->assertTrue($this->finder->isFile(public_path() . "{$this->mediaPath}google-map_smallThumb.png"));
     }
 
     /** @test */
@@ -56,7 +56,7 @@ class ImagyTest extends BaseTestCase
     {
         $this->imagy->get("{$this->mediaPath}test-pdf.pdf", 'smallThumb', true);
 
-        $this->assertFalse($this->finder->isFile(public_path()."{$this->mediaPath}test-pdf_smallThumb.png"));
+        $this->assertFalse($this->finder->isFile(public_path() . "{$this->mediaPath}test-pdf_smallThumb.png"));
     }
 
     /** @test */

@@ -11,7 +11,7 @@ class FileHelper
 
         $name = Str::slug($name);
 
-        return $name.$extension;
+        return $name . $extension;
     }
 
     /**

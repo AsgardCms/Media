@@ -42,7 +42,7 @@ class FileService
         $savedFile = $this->file->createFromFile($file);
 
         // Move the uploaded file to files path
-        $file->move(public_path().$this->config->get('asgard.media.config.files-path'), $savedFile->filename);
+        $file->move(public_path() . $this->config->get('asgard.media.config.files-path'), $savedFile->filename);
 
         $this->createThumbnails($savedFile);
 

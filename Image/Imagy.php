@@ -60,7 +60,7 @@ class Imagy
             return;
         }
 
-        $filename = $this->config->get('asgard.media.config.files-path').$this->newFilename($path, $thumbnail);
+        $filename = $this->config->get('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail);
 
         if ($this->returnCreatedFile($filename, $forceCreate)) {
             return $filename;
@@ -83,7 +83,7 @@ class Imagy
             return $originalImage;
         }
 
-        return $this->config->get('asgard.media.config.files-path').$this->newFilename($originalImage, $thumbnail);
+        return $this->config->get('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
     }
 
     /**
@@ -97,8 +97,8 @@ class Imagy
         }
 
         foreach ($this->manager->all() as $thumbName => $filters) {
-            $image = $this->image->make(public_path().$path);
-            $filename = $this->config->get('asgard.media.config.files-path').$this->newFilename($path, $thumbName);
+            $image = $this->image->make(public_path() . $path);
+            $filename = $this->config->get('asgard.media.config.files-path') . $this->newFilename($path, $thumbName);
             foreach ($filters as $manipulation => $options) {
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
@@ -117,7 +117,7 @@ class Imagy
     {
         $filename = pathinfo($path, PATHINFO_FILENAME);
 
-        return $filename.'_'.$thumbnail.'.'.pathinfo($path, PATHINFO_EXTENSION);
+        return $filename . '_' . $thumbnail . '.' . pathinfo($path, PATHINFO_EXTENSION);
     }
 
     /**
@@ -128,7 +128,7 @@ class Imagy
      */
     private function returnCreatedFile($filename, $forceCreate)
     {
-        return $this->finder->isFile(public_path().$filename) && !$forceCreate;
+        return $this->finder->isFile(public_path() . $filename) && !$forceCreate;
     }
 
     /**
@@ -138,7 +138,7 @@ class Imagy
      */
     private function writeImage($filename, $image)
     {
-        $this->finder->put(public_path().$filename, $image);
+        $this->finder->put(public_path() . $filename, $image);
     }
 
     /**
@@ -149,7 +149,7 @@ class Imagy
      */
     private function makeNew($path, $filename, $thumbnail)
     {
-        $image = $this->image->make(public_path().$path);
+        $image = $this->image->make(public_path() . $path);
 
         foreach ($this->manager->find($thumbnail) as $manipulation => $options) {
             $image = $this->imageFactory->make($manipulation)->handle($image, $options);
@@ -181,13 +181,13 @@ class Imagy
             return $this->finder->delete($file->path);
         }
 
-        $paths[] = public_path().$file->path;
+        $paths[] = public_path() . $file->path;
         $fileName = pathinfo($file->path, PATHINFO_FILENAME);
         $extension = pathinfo($file->path, PATHINFO_EXTENSION);
         foreach ($this->manager->all() as $thumbnail => $filters) {
-            $paths[] = public_path().$this->config->get(
+            $paths[] = public_path() . $this->config->get(
                     'asgard.media.config.files-path'
-                )."{$fileName}_{$thumbnail}.{$extension}";
+                ) . "{$fileName}_{$thumbnail}.{$extension}";
         }
 
         return $this->finder->delete($paths);

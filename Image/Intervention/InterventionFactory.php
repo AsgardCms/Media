@@ -10,7 +10,7 @@ class InterventionFactory implements ImageFactoryInterface
      */
     public function make($manipulation)
     {
-        $class = 'Modules\\Media\\Image\\Intervention\\Manipulations\\'.ucfirst($manipulation);
+        $class = 'Modules\\Media\\Image\\Intervention\\Manipulations\\' . ucfirst($manipulation);
 
         return new $class();
     }
