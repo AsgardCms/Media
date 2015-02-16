@@ -9,14 +9,12 @@ class SidebarViewComposer extends BaseSidebarViewComposer
 {
     public function compose(View $view)
     {
-        $view->sidebar->group('Medias', function (SidebarGroup $group) {
-            $group->enabled = false;
-            $group->weight = 2;
+        $view->sidebar->group(trans('core::sidebar.content'), function (SidebarGroup $group) {
 
-            $group->addItem('Medias', function (SidebarItem $item) {
-                $item->route('admin.media.media.index');
+            $group->addItem(trans('media::media.title.media'), function (SidebarItem $item) {
+                $item->weight = 2;
                 $item->icon = 'fa fa-camera';
-                $item->name = 'Medias';
+                $item->route('admin.media.media.index');
                 $item->authorize(
                     $this->auth->hasAccess('media.media.index')
                 );
