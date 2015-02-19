@@ -37,5 +37,19 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <h3>Thumbnails</h3>
+
+        <ul class="list-unstyled">
+            <?php foreach($thumbnails as $thumb => $filter): ?>
+                <li style="float:left; margin-right: 10px">
+                    <img src="{{ Imagy::getThumbnail($file->path, $thumb) }}" alt=""/>
+                    <p class="text-muted" style="text-align: center">{{ $thumb }}</p>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
 {!! Form::close() !!}
 @stop

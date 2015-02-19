@@ -8,6 +8,7 @@ use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Media\Entities\File;
 use Modules\Media\Http\Requests\UpdateMediaRequest;
 use Modules\Media\Image\Imagy;
+use Modules\Media\Image\ThumbnailsManager;
 use Modules\Media\Repositories\FileRepository;
 
 class MediaController extends AdminBaseController
@@ -24,12 +25,17 @@ class MediaController extends AdminBaseController
      * @var Imagy
      */
     private $imagy;
+    /**
+     * @var ThumbnailsManager
+     */
+    private $thumbnailsManager;
 
-    public function __construct(FileRepository $file, Repository $config, Imagy $imagy)
+    public function __construct(FileRepository $file, Repository $config, Imagy $imagy, ThumbnailsManager $thumbnailsManager)
     {
         $this->file = $file;
         $this->config = $config;
         $this->imagy = $imagy;
+        $this->thumbnailsManager = $thumbnailsManager;
     }
 
     /**
@@ -81,7 +87,9 @@ class MediaController extends AdminBaseController
      */
     public function edit(File $file)
     {
-        return View::make('media::admin.edit', compact('file'));
+        $thumbnails = $this->thumbnailsManager->all();
+
+        return View::make('media::admin.edit', compact('file', 'thumbnails'));
     }
 
     /**
