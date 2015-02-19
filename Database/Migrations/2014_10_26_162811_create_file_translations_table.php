@@ -22,7 +22,7 @@ class CreateFileTranslationsTable extends Migration
                 $table->string('alt_attribute');
                 $table->string('keywords');
                 $table->unique(['file_id', 'locale']);
-                $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
+                $table->foreign('file_id')->references('id')->on('media__files')->onDelete('cascade');
             }
         );
     }
