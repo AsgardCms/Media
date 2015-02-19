@@ -7,6 +7,7 @@ class File extends Model
 {
     use Translatable;
 
+    protected $table = 'media__files';
     public $translatedAttributes = ['description', 'alt_attribute', 'keywords'];
     protected $fillable = [
         'description',

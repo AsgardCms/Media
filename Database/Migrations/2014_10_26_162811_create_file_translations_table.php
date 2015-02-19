@@ -13,7 +13,7 @@ class CreateFileTranslationsTable extends Migration
     public function up()
     {
         Schema::create(
-            'file_translations',
+            'media__file_translations',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('file_id')->unsigned();
