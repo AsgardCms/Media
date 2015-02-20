@@ -35,7 +35,7 @@ class ImagyTest extends MediaTestCase
         $this->finder = App::make('Illuminate\Filesystem\Filesystem');
         $this->imagy = new Imagy(new InterventionFactory(), new ThumbnailsManager($this->config, $module), $this->config);
 
-        $this->mediaPath = $this->config->get('media::config.files-path');
+        $this->mediaPath = __DIR__ . '/Fixtures';
     }
 
     /** @test */
