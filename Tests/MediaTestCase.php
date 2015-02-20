@@ -9,6 +9,7 @@ abstract class MediaTestCase extends TestCase
         return [
             'Modules\Media\Providers\MediaServiceProvider',
             'Pingpong\Modules\ModulesServiceProvider',
+            'Intervention\Image\ImageServiceProvider',
         ];
     }
 }
