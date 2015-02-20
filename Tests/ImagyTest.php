@@ -1,12 +1,11 @@
 <?php namespace Modules\Media\Tests;
 
 use Illuminate\Support\Facades\App;
-use Modules\Core\Tests\BaseTestCase;
 use Modules\Media\Image\Imagy;
 use Modules\Media\Image\Intervention\InterventionFactory;
 use Modules\Media\Image\ThumbnailsManager;
 
-class ImagyTest extends BaseTestCase
+class ImagyTest extends MediaTestCase
 {
     /**
      * @var Imagy
