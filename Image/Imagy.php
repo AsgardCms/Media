@@ -138,7 +138,7 @@ class Imagy
      */
     private function writeImage($filename, $image)
     {
-        $this->finder->put(public_path() . $filename, $image);
+        $this->finder->put(public_path($filename), $image);
     }
 
     /**
@@ -156,6 +156,7 @@ class Imagy
         }
 
         $image = $image->encode(pathinfo($path, PATHINFO_EXTENSION));
+
         $this->writeImage($filename, $image);
     }
 
