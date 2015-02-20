@@ -35,19 +35,19 @@ class ImagyTest extends MediaTestCase
         $this->finder = App::make('Illuminate\Filesystem\Filesystem');
         $this->imagy = new Imagy(new InterventionFactory(), new ThumbnailsManager($this->config, $module), $this->config);
 
-        $this->mediaPath = __DIR__ . '/Fixtures';
+        $this->mediaPath = __DIR__ . '/Fixtures/';
     }
 
     /** @test */
     public function it_should_create_a_file()
     {
-        if ($this->finder->isFile(public_path() . "{$this->mediaPath}google-map_smallThumb.png")) {
-            $this->finder->delete(public_path() . "{$this->mediaPath}google-map_smallThumb.png");
+        if ($this->finder->isFile("{$this->mediaPath}google-map_smallThumb.png")) {
+            $this->finder->delete("{$this->mediaPath}google-map_smallThumb.png");
         }
 
         $this->imagy->get("{$this->mediaPath}google-map.png", 'smallThumb', true);
 
-        $this->assertTrue($this->finder->isFile(public_path() . "{$this->mediaPath}google-map_smallThumb.png"));
+        $this->assertTrue($this->finder->isFile("{$this->mediaPath}google-map_smallThumb.png"));
     }
 
     /** @test */
@@ -61,7 +61,8 @@ class ImagyTest extends MediaTestCase
     /** @test */
     public function it_should_return_thumbnail_path()
     {
-        $path = $this->imagy->getThumbnail("{$this->mediaPath}google-map.png", 'smallThumb');
+        $path = $this->mediaPath;
+        $path .= $this->imagy->getThumbnail("{$this->mediaPath}google-map.png", 'smallThumb');
         $expected = "{$this->mediaPath}google-map_smallThumb.png";
 
         $this->assertEquals($expected, $path);
