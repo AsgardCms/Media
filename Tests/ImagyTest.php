@@ -44,6 +44,7 @@ class ImagyTest extends MediaTestCase
     public function tearDown()
     {
         $this->finder->delete("{$this->testbenchPublicPath}google-map.png");
+        $this->finder->delete("{$this->testbenchPublicPath}google-map_smallThumb.png");
     }
 
     /** @test */
@@ -55,7 +56,7 @@ class ImagyTest extends MediaTestCase
 
         $this->imagy->get("/google-map.png", 'smallThumb', true);
 
-        $this->assertTrue($this->finder->isFile("{$this->mediaPath}google-map_smallThumb.png"));
+        $this->assertTrue($this->finder->isFile("{$this->testbenchPublicPath}google-map_smallThumb.png"));
     }
 
     /** @test */
