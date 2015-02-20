@@ -23,6 +23,7 @@ class ImagyTest extends MediaTestCase
      * @var string
      */
     protected $mediaPath;
+    private $testbenchPublicPath;
 
     /**
      *
@@ -35,7 +36,14 @@ class ImagyTest extends MediaTestCase
         $this->finder = App::make('Illuminate\Filesystem\Filesystem');
         $this->imagy = new Imagy(new InterventionFactory(), new ThumbnailsManager($this->config, $module), $this->config);
 
+        $this->testbenchPublicPath = __DIR__ . '/../vendor/orchestra/testbench/fixture/public/';
         $this->mediaPath = __DIR__ . '/Fixtures/';
+        $this->finder->copy("{$this->mediaPath}google-map.png", "{$this->testbenchPublicPath}google-map.png");
+    }
+
+    public function tearDown()
+    {
+        $this->finder->delete("{$this->testbenchPublicPath}google-map.png");
     }
 
     /** @test */
@@ -45,7 +53,7 @@ class ImagyTest extends MediaTestCase
             $this->finder->delete("{$this->mediaPath}google-map_smallThumb.png");
         }
 
-        $this->imagy->get("{$this->mediaPath}google-map.png", 'smallThumb', true);
+        $this->imagy->get("/google-map.png", 'smallThumb', true);
 
         $this->assertTrue($this->finder->isFile("{$this->mediaPath}google-map_smallThumb.png"));
     }
