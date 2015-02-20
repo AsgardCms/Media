@@ -42,6 +42,7 @@ class ThumbnailsManager
     /**
      * Find the filters for the given thumbnail
      * @param $thumbnail
+     * @return array
      */
     public function find($thumbnail)
     {
@@ -50,5 +51,7 @@ class ThumbnailsManager
                 return $filters;
             }
         }
+
+        return [];
     }
 }
