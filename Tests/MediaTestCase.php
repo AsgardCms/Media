@@ -12,4 +12,10 @@ abstract class MediaTestCase extends TestCase
             'Intervention\Image\ImageServiceProvider',
         ];
     }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['path.base'] = __DIR__ . '/..';
+        $app->setBasePath(__DIR__ . '/..');
+    }
 }
