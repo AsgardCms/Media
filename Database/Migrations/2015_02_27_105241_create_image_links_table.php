@@ -12,7 +12,7 @@ class CreateImageLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('media__imageable', function (Blueprint $table) {
+        Schema::create('media__imageables', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('file_id');
             $table->integer('imageable_id');
@@ -27,6 +27,6 @@ class CreateImageLinksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('media__imageable');
+        Schema::drop('media__imageables');
     }
 }
