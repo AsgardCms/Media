@@ -1,4 +1,20 @@
 <div class="form-group">
+    <style>
+        figure.jsThumbnailImageWrapper {
+            position: relative;
+            display: inline-block;
+        }
+        figure.jsThumbnailImageWrapper i {
+            position: absolute;
+            top:-10px;
+            right:-10px;
+            color: #f56954;
+            font-size: 2em;
+            background: white;
+            border-radius: 20px;
+            height: 25px;
+        }
+    </style>
     <script>
         function includeMedia(mediaId) {
             $.ajax({
@@ -20,10 +36,10 @@
     {!! Form::label("thumbnail", 'Thumbnail:') !!}
     <div class="clearfix"></div>
     <?php if (isset(${$zone}->path)): ?>
-    <figure style="position: relative; display: inline-block;" class="jsThumbnailImageWrapper">
+    <figure class="jsThumbnailImageWrapper">
         <img src="{{ Imagy::getThumbnail(${$zone}->path, 'smallThumb') }}" alt=""/>
         <a class="jsRemoveLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
-            <i class="fa fa-times-circle" style="position: absolute; top:-10px; right:-10px;color: #f56954;font-size: 2em;background: white;border-radius: 20px;height: 25px;"></i>
+            <i class="fa fa-times-circle"></i>
         </a>
     </figure>
     <?php endif; ?>
