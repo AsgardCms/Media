@@ -32,6 +32,7 @@ class MediaController extends AdminBaseController
 
     public function __construct(FileRepository $file, Repository $config, Imagy $imagy, ThumbnailsManager $thumbnailsManager)
     {
+        parent::__construct();
         $this->file = $file;
         $this->config = $config;
         $this->imagy = $imagy;
