@@ -10,5 +10,6 @@ return [
     ],
     'media.media-grid' => [
         'index',
+        'ckIndex',
     ]
 ];

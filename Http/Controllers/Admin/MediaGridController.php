@@ -17,10 +17,25 @@ class MediaGridController extends AdminBaseController
         $this->file = $file;
     }
 
+    /**
+     * A grid view for the upload button
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $files = $this->file->all();
 
-        return view('media::admin.grid', compact('files'));
+        return view('media::admin.grid.general', compact('files'));
+    }
+
+    /**
+     * A grid view of uploaded files used for the wysiwyg editor
+     * @return \Illuminate\View\View
+     */
+    public function ckIndex()
+    {
+        $files = $this->file->all();
+
+        return view('media::admin.grid.ckeditor', compact('files'));
     }
 }
