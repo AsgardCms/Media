@@ -47,6 +47,8 @@ class MediaController extends Controller
 
         $entity = $entityClass::find($entityId);
         $entity->files()->attach($mediaId, ['imageable_type' => $entityClass, 'zone' => $request->get('zone')]);
+
+        return Response::json(['error' => false, 'message' => 'The link has been added.']);
     }
 
     /**
