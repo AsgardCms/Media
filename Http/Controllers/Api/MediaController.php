@@ -35,9 +35,17 @@ class MediaController extends Controller
         return Response::json($savedFile->toArray());
     }
 
+    /**
+     * Link the given entity with a media file
+     * @param Request $request
+     */
     public function linkMedia(Request $request)
     {
         $mediaId = $request->get('mediaId');
+        $entityClass = $request->get('entityClass');
+        $entityId = $request->get('entityId');
 
+        $entity = $entityClass::find($entityId);
+        $entity->files()->attach($mediaId, ['imageable_type' => $entityClass, 'zone' => $request->get('zone')]);
     }
 }
