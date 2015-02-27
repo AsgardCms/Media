@@ -19,7 +19,7 @@
     </script>
     {!! Form::label("thumbnail", 'Thumbnail:') !!}
     <div class="clearfix"></div>
-    <?php if (isset(${$zone})): ?>
+    <?php if (isset(${$zone}->path)): ?>
     <figure style="position: relative; display: inline-block;" class="jsThumbnailImageWrapper">
         <img src="{{ Imagy::getThumbnail(${$zone}->path, 'smallThumb') }}" alt=""/>
         <a class="jsRemoveLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
