@@ -39,7 +39,11 @@ class FileService
     public function store(UploadedFile $file)
     {
         // Save the file info to db
-        $savedFile = $this->file->createFromFile($file);
+        try {
+            $savedFile = $this->file->createFromFile($file);
+        } catch (\InvalidArgumentException $e) {
+            return $e->getMessage();
+        }
 
         // Move the uploaded file to files path
         $file->move(public_path() . $this->config->get('asgard.media.config.files-path'), $savedFile->filename);

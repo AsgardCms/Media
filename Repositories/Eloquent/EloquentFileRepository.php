@@ -30,6 +30,10 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
     {
         $fileName = FileHelper::slug($file->getClientOriginalName());
 
+        $exists = $this->model->whereFilename($fileName)->first();
+
+        if ($exists) throw new \InvalidArgumentException('File slug already exists');
+
         return $this->model->create([
             'filename' => $fileName,
             'path' => "/assets/media/{$fileName}",

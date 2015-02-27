@@ -27,6 +27,10 @@ class MediaController extends Controller
     {
         $savedFile = $this->fileService->store($request->file('file'));
 
+        if (is_string($savedFile)) {
+            return Response::json(['error' => $savedFile], 409);
+        }
+
         return Response::json($savedFile->toArray());
     }
 }

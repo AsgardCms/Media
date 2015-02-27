@@ -133,6 +133,10 @@ $( document ).ready(function() {
 
         }, 1000);
     });
+    myDropzone.on("error", function(file, errorMessage) {
+        var html = '<div class="alert alert-danger" role="alert">' + errorMessage.error + '</div>';
+        $('.col-md-12').first().prepend(html);
+    });
 });
 </script>
 <?php $locale = App::getLocale(); ?>
