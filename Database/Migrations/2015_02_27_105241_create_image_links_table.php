@@ -16,7 +16,7 @@ class CreateImageLinksTable extends Migration
             $table->increments('id');
             $table->integer('file_id');
             $table->integer('imageable_id');
-            $table->integer('imageable_type');
+            $table->string('imageable_type');
             $table->timestamps();
         });
     }
