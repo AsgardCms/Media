@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Modules\Media\Http\Requests\UploadMediaRequest;
 use Modules\Media\Services\FileService;
@@ -20,7 +21,6 @@ class MediaController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  UploadMediaRequest $request
      * @return Response
      */
@@ -49,9 +49,18 @@ class MediaController extends Controller
         $entity->files()->attach($mediaId, ['imageable_type' => $entityClass, 'zone' => $request->get('zone')]);
     }
 
+    /**
+     * Remove the record in the media__imageables table for the given id
+     * @param Request $request
+     */
     public function unlinkMedia(Request $request)
     {
-        $mediaId = $request->get('mediaId');
+        $imageableId = $request->get('imageableId');
+        $deleted = DB::table('media__imageables')->whereId($imageableId)->delete();
+        if ( ! $deleted) {
+            return Response::json(['error' => true, 'message' => 'The file was not found.']);
+        }
 
+        return Response::json(['error' => false, 'message' => 'The link has been removed.']);
     }
 }
