@@ -28,21 +28,25 @@
                     'zone': '{{ $zone }}'
                 },
                 success: function(data) {
-                    // Insert a thumbnail of the selected image
+                    var html = '<img src="' + data.result.path + '" alt=""/>' +
+                            '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
+                                '<i class="fa fa-times-circle"></i>' +
+                            '</a>';
+                    $('.jsThumbnailImageWrapper').append(html).fadeIn();
                 }
             });
         }
     </script>
-    {!! Form::label("thumbnail", 'Thumbnail:') !!}
+    {!! Form::label($zone, ucfirst($zone) . ':') !!}
     <div class="clearfix"></div>
-    <?php if (isset(${$zone}->path)): ?>
     <figure class="jsThumbnailImageWrapper">
-        <img src="{{ Imagy::getThumbnail(${$zone}->path, 'smallThumb') }}" alt=""/>
-        <a class="jsRemoveLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
-            <i class="fa fa-times-circle"></i>
-        </a>
+        <?php if (isset(${$zone}->path)): ?>
+            <img src="{{ Imagy::getThumbnail(${$zone}->path, 'smallThumb') }}" alt=""/>
+            <a class="jsRemoveLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
+                <i class="fa fa-times-circle"></i>
+            </a>
+        <?php endif; ?>
     </figure>
-    <?php endif; ?>
     <div class="clearfix"></div>
     <?php $url = route('media.grid.select') ?>
     <a class="btn btn-primary" onclick="window.open('{!! $url !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');"><i class="fa fa-upload"></i>
@@ -62,11 +66,10 @@
                     '_token': '{{ csrf_token() }}'
                 },
                 success: function(data) {
-                    console.log(data);
                     if (data.error === false) {
-                        $('.jsThumbnailImageWrapper').fadeOut();
+                        $('.jsThumbnailImageWrapper').fadeOut().html('');
                     } else {
-                        $('.jsThumbnailImageWrapper').append(data.message)
+                        $('.jsThumbnailImageWrapper').append(data.message);
                     }
                 }
             });
