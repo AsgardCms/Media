@@ -21,4 +21,5 @@ return [
     'choose file' => 'Choose a file',
     'insert' => 'Insert this file',
     'file picker' => 'File Picker',
+    'Browse' => 'Browse ...',
 ];
