@@ -48,4 +48,10 @@ class MediaController extends Controller
         $entity = $entityClass::find($entityId);
         $entity->files()->attach($mediaId, ['imageable_type' => $entityClass, 'zone' => $request->get('zone')]);
     }
+
+    public function unlinkMedia(Request $request)
+    {
+        $mediaId = $request->get('mediaId');
+
+    }
 }
