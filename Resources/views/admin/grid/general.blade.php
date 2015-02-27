@@ -19,7 +19,7 @@
               <?php foreach ($files as $file): ?>
                   <li class="pull-left" style="margin-right: 20px">
                       <img src="{{ $file->path }}" alt="" class="img-thumbnail" style="width: 250px;"/>
-                      <a class="jsInsertImage btn btn-primary btn-flat" href="#" style="display: block">{{ trans('media::media.insert') }}</a>
+                      <a class="jsInsertImage btn btn-primary btn-flat" href="#" data-id="{{ $file->id }}" style="display: block">{{ trans('media::media.insert') }}</a>
                   </li>
               <?php endforeach; ?>
             </ul>
@@ -31,14 +31,8 @@
     $( document ).ready(function() {
         $('.jsInsertImage').on('click', function(e) {
             e.preventDefault();
-            function getUrlParam( paramName ) {
-                var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' ) ;
-                var match = window.location.search.match(reParam) ;
-
-                return ( match && match.length > 1 ) ? match[ 1 ] : null ;
-            }
-            var funcNum = getUrlParam( 'CKEditorFuncNum' );
-
+            var mediaId = $(this).data('id');
+            window.opener.includeMedia(mediaId);
             window.close();
         });
     });
