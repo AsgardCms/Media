@@ -16,6 +16,6 @@ $router->group(['prefix' => '/media'], function (Router $router) {
             'destroy' => 'admin.media.media.destroy',
         ],
     ]);
+    $router->get('media-grid/index', ['uses' => 'MediaGridController@index', 'as' => 'media.grid.select']);
 });
 
-$router->get('grid-files', 'MediaController@gridFiles');
