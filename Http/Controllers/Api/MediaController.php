@@ -1,5 +1,6 @@
 <?php namespace Modules\Media\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use Modules\Media\Http\Requests\UploadMediaRequest;
@@ -32,5 +33,11 @@ class MediaController extends Controller
         }
 
         return Response::json($savedFile->toArray());
+    }
+
+    public function linkMedia(Request $request)
+    {
+        $mediaId = $request->get('mediaId');
+
     }
 }
