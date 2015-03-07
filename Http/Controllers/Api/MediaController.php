@@ -64,6 +64,7 @@ class MediaController extends Controller
         $file = $this->file->find($imageable->file_id);
 
         $thumbnailPath = $this->imagy->getThumbnail($file->path, 'smallThumb');
+
         return Response::json(['error' => false, 'message' => 'The link has been added.', 'result' => ['path' => $thumbnailPath, 'imageableId' => $imageable->id]]);
     }
 
@@ -75,7 +76,7 @@ class MediaController extends Controller
     {
         $imageableId = $request->get('imageableId');
         $deleted = DB::table('media__imageables')->whereId($imageableId)->delete();
-        if ( ! $deleted) {
+        if (! $deleted) {
             return Response::json(['error' => true, 'message' => 'The file was not found.']);
         }
 

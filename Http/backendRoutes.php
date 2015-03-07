@@ -19,4 +19,3 @@ $router->group(['prefix' => '/media'], function (Router $router) {
     $router->get('media-grid/index', ['uses' => 'MediaGridController@index', 'as' => 'media.grid.select']);
     $router->get('media-grid/ckIndex', ['uses' => 'MediaGridController@ckIndex']);
 });
-
