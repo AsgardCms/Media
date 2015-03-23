@@ -1,8 +1,9 @@
 {
     "name": "Media",
     "alias": "media",
-    "description": "",
+    "description": "A media library, used throughout the CMS.",
     "keywords": [],
+    "version": "v0.1.0",
     "active": 1,
     "order": 1,
     "providers": [
