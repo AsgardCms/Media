@@ -49,4 +49,21 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
     {
         $file->delete();
     }
+
+    /**
+     * Find a file for the entity by zone
+     * @param $zone
+     * @param object $entity
+     * @return object
+     */
+    public function findFileByZoneForEntity($zone, $entity)
+    {
+        foreach ($entity->files as $file) {
+            if ($file->pivot->zone == $zone) {
+                return $file;
+            }
+        }
+
+        return '';
+    }
 }

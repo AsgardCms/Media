@@ -11,4 +11,12 @@ interface FileRepository extends BaseRepository
      * @return mixed
      */
     public function createFromFile(UploadedFile $file);
+
+    /**
+     * Find a file for the post by zone
+     * @param string $zone
+     * @param object $entity
+     * @return object
+     */
+    public function findFileByZoneForEntity($zone, $entity);
 }
