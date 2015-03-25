@@ -8,7 +8,7 @@
             display: inline-block;
             margin-right: 20px;
             background-color: #fff;
-            border: 1px solid #202227;
+            border: 1px solid #eee;
             padding: 3px;
             border-radius: 3px;
         }
