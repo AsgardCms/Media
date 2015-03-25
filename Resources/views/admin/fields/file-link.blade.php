@@ -41,7 +41,7 @@
     <div class="clearfix"></div>
     <figure class="jsThumbnailImageWrapper">
         <?php if (isset(${$zone}->path)): ?>
-            <img src="{{ Imagy::getThumbnail(${$zone}->path, 'smallThumb') }}" alt=""/>
+            <img src="{{ Imagy::getThumbnail(${$zone}->path, 'mediumThumb') }}" alt=""/>
             <a class="jsRemoveLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
                 <i class="fa fa-times-circle"></i>
             </a>
