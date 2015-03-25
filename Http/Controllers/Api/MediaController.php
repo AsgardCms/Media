@@ -63,7 +63,7 @@ class MediaController extends Controller
         $imageable = DB::table('media__imageables')->whereFileId($mediaId)->whereZone($zone)->whereImageableType($entityClass)->first();
         $file = $this->file->find($imageable->file_id);
 
-        $thumbnailPath = $this->imagy->getThumbnail($file->path, 'smallThumb');
+        $thumbnailPath = $this->imagy->getThumbnail($file->path, 'mediumThumb');
 
         return Response::json(['error' => false, 'message' => 'The link has been added.', 'result' => ['path' => $thumbnailPath, 'imageableId' => $imageable->id]]);
     }
