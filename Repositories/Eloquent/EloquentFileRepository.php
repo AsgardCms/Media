@@ -66,4 +66,22 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
 
         return '';
     }
+
+    /**
+     * Find multiple files for the given zone and entity
+     * @param zone $zone
+     * @param object $entity
+     * @return object
+     */
+    public function findMultipleFilesByZoneForEntity($zone, $entity)
+    {
+        $files = [];
+        foreach ($entity->files as $file) {
+            if ($file->pivot->zone == $zone) {
+                $files[] = $file;
+            }
+        }
+
+        return new Collection($files);
+    }
 }
