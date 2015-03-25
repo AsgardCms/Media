@@ -3,6 +3,11 @@
         figure.jsThumbnailImageWrapper {
             position: relative;
             display: inline-block;
+            background-color: #fff;
+            border: 1px solid #eee;
+            padding: 3px;
+            border-radius: 3px;
+            margin-top: 20px;
         }
         figure.jsThumbnailImageWrapper i {
             position: absolute;
@@ -39,6 +44,14 @@
     </script>
     {!! Form::label($zone, ucfirst($zone) . ':') !!}
     <div class="clearfix"></div>
+
+    <?php $url = route('media.grid.select') ?>
+    <a class="btn btn-primary" onclick="window.open('{!! $url !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');"><i class="fa fa-upload"></i>
+        {{ trans('media::media.Browse') }}
+    </a>
+
+    <div class="clearfix"></div>
+
     <figure class="jsThumbnailImageWrapper">
         <?php if (isset(${$zone}->path)): ?>
             <img src="{{ Imagy::getThumbnail(${$zone}->path, 'mediumThumb') }}" alt=""/>
@@ -47,11 +60,6 @@
             </a>
         <?php endif; ?>
     </figure>
-    <div class="clearfix"></div>
-    <?php $url = route('media.grid.select') ?>
-    <a class="btn btn-primary" onclick="window.open('{!! $url !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');"><i class="fa fa-upload"></i>
-        {{ trans('media::media.Browse') }}
-    </a>
 </div>
 <script>
     $( document ).ready(function() {
