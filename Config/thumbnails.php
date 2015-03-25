@@ -10,4 +10,10 @@ return [
             },
         ],
     ],
+    'mediumThumb' => [
+        'fit' => [
+            'width' => 180,
+            'position' => 'top-left',
+        ],
+    ],
 ];
