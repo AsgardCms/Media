@@ -6,43 +6,61 @@
     {!! Theme::style('css/vendor/bootstrap.min.css') !!}
     {!! Theme::script('js/vendor/jquery.min.js') !!}
     <style>
+        h1 {
+            border-bottom: 1px solid #eee;
+        }
+        .figureWrapper {
+            margin-bottom: 20px;
+        }
+        .figureWrapper a.btn {
+            border-radius: 0 0 3px 3px;
+        }
+        figure {
+            background-color: #fff;
+            border: 1px solid #eee;
+            padding: 3px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h1>{{ trans('media::media.choose file') }}</h1>
-
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <?php if ($files): ?>
-            <ul class="list-unstyled">
-              <?php foreach ($files as $file): ?>
-                  <li class="pull-left" style="margin-right: 20px">
-                      <img src="{{ $file->path }}" alt="" class="img-thumbnail" style="width: 250px;"/>
-                      <a class="jsInsertImage btn btn-primary btn-flat" href="#" style="display: block">{{ trans('media::media.insert') }}</a>
-                  </li>
-              <?php endforeach; ?>
-            </ul>
+            <?php foreach ($files as $file): ?>
+            <div class="col-md-3 figureWrapper">
+                <img src="{{ Imagy::getThumbnail($file->path, 'mediumThumb') }}" alt=""/>
+                <a class="jsInsertImage btn btn-primary btn-flat" href="#"
+                   style="display: block">{{ trans('media::media.insert') }}</a>
+            </div>
+            <?php endforeach; ?>
             <?php endif; ?>
         </div>
     </div>
 </div>
-  <script>
-    $( document ).ready(function() {
-        $('.jsInsertImage').on('click', function(e) {
+<script>
+    $(document).ready(function () {
+        $('.jsInsertImage').on('click', function (e) {
             e.preventDefault();
-            function getUrlParam( paramName ) {
-                var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' ) ;
-                var match = window.location.search.match(reParam) ;
+            function getUrlParam(paramName) {
+                var reParam = new RegExp('(?:[\?&]|&)' + paramName + '=([^&]+)', 'i');
+                var match = window.location.search.match(reParam);
 
-                return ( match && match.length > 1 ) ? match[ 1 ] : null ;
+                return ( match && match.length > 1 ) ? match[1] : null;
             }
-            var funcNum = getUrlParam( 'CKEditorFuncNum' );
 
-            window.opener.CKEDITOR.tools.callFunction( funcNum, $(this).parent().find('img').attr('src') );
+            var funcNum = getUrlParam('CKEditorFuncNum');
+
+            window.opener.CKEDITOR.tools.callFunction(funcNum, $(this).parent().find('img').attr('src'));
             window.close();
         });
     });
-  </script>
+</script>
 </body>
 </html>
