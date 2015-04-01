@@ -61,7 +61,7 @@
     <div class="jsThumbnailImageWrapper">
         <?php $zoneVar = "{$zone}Files"  ?>
         <?php if (isset($$zoneVar)): ?>
-        <?php foreach($$zoneVar as $file): ?>
+        <?php foreach ($$zoneVar as $file): ?>
         <figure>
             <img src="{{ Imagy::getThumbnail($file->path, 'mediumThumb') }}" alt=""/>
             <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
