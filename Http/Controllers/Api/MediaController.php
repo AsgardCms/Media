@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
+use Modules\Media\Events\FileWasLinked;
+use Modules\Media\Events\FileWasUnlinked;
 use Modules\Media\Events\FileWasUploaded;
 use Modules\Media\Http\Requests\UploadMediaRequest;
 use Modules\Media\Image\Imagy;
@@ -68,6 +70,8 @@ class MediaController extends Controller
 
         $thumbnailPath = $this->imagy->getThumbnail($file->path, 'mediumThumb');
 
+        event(new FileWasLinked($file, $entity));
+
         return Response::json([
             'error' => false,
             'message' => 'The link has been added.',
@@ -86,6 +90,8 @@ class MediaController extends Controller
         if ( ! $deleted) {
             return Response::json(['error' => true, 'message' => 'The file was not found.']);
         }
+
+        event(new FileWasUnlinked($imageableId));
 
         return Response::json(['error' => false, 'message' => 'The link has been removed.']);
     }
