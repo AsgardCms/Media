@@ -4,7 +4,10 @@ use Modules\Media\Entities\File;
 
 class FileWasUploaded
 {
-    private $file;
+    /**
+     * @var File
+     */
+    public $file;
 
     public function __construct(File $file)
     {
