@@ -139,6 +139,7 @@ class Imagy
     private function writeImage($filename, $image)
     {
         $this->finder->put(public_path($filename), $image);
+        @chmod(public_path($filename), 0666);
     }
 
     /**
