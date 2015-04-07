@@ -11,6 +11,14 @@ abstract class MediaTestCase extends TestCase
             'Modules\Media\Providers\MediaServiceProvider',
             'Pingpong\Modules\ModulesServiceProvider',
             'Intervention\Image\ImageServiceProvider',
+            'Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider',
+        ];
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return [
+            'LaravelLocalization' => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization'
         ];
     }
 }
