@@ -5,7 +5,7 @@ return [
         'resize' => [
             'width' => 50,
             'height' => null,
-            'callback' => function($constraint) {
+            'callback' => function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             },
@@ -15,7 +15,7 @@ return [
         'resize' => [
             'width' => 180,
             'height' => null,
-            'callback' => function($constraint) {
+            'callback' => function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             },

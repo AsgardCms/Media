@@ -47,7 +47,7 @@ class FileService
 
         // Move the uploaded file to files path
         $file->move(public_path() . $this->config->get('asgard.media.config.files-path'), $savedFile->filename);
-        @chmod(public_path() . $this->config->get('asgard.media.config.files-path').$savedFile->filename, 0666);
+        @chmod(public_path() . $this->config->get('asgard.media.config.files-path') . $savedFile->filename, 0666);
 
         $this->createThumbnails($savedFile);
 
