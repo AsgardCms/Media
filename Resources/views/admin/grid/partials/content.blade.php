@@ -94,37 +94,15 @@
 <script src="{!! Module::asset('media:js/dropzone.js') !!}"></script>
 <?php $config = config('asgard.media.config'); ?>
 <script>
+    var maxFilesize = '<?php echo $config["max-file-size"] ?>',
+        acceptedFiles = '<?php echo $config["allowed-types"] ?>';
+</script>
+<script src="{!! Module::asset('media:js/init-dropzone.js') !!}"></script>
+<script>
     $( document ).ready(function() {
-
         $('.jsShowUploadForm').on('click',function (event) {
             event.preventDefault();
             $('.dropzone').fadeToggle();
-        });
-
-        Dropzone.autoDiscover = false;
-        var myDropzone = new Dropzone(".dropzone", {
-            url: '/api/file',
-            autoProcessQueue: true,
-            maxFilesize: '<?php echo $config["max-file-size"] ?>',
-            acceptedFiles : '<?php echo $config["allowed-types"] ?>'
-        });
-        myDropzone.on("success", function(file, http) {
-            var _this = this;
-            window.setTimeout(function(){
-                location.reload();
-            }, 1000);
-        });
-        myDropzone.on("sending", function(file, fromData) {
-            if ($('.alert-danger').length > 0) {
-                $('.alert-danger').remove();
-            }
-        });
-        myDropzone.on("error", function(file, errorMessage) {
-            var html = '<div class="alert alert-danger" role="alert">' + errorMessage.error + '</div>';
-            $('.col-md-12').first().prepend(html);
-            setTimeout(function() {
-                myDropzone.removeFile(file);
-            }, 2000);
         });
     });
 </script>
