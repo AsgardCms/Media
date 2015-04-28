@@ -6,24 +6,10 @@
     {!! Theme::style('css/vendor/bootstrap.min.css') !!}
     {!! Theme::style('vendor/admin-lte/dist/css/AdminLTE.css') !!}
     {!! Theme::style('css/vendor/datatables/dataTables.bootstrap.css') !!}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.6/css/jquery.dataTables.css"/>
     <style>
         body {
             background: #ecf0f5;
-        }
-
-        .figureWrapper {
-            margin-bottom: 20px;
-        }
-
-        .figureWrapper a.btn {
-            border-radius: 0 0 3px 3px;
-        }
-
-        figure {
-            background-color: #fff;
-            border: 1px solid #eee;
-            padding: 3px;
-            border-radius: 3px;
         }
         .box {
             margin-top: 25px;
