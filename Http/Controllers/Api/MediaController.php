@@ -34,6 +34,15 @@ class MediaController extends Controller
         $this->imagy = $imagy;
     }
 
+    public function all()
+    {
+        $files = $this->file->all();
+        return [
+            'count' => $files->count(),
+            'data' => $files,
+        ];
+    }
+
     /**
      * Store a newly created resource in storage.
      * @param  UploadMediaRequest $request
