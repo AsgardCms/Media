@@ -6,22 +6,39 @@
     {!! Theme::style('css/vendor/bootstrap.min.css') !!}
     {!! Theme::style('vendor/admin-lte/dist/css/AdminLTE.css') !!}
     {!! Theme::style('css/vendor/datatables/dataTables.bootstrap.css') !!}
+    <link href="{!! Module::asset('media:css/dropzone.css') !!}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.6/css/jquery.dataTables.css"/>
     <style>
         body {
             background: #ecf0f5;
+            margin-top: 20px;
         }
-        .box {
-            margin-top: 25px;
+        .dropzone {
+            border: 1px dashed #CCC;
+            min-height: 227px;
+            margin-bottom: 20px;
+            display: none;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="row">
+        <form method="POST" class="dropzone">
+            {!! Form::token() !!}
+        </form>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
         <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title">{{ trans('media::media.choose file') }}</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool jsShowUploadForm" data-toggle="tooltip" title="" data-original-title="Upload new">
+                        <i class="fa fa-cloud-upload"></i>
+                        Upload new
+                    </button>
+                </div>
             </div>
             <div class="box-body">
                 <table class="data-table table table-bordered table-hover jsFileList data-table">
@@ -74,6 +91,44 @@
 {!! Theme::script('js/vendor/jquery.min.js') !!}
 {!! Theme::script('vendor/bootstrap/dist/js/bootstrap.min.js') !!}
 {!! Theme::script('js/vendor/datatables/jquery.dataTables.js') !!}
+<script src="{!! Module::asset('media:js/dropzone.js') !!}"></script>
+<?php $config = config('asgard.media.config'); ?>
+<script>
+    $( document ).ready(function() {
+
+        $('.jsShowUploadForm').on('click',function (event) {
+            event.preventDefault();
+            $('.dropzone').fadeToggle();
+        });
+
+        Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone(".dropzone", {
+            url: '/api/file',
+            autoProcessQueue: true,
+            maxFilesize: '<?php echo $config["max-file-size"] ?>',
+            acceptedFiles : '<?php echo $config["allowed-types"] ?>'
+        });
+        myDropzone.on("success", function(file, http) {
+            var _this = this;
+            window.setTimeout(function(){
+                location.reload();
+            }, 1000);
+        });
+        myDropzone.on("sending", function(file, fromData) {
+            if ($('.alert-danger').length > 0) {
+                $('.alert-danger').remove();
+            }
+        });
+        myDropzone.on("error", function(file, errorMessage) {
+            var html = '<div class="alert alert-danger" role="alert">' + errorMessage.error + '</div>';
+            $('.col-md-12').first().prepend(html);
+            setTimeout(function() {
+                myDropzone.removeFile(file);
+            }, 2000);
+        });
+    });
+</script>
+
 <?php $locale = App::getLocale(); ?>
 <script type="text/javascript">
     $(function () {
