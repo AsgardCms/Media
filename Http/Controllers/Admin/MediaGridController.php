@@ -1,6 +1,7 @@
 <?php namespace Modules\Media\Http\Controllers\Admin;
 
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
+use Modules\Media\Image\ThumbnailsManager;
 use Modules\Media\Repositories\FileRepository;
 
 class MediaGridController extends AdminBaseController
@@ -9,12 +10,17 @@ class MediaGridController extends AdminBaseController
      * @var FileRepository
      */
     private $file;
+    /**
+     * @var ThumbnailsManager
+     */
+    private $thumbnailsManager;
 
-    public function __construct(FileRepository $file)
+    public function __construct(FileRepository $file, ThumbnailsManager $thumbnailsManager)
     {
         parent::__construct();
 
         $this->file = $file;
+        $this->thumbnailsManager = $thumbnailsManager;
     }
 
     /**
@@ -24,8 +30,9 @@ class MediaGridController extends AdminBaseController
     public function index()
     {
         $files = $this->file->all();
+        $thumbnails = $this->thumbnailsManager->all();
 
-        return view('media::admin.grid.general', compact('files'));
+        return view('media::admin.grid.general', compact('files', 'thumbnails'));
     }
 
     /**
@@ -35,7 +42,8 @@ class MediaGridController extends AdminBaseController
     public function ckIndex()
     {
         $files = $this->file->all();
+        $thumbnails = $this->thumbnailsManager->all();
 
-        return view('media::admin.grid.ckeditor', compact('files'));
+        return view('media::admin.grid.ckeditor', compact('files', 'thumbnails'));
     }
 }

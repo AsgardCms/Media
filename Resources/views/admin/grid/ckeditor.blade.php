@@ -11,7 +11,8 @@
             }
 
             var funcNum = getUrlParam('CKEditorFuncNum');
-            window.opener.CKEDITOR.tools.callFunction(funcNum, $(this).closest('tr').find('td > img').attr('src'));
+
+            window.opener.CKEDITOR.tools.callFunction(funcNum, $(this).data('file'));
             window.close();
         });
     });

@@ -43,9 +43,23 @@
                             </td>
                             <td>{{ $file->filename }}</td>
                             <td>
-                                <a class="jsInsertImage btn btn-primary btn-flat" href="#" data-id="{{ $file->id }}">
-                                    {{ trans('media::media.insert') }}
-                                </a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        {{ trans('media::media.insert') }} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <?php foreach ($thumbnails as $thumb => $filter): ?>
+                                        <li data-file="{{ Imagy::getThumbnail($file->path, $thumb) }}"
+                                            data-id="{{ $file->id }}" class="jsInsertImage">
+                                            <a href="">{{ $thumb }}</a>
+                                        </li>
+                                        <?php endforeach; ?>
+                                        <li class="divider"></li>
+                                        <li data-file="{{ $file->path }}" class="jsInsertImage">
+                                            <a href="">Original</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -58,6 +72,7 @@
 </div>
 
 {!! Theme::script('js/vendor/jquery.min.js') !!}
+{!! Theme::script('vendor/bootstrap/dist/js/bootstrap.min.js') !!}
 {!! Theme::script('js/vendor/datatables/jquery.dataTables.js') !!}
 <?php $locale = App::getLocale(); ?>
 <script type="text/javascript">
