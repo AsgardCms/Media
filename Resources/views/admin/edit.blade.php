@@ -43,10 +43,10 @@
         <h3>Thumbnails</h3>
 
         <ul class="list-unstyled">
-            <?php foreach ($thumbnails as $thumb => $filter): ?>
+            <?php foreach ($thumbnails as $thumbnail): ?>
                 <li style="float:left; margin-right: 10px">
-                    <img src="{{ Imagy::getThumbnail($file->path, $thumb) }}" alt=""/>
-                    <p class="text-muted" style="text-align: center">{{ $thumb }}</p>
+                    <img src="{{ Imagy::getThumbnail($file->path, $thumbnail->name()) }}" alt=""/>
+                    <p class="text-muted" style="text-align: center">{{ $thumbnail->name() }} ({{ $thumbnail->size() }})</p>
                 </li>
             <?php endforeach; ?>
         </ul>

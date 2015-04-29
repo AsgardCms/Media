@@ -32,7 +32,7 @@ class ThumbnailsManager
         foreach ($this->module->enabled() as $enabledModule) {
             $configuration = $this->config->get(strtolower('asgard.' . $enabledModule->getName()) . '.thumbnails');
             if (!is_null($configuration)) {
-                $thumbnails = array_merge($thumbnails, $configuration);
+                $thumbnails = array_merge($thumbnails, Thumbnail::makeMultiple($configuration));
             }
         }
 
@@ -46,9 +46,9 @@ class ThumbnailsManager
      */
     public function find($thumbnail)
     {
-        foreach ($this->all() as $thumbName => $filters) {
-            if ($thumbName == $thumbnail) {
-                return $filters;
+        foreach ($this->all() as $thumb) {
+            if ($thumb->name() == $thumbnail) {
+                return $thumb->filters();
             }
         }
 

@@ -65,10 +65,10 @@
                                         {{ trans('media::media.insert') }} <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <?php foreach ($thumbnails as $thumb => $filter): ?>
-                                        <li data-file="{{ Imagy::getThumbnail($file->path, $thumb) }}"
+                                        <?php foreach ($thumbnails as $thumbnail): ?>
+                                        <li data-file="{{ Imagy::getThumbnail($file->path, $thumbnail->name()) }}"
                                             data-id="{{ $file->id }}" class="jsInsertImage">
-                                            <a href="">{{ $thumb }}</a>
+                                            <a href="">{{ $thumbnail->name() }} ({{ $thumbnail->size() }})</a>
                                         </li>
                                         <?php endforeach; ?>
                                         <li class="divider"></li>
