@@ -8,6 +8,7 @@ abstract class MediaTestCase extends TestCase
     {
         return [
             'Pingpong\Modules\ModulesServiceProvider',
+            'Pingpong\Modules\Providers\BootstrapServiceProvider',
             'Modules\Core\Providers\CoreServiceProvider',
             'Modules\Media\Providers\MediaServiceProvider',
             'Intervention\Image\ImageServiceProvider',
@@ -20,5 +21,21 @@ abstract class MediaTestCase extends TestCase
         return [
             'LaravelLocalization' => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization'
         ];
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        $conf = [
+            'smallThumb' => [
+                'fit' => [
+                    'width' => 50,
+                    'height' => 50,
+                    'callback' => function ($constraint) {
+                        $constraint->upsize();
+                    },
+                ],
+            ],
+        ];
+        $app['config']->set('asgard.media.thumbnails', $conf);
     }
 }
