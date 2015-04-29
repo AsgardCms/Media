@@ -28,37 +28,30 @@ class ThumbnailTest extends \PHPUnit_Framework_TestCase
         $expected = [
             'resize' => [
                 'width' => 150,
-                'height' => 150,
+                'height' => 250,
+            ],
+            'fit' => [
+                'width' => 550,
+                'height' => 650,
             ],
         ];
         $this->assertEquals($expected, $thumbnail->filters());
     }
 
-    private function getThumbnailConfiguration()
+    /** @test */
+    public function it_gets_thumbnail_width()
     {
-        return [
-            $this->getBlogThumbnailConfig(),
-            'smallThumb' => [
-                'resize' => [
-                    'width' => 50,
-                    'height' => null,
-                    'callback' => function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    },
-                ],
-            ],
-            'mediumThumb' => [
-                'resize' => [
-                    'width' => 180,
-                    'height' => null,
-                    'callback' => function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    },
-                ],
-            ],
-        ];
+        $thumbnail = Thumbnail::make($this->getBlogThumbnailConfig());
+
+        $this->assertSame(150, $thumbnail->width());
+    }
+
+    /** @test */
+    public function it_gets_thumbnail_height()
+    {
+        $thumbnail = Thumbnail::make($this->getBlogThumbnailConfig());
+
+        $this->assertSame(250, $thumbnail->height());
     }
 
     private function getBlogThumbnailConfig()
@@ -67,7 +60,11 @@ class ThumbnailTest extends \PHPUnit_Framework_TestCase
             'blogThumb' => [
                 'resize' => [
                     'width' => 150,
-                    'height' => 150,
+                    'height' => 250,
+                ],
+                'fit' => [
+                    'width' => 550,
+                    'height' => 650,
                 ],
             ],
         ];

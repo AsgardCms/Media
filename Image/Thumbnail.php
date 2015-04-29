@@ -48,4 +48,36 @@ class Thumbnail
     {
         return $this->filters;
     }
+
+    /**
+     * Return the first width option found in the filters
+     * @return int
+     */
+    public function width()
+    {
+        return $this->getFirst('width');
+    }
+
+    /**
+     * Return the first height option found in the filters
+     * @return int
+     */
+    public function height()
+    {
+        return $this->getFirst('height');
+    }
+
+    /**
+     * Get the first found key in filters
+     * @param string $key
+     * @return int
+     */
+    private function getFirst($key)
+    {
+        foreach ($this->filters as $filter) {
+            if (isset($filter[$key])) {
+                return (int) $filter[$key];
+            }
+        }
+    }
 }
