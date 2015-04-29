@@ -37,6 +37,7 @@ class MediaController extends Controller
     public function all()
     {
         $files = $this->file->all();
+
         return [
             'count' => $files->count(),
             'data' => $files,
