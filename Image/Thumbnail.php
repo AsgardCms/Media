@@ -33,6 +33,22 @@ class Thumbnail
     }
 
     /**
+     * Make multiple thumbnail classes with the given array
+     * @param array $thumbnailDefinitions
+     * @return array
+     */
+    public static function makeMultiple(array $thumbnailDefinitions)
+    {
+        $thumbnails = [];
+
+        foreach ($thumbnailDefinitions as $name => $thumbnail) {
+            $thumbnails[] = self::make([$name => $thumbnail]);
+        }
+
+        return $thumbnails;
+    }
+
+    /**
      * Return the thumbnail name
      * @return string
      */

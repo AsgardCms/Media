@@ -62,6 +62,16 @@ class ThumbnailTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('150x250', $thumbnail->size());
     }
 
+    /** @test */
+    public function it_gets_multiple_thumbnails()
+    {
+        $thumbnails = Thumbnail::makeMultiple($this->getMediaThumbnails());
+
+        $this->assertCount(2, $thumbnails);
+        $this->assertEquals('smallThumb', $thumbnails[0]->name());
+        $this->assertEquals('mediumThumb', $thumbnails[1]->name());
+    }
+
     private function getBlogThumbnailConfig()
     {
         return [
@@ -73,6 +83,32 @@ class ThumbnailTest extends \PHPUnit_Framework_TestCase
                 'fit' => [
                     'width' => 550,
                     'height' => 650,
+                ],
+            ],
+        ];
+    }
+
+    private function getMediaThumbnails()
+    {
+        return [
+            'smallThumb' => [
+                'resize' => [
+                    'width' => 50,
+                    'height' => null,
+                    'callback' => function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    },
+                ],
+            ],
+            'mediumThumb' => [
+                'resize' => [
+                    'width' => 180,
+                    'height' => null,
+                    'callback' => function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    },
                 ],
             ],
         ];
