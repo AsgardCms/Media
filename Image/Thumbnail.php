@@ -68,6 +68,15 @@ class Thumbnail
     }
 
     /**
+     * Get the thumbnail size in format: width x height
+     * @return string
+     */
+    public function size()
+    {
+        return $this->width() . 'x' . $this->height();
+    }
+
+    /**
      * Get the first found key in filters
      * @param string $key
      * @return int

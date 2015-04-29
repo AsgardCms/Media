@@ -54,6 +54,14 @@ class ThumbnailTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(250, $thumbnail->height());
     }
 
+    /** @test */
+    public function it_gets_thumbnail_size()
+    {
+        $thumbnail = Thumbnail::make($this->getBlogThumbnailConfig());
+
+        $this->assertSame('150x250', $thumbnail->size());
+    }
+
     private function getBlogThumbnailConfig()
     {
         return [
