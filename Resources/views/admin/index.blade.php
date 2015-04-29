@@ -22,10 +22,12 @@
 @stop
 
 @section('content')
-<div class="row col-md-12">
-    <form method="POST" class="dropzone">
-        {!! Form::token() !!}
-    </form>
+<div class="row">
+    <div class="col-md-12">
+        <form method="POST" class="dropzone">
+            {!! Form::token() !!}
+        </form>
+    </div>
 </div>
 
 <div class="row">
