@@ -18,6 +18,16 @@ return [
         'description' => 'Description',
         'keywords' => 'Keywords',
     ],
+    'validation' => [
+        'max_size' => 'Maximum folder size (:size) of the Media folder reached.'
+    ],
+    'file-sizes' => [
+        'B' => 'Bytes',
+        'KB' => 'Kb',
+        'MB' => 'Mb',
+        'GB' => 'Gb',
+        'TB' => 'Tb',
+    ],
     'choose file' => 'Choose a file',
     'insert' => 'Insert this file',
     'file picker' => 'File Picker',
