@@ -34,6 +34,6 @@ class CreateFileTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('file_translations');
+        Schema::drop('media__file_translations');
     }
 }

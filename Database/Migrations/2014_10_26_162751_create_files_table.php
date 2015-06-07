@@ -31,6 +31,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('files');
+        Schema::drop('media__files');
     }
 }
