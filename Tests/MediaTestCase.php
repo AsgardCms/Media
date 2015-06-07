@@ -7,6 +7,7 @@ abstract class MediaTestCase extends TestCase
     protected function getPackageProviders($app)
     {
         return [
+            'Illuminate\Translation\TranslationServiceProvider',
             'Pingpong\Modules\ModulesServiceProvider',
             'Pingpong\Modules\Providers\BootstrapServiceProvider',
             'Modules\Core\Providers\CoreServiceProvider',
@@ -19,7 +20,8 @@ abstract class MediaTestCase extends TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'LaravelLocalization' => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization'
+            'LaravelLocalization' => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization',
+            'Validator' => 'Illuminate\Support\Facades\Validator',
         ];
     }
 
