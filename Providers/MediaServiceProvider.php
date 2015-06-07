@@ -80,6 +80,9 @@ class MediaServiceProvider extends ServiceProvider
 
     private function registerMaxFolderSizeValidator()
     {
+        if (app()->environment() === 'testing') {
+            return;
+        }
         Validator::resolver(function($translator, $data, $rules, $messages)
         {
             return new MaxFolderSizeValidator($translator, $data, $rules, $messages);
