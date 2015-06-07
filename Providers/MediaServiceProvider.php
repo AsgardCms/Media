@@ -1,5 +1,6 @@
 <?php namespace Modules\Media\Providers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Modules\Media\Console\RefreshThumbnailCommand;
 use Modules\Media\Entities\File;
@@ -7,6 +8,7 @@ use Modules\Media\Image\Imagy;
 use Modules\Media\Image\Intervention\InterventionFactory;
 use Modules\Media\Image\ThumbnailsManager;
 use Modules\Media\Repositories\Eloquent\EloquentFileRepository;
+use Modules\Media\Validators\MaxFolderSizeValidator;
 
 class MediaServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,7 @@ class MediaServiceProvider extends ServiceProvider
             $this->registerBindings();
         });
         $this->registerCommands();
+        $this->registerMaxFolderSizeValidator();
     }
 
     /**
@@ -73,5 +76,13 @@ class MediaServiceProvider extends ServiceProvider
         $this->commands(
             'command.media.refresh'
         );
+    }
+
+    private function registerMaxFolderSizeValidator()
+    {
+        Validator::resolver(function($translator, $data, $rules, $messages)
+        {
+            return new MaxFolderSizeValidator($translator, $data, $rules, $messages);
+        });
     }
 }

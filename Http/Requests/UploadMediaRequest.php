@@ -6,7 +6,9 @@ class UploadMediaRequest extends FormRequest
 {
     public function rules()
     {
-        return [];
+        return [
+            'file' => ['required', 'maxSize'],
+        ];
     }
 
     public function authorize()
