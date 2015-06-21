@@ -30,7 +30,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
     public function extendWith(Menu $menu)
     {
         $menu->group(trans('core::sidebar.content'), function (Group $group) {
-            $group->addItem(trans('media::media.title.media'), function (Item $item) {
+            $group->item(trans('media::media.title.media'), function (Item $item) {
                 $item->weight(2);
                 $item->icon('fa fa-camera');
                 $item->route('admin.media.media.index');
