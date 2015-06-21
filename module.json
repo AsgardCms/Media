@@ -16,7 +16,5 @@
         "Image": "Intervention\\Image\\Facades\\Image",
         "Imagy": "Modules\\Media\\Image\\Facade\\Imagy"
     },
-    "files": [
-        "composers.php"
-    ]
+    "files": []
 }
