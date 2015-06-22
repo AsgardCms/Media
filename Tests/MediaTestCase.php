@@ -1,27 +1,36 @@
 <?php namespace Modules\Media\Tests;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Translation\TranslationServiceProvider;
+use Intervention\Image\ImageServiceProvider;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider;
+use Modules\Core\Providers\CoreServiceProvider;
+use Modules\Media\Providers\MediaServiceProvider;
 use Orchestra\Testbench\TestCase;
+use Pingpong\Modules\ModulesServiceProvider;
+use Pingpong\Modules\Providers\BootstrapServiceProvider;
 
 abstract class MediaTestCase extends TestCase
 {
     protected function getPackageProviders($app)
     {
         return [
-            'Illuminate\Translation\TranslationServiceProvider',
-            'Pingpong\Modules\ModulesServiceProvider',
-            'Pingpong\Modules\Providers\BootstrapServiceProvider',
-            'Modules\Core\Providers\CoreServiceProvider',
-            'Modules\Media\Providers\MediaServiceProvider',
-            'Intervention\Image\ImageServiceProvider',
-            'Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider',
+            TranslationServiceProvider::class,
+            ModulesServiceProvider::class,
+            BootstrapServiceProvider::class,
+            CoreServiceProvider::class,
+            MediaServiceProvider::class,
+            ImageServiceProvider::class,
+            LaravelLocalizationServiceProvider::class,
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return [
-            'LaravelLocalization' => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization',
-            'Validator' => 'Illuminate\Support\Facades\Validator',
+            'LaravelLocalization' => LaravelLocalization::class,
+            'Validator' => Validator::class,
         ];
     }
 
