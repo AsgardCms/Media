@@ -6,6 +6,7 @@ use Collective\Html\HtmlServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Translation\TranslationServiceProvider;
 use Intervention\Image\ImageServiceProvider;
+use Maatwebsite\Sidebar\SidebarServiceProvider;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider;
 use Modules\Core\Providers\CoreServiceProvider;
@@ -27,6 +28,7 @@ abstract class MediaTestCase extends TestCase
             ImageServiceProvider::class,
             LaravelLocalizationServiceProvider::class,
             HtmlServiceProvider::class,
+            SidebarServiceProvider::class,
         ];
     }
 
