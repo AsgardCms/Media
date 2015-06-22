@@ -1,5 +1,8 @@
 <?php namespace Modules\Media\Tests;
 
+use Collective\Html\FormFacade;
+use Collective\Html\HtmlFacade;
+use Collective\Html\HtmlServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Translation\TranslationServiceProvider;
 use Intervention\Image\ImageServiceProvider;
@@ -23,6 +26,7 @@ abstract class MediaTestCase extends TestCase
             MediaServiceProvider::class,
             ImageServiceProvider::class,
             LaravelLocalizationServiceProvider::class,
+            HtmlServiceProvider::class,
         ];
     }
 
@@ -31,6 +35,8 @@ abstract class MediaTestCase extends TestCase
         return [
             'LaravelLocalization' => LaravelLocalization::class,
             'Validator' => Validator::class,
+            'Form' => FormFacade::class,
+            'Html' => HtmlFacade::class,
         ];
     }
 
