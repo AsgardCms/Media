@@ -37,9 +37,9 @@
                 <table class="data-table table table-bordered table-hover jsFileList">
                     <thead>
                         <tr>
-                            <th>{{ trans('media::media.table.filename') }}</th>
                             <th>{{ trans('core::core.table.thumbnail') }}</th>
                             <th>{{ trans('media::media.table.filename') }}</th>
+                            <th>{{ trans('core::core.table.created at') }}</th>
                             <th>{{ trans('core::core.table.actions') }}</th>
                         </tr>
                     </thead>
@@ -48,16 +48,16 @@
                             <?php foreach ($files as $file): ?>
                                 <tr>
                                     <td>
-                                        <a href="{{ URL::route('admin.media.media.edit', [$file->id]) }}">
-                                            {{ $file->created_at }}
-                                        </a>
-                                    </td>
-                                    <td>
                                         <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
                                     </td>
                                     <td>
                                         <a href="{{ URL::route('admin.media.media.edit', [$file->id]) }}">
                                             {{ $file->filename }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ URL::route('admin.media.media.edit', [$file->id]) }}">
+                                            {{ $file->created_at }}
                                         </a>
                                     </td>
                                     <td>
@@ -72,9 +72,9 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>{{ trans('core::core.table.created at') }}</th>
                             <th>{{ trans('core::core.table.thumbnail') }}</th>
                             <th>{{ trans('media::media.table.filename') }}</th>
+                            <th>{{ trans('core::core.table.created at') }}</th>
                             <th>{{ trans('core::core.table.actions') }}</th>
                         </tr>
                     </tfoot>
