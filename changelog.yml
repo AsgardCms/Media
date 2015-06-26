@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.0.4":
+        changed:
+            - Change column ordering on index view
     "1.0.3":
         added:
             - Using new sidebar extender class
