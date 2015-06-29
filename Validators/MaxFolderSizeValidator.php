@@ -26,7 +26,7 @@ class MaxFolderSizeValidator extends Validator
     * @param string $directory
     * @return int
     */
-    function getDirSize($directory)
+    public function getDirSize($directory)
     {
         $size = 0;
         foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory)) as $file) {
