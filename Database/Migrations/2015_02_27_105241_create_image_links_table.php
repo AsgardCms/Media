@@ -13,6 +13,7 @@ class CreateImageLinksTable extends Migration
     public function up()
     {
         Schema::create('media__imageables', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('file_id');
             $table->integer('imageable_id');

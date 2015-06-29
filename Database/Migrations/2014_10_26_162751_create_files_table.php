@@ -13,6 +13,7 @@ class CreateFilesTable extends Migration
     public function up()
     {
         Schema::create('media__files', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('filename');
             $table->string('path');

@@ -15,6 +15,7 @@ class CreateFileTranslationsTable extends Migration
         Schema::create(
             'media__file_translations',
             function (Blueprint $table) {
+                $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->integer('file_id')->unsigned();
                 $table->string('locale')->index();
