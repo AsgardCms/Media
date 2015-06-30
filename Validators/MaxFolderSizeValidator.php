@@ -10,11 +10,7 @@ class MaxFolderSizeValidator extends Validator
     public function validateMaxSize($attribute, UploadedFile $value, $parameters)
     {
         $mediaPath = public_path(config('asgard.media.config.files-path'));
-        try {
-            $folderSize = `du -s $mediaPath`;
-        } catch (\Exception $e) {
-            $folderSize = $this->getDirSize($mediaPath);
-        }
+        $folderSize = $this->getDirSize($mediaPath);
 
         preg_match('/([0-9]+)/', $folderSize, $match);
 
