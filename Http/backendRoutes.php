@@ -1,21 +1,15 @@
 <?php
 
-use Illuminate\Routing\Router;
+$router->model('media', \Modules\Media\Entities\File::class);
 
-$router->model('media', 'Modules\Media\Entities\File');
+$router->group(['prefix' => '/media'], function () {
+    get('media', ['as' => 'admin.media.media.index', 'uses' => 'MediaController@index']);
+    get('media/create', ['as' => 'admin.media.media.create', 'uses' => 'MediaController@create']);
+    post('media', ['as' => 'admin.media.media.store', 'uses' => 'MediaController@store']);
+    get('media/{media}/edit', ['as' => 'admin.media.media.edit', 'uses' => 'MediaController@edit']);
+    put('media/{media}', ['as' => 'admin.media.media.update', 'uses' => 'MediaController@update']);
+    delete('media/{media}', ['as' => 'admin.media.media.destroy', 'uses' => 'MediaController@destroy']);
 
-$router->group(['prefix' => '/media'], function (Router $router) {
-    $router->resource('media', 'MediaController', [
-        'except' => ['show'],
-        'names' => [
-            'index' => 'admin.media.media.index',
-            'create' => 'admin.media.media.create',
-            'store' => 'admin.media.media.store',
-            'edit' => 'admin.media.media.edit',
-            'update' => 'admin.media.media.update',
-            'destroy' => 'admin.media.media.destroy',
-        ],
-    ]);
-    $router->get('media-grid/index', ['uses' => 'MediaGridController@index', 'as' => 'media.grid.select']);
-    $router->get('media-grid/ckIndex', ['uses' => 'MediaGridController@ckIndex']);
+    get('media-grid/index', ['uses' => 'MediaGridController@index', 'as' => 'media.grid.select']);
+    get('media-grid/ckIndex', ['uses' => 'MediaGridController@ckIndex']);
 });
