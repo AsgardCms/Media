@@ -10,7 +10,7 @@
     {!! Form::textarea("{$lang}[description]", Input::old("{$lang}[description]", $description), ['class' => 'form-control', 'placeholder' => trans('media::media.form.description')]) !!}
     {!! $errors->first("{$lang}[description]", '<span class="help-block">:message</span>') !!}
 </div>
-<?php $keywords = isset($file->translate($lang)->keywords) ? $file->translate($lang)->alt_attribute : '' ?>
+<?php $keywords = isset($file->translate($lang)->keywords) ? $file->translate($lang)->keywords : '' ?>
 <div class='form-group{{ $errors->has("{$lang}[keywords]") ? ' has-error' : '' }}'>
     {!! Form::label("{$lang}[keywords]", trans('media::media.form.keywords')) !!}
     {!! Form::text("{$lang}[keywords]", Input::old("{$lang}[keywords]", $keywords), ['class' => 'form-control', 'placeholder' => trans('media::media.form.keywords')]) !!}
