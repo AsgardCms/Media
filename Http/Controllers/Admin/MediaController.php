@@ -1,9 +1,6 @@
 <?php namespace Modules\Media\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Config\Repository;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
-use Laracasts\Flash\Flash;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Media\Entities\File;
 use Modules\Media\Http\Requests\UpdateMediaRequest;
@@ -50,7 +47,7 @@ class MediaController extends AdminBaseController
 
         $config = $this->config->get('asgard.media.config');
 
-        return View::make('media::admin.index', compact('files', 'config'));
+        return view('media::admin.index', compact('files', 'config'));
     }
 
     /**
@@ -60,17 +57,7 @@ class MediaController extends AdminBaseController
      */
     public function create()
     {
-        return \View::make('media.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
+        return view('media.create');
     }
 
     /**
@@ -83,7 +70,7 @@ class MediaController extends AdminBaseController
     {
         $thumbnails = $this->thumbnailsManager->all();
 
-        return View::make('media::admin.edit', compact('file', 'thumbnails'));
+        return view('media::admin.edit', compact('file', 'thumbnails'));
     }
 
     /**
@@ -97,9 +84,9 @@ class MediaController extends AdminBaseController
     {
         $this->file->update($file, $request->all());
 
-        Flash::success(trans('media::messages.file updated'));
+        flash(trans('media::messages.file updated'));
 
-        return Redirect::route('admin.media.media.index');
+        return redirect()->route('admin.media.media.index');
     }
 
     /**
@@ -114,8 +101,8 @@ class MediaController extends AdminBaseController
         $this->imagy->deleteAllFor($file);
         $this->file->destroy($file);
 
-        Flash::success(trans('media::messages.file deleted'));
+        flash(trans('media::messages.file deleted'));
 
-        return Redirect::route('admin.media.media.index');
+        return redirect()->route('admin.media.media.index');
     }
 }
