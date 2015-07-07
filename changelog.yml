@@ -1,5 +1,9 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.3.0":
+       changed:
+           - Use the helper functions in controller
+           - Use manual route definition over the route resource shortcut
     "1.2.0":
        changed:
            - Remove the <code>du</code> function usage for non *nix systems
