@@ -1,18 +1,21 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.4.0":
+        changed:
+            - Use the manual route binding
     "1.3.1":
-       changed:
-           - Fixing alt atribute display error
+        changed:
+            - Fixing alt atribute display error
     "1.3.0":
-       changed:
-           - Use the helper functions in controller
-           - Use manual route definition over the route resource shortcut
+        changed:
+            - Use the helper functions in controller
+            - Use manual route definition over the route resource shortcut
     "1.2.0":
-       changed:
-           - Remove the <code>du</code> function usage for non *nix systems
+        changed:
+            - Remove the <code>du</code> function usage for non *nix systems
     "1.1.0":
-       changed:
-           - Adding table engine into migrations
+        changed:
+            - Adding table engine into migrations
     "1.0.4":
         changed:
             - Change column ordering on index view
