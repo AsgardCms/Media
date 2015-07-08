@@ -1,6 +1,8 @@
 <?php
 
-$router->model('media', \Modules\Media\Entities\File::class);
+$router->bind('media', function ($id) {
+    return app(\Modules\Media\Repositories\FileRepository::class)->find($id);
+});
 
 $router->group(['prefix' => '/media'], function () {
     get('media', ['as' => 'admin.media.media.index', 'uses' => 'MediaController@index']);
