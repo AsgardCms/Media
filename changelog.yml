@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.5.0":
+        changed:
+            - Added <code>$attributes</code> to validator resolver
     "1.4.0":
         changed:
             - Use the manual route binding
