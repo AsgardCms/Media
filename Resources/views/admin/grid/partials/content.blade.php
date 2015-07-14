@@ -72,7 +72,7 @@
                                         </li>
                                         <?php endforeach; ?>
                                         <li class="divider"></li>
-                                        <li data-file="{{ $file->path }}" class="jsInsertImage">
+                                        <li data-file="{{ $file->path }}" data-id="{{ $file->id }}" class="jsInsertImage">
                                             <a href="">Original</a>
                                         </li>
                                     </ul>
