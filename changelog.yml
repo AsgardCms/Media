@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.7.0":
+        added:
+            - Spanish translations
     "1.6.0":
         added:
             - Added Brazilian Portuguese translations
