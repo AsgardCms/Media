@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.8.0":
+        added:
+            - Dutch and Portuguese language
     "1.7.0":
         added:
             - Spanish translations
