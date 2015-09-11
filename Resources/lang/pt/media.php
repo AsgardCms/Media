@@ -19,7 +19,7 @@ return [
         'keywords' => 'Palavras chave',
     ],
     'validation' => [
-        'max_size' => 'A pasta de media atingiu o tamanho máximo (:size).'
+        'max_size' => 'A pasta de media atingiu o tamanho máximo (:size).',
     ],
     'file-sizes' => [
         'B' => 'Bytes',

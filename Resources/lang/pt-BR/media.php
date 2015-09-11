@@ -19,7 +19,7 @@ return [
         'keywords' => 'Palavras chaves',
     ],
     'validation' => [
-        'max_size' => 'A pasta de mídia está cheia. Tamanho máximo (:size).'
+        'max_size' => 'A pasta de mídia está cheia. Tamanho máximo (:size).',
     ],
     'file-sizes' => [
         'B' => 'Bytes',

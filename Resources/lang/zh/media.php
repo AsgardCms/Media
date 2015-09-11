@@ -19,7 +19,7 @@ return [
         'keywords' => '关键字',
     ],
     'validation' => [
-        'max_size' => '媒体文件夹已达到最大容量 (:size).'
+        'max_size' => '媒体文件夹已达到最大容量 (:size).',
     ],
     'file-sizes' => [
         'B' => 'Bytes',

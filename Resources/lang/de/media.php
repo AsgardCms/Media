@@ -19,7 +19,7 @@ return [
         'keywords' => 'Schlüsselwörter',
     ],
     'validation' => [
-        'max_size' => 'Maximale Ordnergröße (:size) der Medienordner erreicht.'
+        'max_size' => 'Maximale Ordnergröße (:size) der Medienordner erreicht.',
     ],
     'file-sizes' => [
         'B' => 'Bytes',

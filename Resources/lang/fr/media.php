@@ -14,7 +14,7 @@ return [
         'height' => 'Hauteur',
     ],
     'validation' => [
-        'max_size' => 'Taille maximale (:size) du dossier Media atteint.'
+        'max_size' => 'Taille maximale (:size) du dossier Media atteint.',
     ],
     'file-sizes' => [
         'B' => 'Octet',
