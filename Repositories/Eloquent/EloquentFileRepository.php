@@ -43,6 +43,7 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
             'extension' => $file->guessClientExtension(),
             'mimetype' => $file->getClientMimeType(),
             'filesize' => $file->getFileInfo()->getSize(),
+            'folder_id' => 0,
         ]);
     }
 
