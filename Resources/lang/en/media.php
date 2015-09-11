@@ -19,7 +19,7 @@ return [
         'keywords' => 'Keywords',
     ],
     'validation' => [
-        'max_size' => 'Maximum folder size (:size) of the Media folder reached.'
+        'max_size' => 'Maximum folder size (:size) of the Media folder reached.',
     ],
     'file-sizes' => [
         'B' => 'Bytes',

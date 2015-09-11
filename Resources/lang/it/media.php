@@ -19,7 +19,7 @@ return [
         'keywords' => 'Parole chiave',
     ],
     'validation' => [
-        'max_size' => 'Dimensione massima della cartella (:size) della cartella Media raggiunta.'
+        'max_size' => 'Dimensione massima della cartella (:size) della cartella Media raggiunta.',
     ],
     'file-sizes' => [
         'B' => 'Bytes',

@@ -19,7 +19,7 @@ return [
         'keywords' => 'Palabras claves',
     ],
     'validation' => [
-        'max_size' => 'Tamaño (:size) máximo alcanzado de la carpeta multimedia.'
+        'max_size' => 'Tamaño (:size) máximo alcanzado de la carpeta multimedia.',
     ],
     'file-sizes' => [
         'B' => 'Bytes',

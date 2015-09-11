@@ -94,8 +94,8 @@
 <script src="{!! Module::asset('media:js/dropzone.js') !!}"></script>
 <?php $config = config('asgard.media.config'); ?>
 <script>
-    var maxFilesize = '<?php echo $config["max-file-size"] ?>',
-        acceptedFiles = '<?php echo $config["allowed-types"] ?>';
+    var maxFilesize = '<?php echo $config['max-file-size'] ?>',
+        acceptedFiles = '<?php echo $config['allowed-types'] ?>';
 </script>
 <script src="{!! Module::asset('media:js/init-dropzone.js') !!}"></script>
 <script>
