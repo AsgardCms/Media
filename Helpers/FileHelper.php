@@ -21,6 +21,6 @@ class FileHelper
      */
     private static function getExtension($name)
     {
-        return substr($name, strrpos($name, '.'));
+        return strtolower(substr($name, strrpos($name, '.')));
     }
 }
