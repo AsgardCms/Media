@@ -22,4 +22,9 @@ class File extends Model
         'filesize',
         'folder_id',
     ];
+
+    function item()
+    {
+        return $this->hasOne('Modules\Gallery\Entities\item');
+    }
 }
