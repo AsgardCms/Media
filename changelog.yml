@@ -1,5 +1,11 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.9.0":
+        added:
+            - Chinese Simplified language
+        changed:
+            - Setting default folder id to 0
+            - Fixed bug where thumbnails for images with uppercase extension wouldn't get created
     "1.8.0":
         added:
             - Dutch and Portuguese language

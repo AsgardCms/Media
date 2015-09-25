@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateImageLinksTable extends Migration
 {
-
     /**
      * Run the migrations.
      * @return void
