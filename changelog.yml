@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.10.0":
+        added:
+            - Added Russian translations
     "1.9.0":
         added:
             - Chinese Simplified language
