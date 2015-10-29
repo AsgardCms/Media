@@ -82,6 +82,7 @@ class MediaController extends AdminBaseController
      */
     public function update(File $file, UpdateMediaRequest $request)
     {
+        app('imagy')->createAll($file->path);
         $this->file->update($file, $request->all());
 
         flash(trans('media::messages.file updated'));
