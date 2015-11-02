@@ -4,7 +4,7 @@
     {!! Form::text("{$lang}[alt_attribute]", Input::old("{$lang}[alt_attribute]", $altAttribute), ['class' => 'form-control', 'placeholder' => trans('media::media.form.alt_attribute')]) !!}
     {!! $errors->first("{$lang}[alt_attribute]", '<span class="help-block">:message</span>') !!}
 </div>
-<?php $description = isset($file->translate($lang)->description) ? $file->translate($lang)->alt_attribute : '' ?>
+<?php $description = isset($file->translate($lang)->description) ? $file->translate($lang)->description : '' ?>
 <div class='form-group{{ $errors->has("{$lang}[description]") ? ' has-error' : '' }}'>
     {!! Form::label("{$lang}[description]", trans('media::media.form.description')) !!}
     {!! Form::textarea("{$lang}[description]", Input::old("{$lang}[description]", $description), ['class' => 'form-control', 'placeholder' => trans('media::media.form.description')]) !!}
