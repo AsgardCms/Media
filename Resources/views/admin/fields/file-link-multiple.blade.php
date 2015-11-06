@@ -51,7 +51,7 @@
             });
         }
     </script>
-    {!! Form::label($zone, ucfirst($zone) . ':') !!}
+    {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
     <?php $url = route('media.grid.select') ?>
     <a class="btn btn-primary btn-upload" onclick="window.open('{!! $url !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');"><i class="fa fa-upload"></i>
