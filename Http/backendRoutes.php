@@ -13,5 +13,5 @@ $router->group(['prefix' => '/media'], function () {
     delete('media/{media}', ['as' => 'admin.media.media.destroy', 'uses' => 'MediaController@destroy']);
 
     get('media-grid/index', ['uses' => 'MediaGridController@index', 'as' => 'media.grid.select']);
-    get('media-grid/ckIndex', ['uses' => 'MediaGridController@ckIndex']);
+    get('media-grid/ckIndex', ['uses' => 'MediaGridController@ckIndex', 'as' => 'media.grid.ckeditor']);
 });

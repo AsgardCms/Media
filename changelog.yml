@@ -1,5 +1,9 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.11.0":
+        changed:
+            - Getting the correct field for the description input
+            - Naming the CkEditor route
     "1.10.0":
         added:
             - Added Russian translations
