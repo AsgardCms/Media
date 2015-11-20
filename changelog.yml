@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.12.0":
+        changed:
+            - The clic event on the <code>x</code> to unlink an image has been bound to a container to allow removal after dom generation
     "1.11.0":
         changed:
             - Getting the correct field for the description input
