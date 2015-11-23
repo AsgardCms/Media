@@ -63,7 +63,7 @@
 </div>
 <script>
     $( document ).ready(function() {
-        $('.jsRemoveLink').on('click', function(e) {
+        $('.jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
             e.preventDefault();
             var imageableId = $(this).data('id');
             $.ajax({
