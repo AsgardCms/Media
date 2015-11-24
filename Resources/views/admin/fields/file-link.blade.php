@@ -42,7 +42,7 @@
             });
         }
     </script>
-    {!! Form::label($zone, ucfirst($zone) . ':') !!}
+    {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
 
     <?php $url = route('media.grid.select') ?>
