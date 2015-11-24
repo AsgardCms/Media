@@ -1,5 +1,9 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.13.0":
+        changed:
+            - Allow multiple upload from media library fields on one page
+            - Allow media zone names to have multiple words separated with underscore
     "1.12.0":
         changed:
             - The clic event on the <code>x</code> to unlink an image has been bound to a container to allow removal after dom generation

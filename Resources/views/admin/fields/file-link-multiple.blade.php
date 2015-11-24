@@ -25,36 +25,45 @@
         }
     </style>
     <script>
-        function includeMedia(mediaId) {
-            var $fileCount = $('.jsFileCount');
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('api.media.link') }}',
-                data: {
-                    'mediaId': mediaId,
-                    '_token': '{{ csrf_token() }}',
-                    'entityClass': '{{ $entityClass }}',
-                    'entityId': '{{ $entityId }}',
-                    'zone': '{{ $zone }}'
-                },
-                success: function(data) {
-                    var html = '<figure><img src="' + data.result.path + '" alt=""/>' +
-                            '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
-                            '<i class="fa fa-times-circle"></i>' +
-                            '</a></figure>';
-                    $('.jsThumbnailImageWrapper').append(html).fadeIn();
-                    if ($fileCount.length > 0) {
-                        var count = parseInt($fileCount.text());
-                        $fileCount.text(count + 1);
+        if (typeof window.openMediaWindow === 'undefined') {
+            window.mediaZone = '';
+            window.openMediaWindow = function (event, zone) {
+                window.mediaZone = zone;
+                window.zoneWrapper = $(event.currentTarget).siblings('.jsThumbnailImageWrapper');
+                window.open('{!! route('media.grid.select') !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');
+            };
+        }
+        if (typeof window.includeMedia === 'undefined') {
+            window.includeMedia = function (mediaId) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('api.media.link') }}',
+                    data: {
+                        'mediaId': mediaId,
+                        '_token': '{{ csrf_token() }}',
+                        'entityClass': '{{ $entityClass }}',
+                        'entityId': '{{ $entityId }}',
+                        'zone': window.mediaZone
+                    },
+                    success: function (data) {
+                        var html = '<img src="' + data.result.path + '" alt=""/>' +
+                                '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
+                                '<i class="fa fa-times-circle"></i>' +
+                                '</a>';
+                        window.zoneWrapper.append(html).fadeIn();
+                        if ($fileCount.length > 0) {
+                            var count = parseInt($fileCount.text());
+                            $fileCount.text(count + 1);
+                        }
                     }
-                }
-            });
+                });
+            };
         }
     </script>
-    {!! Form::label($zone, ucfirst($zone) . ':') !!}
+    {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
     <?php $url = route('media.grid.select') ?>
-    <a class="btn btn-primary btn-upload" onclick="window.open('{!! $url !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');"><i class="fa fa-upload"></i>
+    <a class="btn btn-primary btn-upload" onclick="openMediaWindow(event, '{{ $zone }}')"><i class="fa fa-upload"></i>
         {{ trans('media::media.Browse') }}
     </a>
     <div class="clearfix"></div>
@@ -74,12 +83,12 @@
 </div>
 <script>
     $( document ).ready(function() {
+        $('.jsThumbnailImageWrapper').off('click', '.jsRemoveLink');
         $('.jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
             e.preventDefault();
             var imageableId = $(this).data('id'),
-                    pictureWrapper = $(this).parent(),
-                    $fileCount = $('.jsFileCount');
-
+                pictureWrapper = $(this).parent(),
+                $fileCount = $('.jsFileCount');
             $.ajax({
                 type: 'POST',
                 url: '{{ route('api.media.unlink') }}',
