@@ -1,5 +1,9 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.14.0":
+        changed:
+            - Use the new datatables way of marking column not sortable
+            - Use the single removal modal setup
     "1.13.0":
         changed:
             - Allow multiple upload from media library fields on one page
