@@ -22,4 +22,12 @@ class File extends Model
         'filesize',
         'folder_id',
     ];
+    function albums()
+    {
+        return $this->belongsToMany('Modules\Gallery\Entities\Album',  'gallery__album_file');
+    }
+    function item()
+    {
+        return $this->hasOne('Modules\Gallery\Entities\item');
+    }
 }
