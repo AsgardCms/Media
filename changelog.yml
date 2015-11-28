@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.14.1":
+        changed:
+            - Fixed the include media pop up link to assets
     "1.14.0":
         changed:
             - Use the new datatables way of marking column not sortable
