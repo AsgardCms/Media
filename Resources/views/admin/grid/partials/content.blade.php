@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ trans('media::media.file picker') }}</title>
-    {!! Theme::style('css/vendor/bootstrap.min.css') !!}
+    {!! Theme::style('vendor/bootstrap/dist/css/bootstrap.min.css') !!}
     {!! Theme::style('vendor/admin-lte/dist/css/AdminLTE.css') !!}
-    {!! Theme::style('css/vendor/datatables/dataTables.bootstrap.css') !!}
+    {!! Theme::style('vendor/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}
     <link href="{!! Module::asset('media:css/dropzone.css') !!}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.6/css/jquery.dataTables.css"/>
     <style>
         body {
             background: #ecf0f5;
@@ -87,10 +86,10 @@
         </div>
     </div>
 </div>
-
-{!! Theme::script('js/vendor/jquery.min.js') !!}
+{!! Theme::script('vendor/jquery/jquery.min.js') !!}
 {!! Theme::script('vendor/bootstrap/dist/js/bootstrap.min.js') !!}
-{!! Theme::script('js/vendor/datatables/jquery.dataTables.js') !!}
+{!! Theme::script('vendor/datatables.net/js/jquery.dataTables.min.js') !!}
+{!! Theme::script('vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}
 <script src="{!! Module::asset('media:js/dropzone.js') !!}"></script>
 <?php $config = config('asgard.media.config'); ?>
 <script>
