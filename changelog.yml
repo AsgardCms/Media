@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.14.2":
+        changed:
+            - Fixing the display of the max file size error message
     "1.14.1":
         changed:
             - Fixed the include media pop up link to assets
