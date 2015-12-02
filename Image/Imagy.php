@@ -83,7 +83,7 @@ class Imagy
             return $originalImage;
         }
 
-        return $this->config->get('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
+        return App::make('url')->to('/').$this->config->get('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
     }
 
     /**
