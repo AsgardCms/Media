@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.15.0":
+        changed:
+            - Read the dropzone post URL from the Asgard global object
     "1.14.2":
         changed:
             - Fixing the display of the max file size error message
