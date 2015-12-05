@@ -19,6 +19,7 @@
             display: none;
         }
     </style>
+    @include('partials.asgard-globals')
 </head>
 <body>
 <div class="container">
