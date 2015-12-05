@@ -2,7 +2,13 @@
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Media\ValueObjects\MediaPath;
 
+/**
+ * Class File
+ * @package Modules\Media\Entities
+ * @property \Modules\Media\ValueObjects\MediaPath path
+ */
 class File extends Model
 {
     use Translatable;
@@ -22,4 +28,9 @@ class File extends Model
         'filesize',
         'folder_id',
     ];
+
+    public function getPathAttribute($value)
+    {
+        return new MediaPath($value);
+    }
 }
