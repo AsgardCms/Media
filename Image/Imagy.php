@@ -1,7 +1,9 @@
 <?php namespace Modules\Media\Image;
 
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 use Modules\Media\Entities\File;
 
 class Imagy
@@ -32,6 +34,10 @@ class Imagy
      * @var Repository
      */
     private $config;
+    /**
+     * @var Factory
+     */
+    private $filesystem;
 
     /**
      * @param ImageFactoryInterface $imageFactory
@@ -42,6 +48,7 @@ class Imagy
     {
         $this->image = app('Intervention\Image\ImageManager');
         $this->finder = app('Illuminate\Filesystem\Filesystem');
+        $this->filesystem = app(Factory::class);
         $this->imageFactory = $imageFactory;
         $this->manager = $manager;
         $this->config = $config;
@@ -97,12 +104,12 @@ class Imagy
         }
 
         foreach ($this->manager->all() as $thumbnail) {
-            $image = $this->image->make(public_path() . $path);
+            $image = $this->image->make($path->getUrl());
             $filename = $this->config->get('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail->name());
             foreach ($thumbnail->filters() as $manipulation => $options) {
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
-            $image = $image->encode(pathinfo($path, PATHINFO_EXTENSION));
+            $image = $image->stream(pathinfo($path, PATHINFO_EXTENSION));
             $this->writeImage($filename, $image);
         }
     }
@@ -138,8 +145,12 @@ class Imagy
      */
     private function writeImage($filename, $image)
     {
-        $this->finder->put(public_path($filename), $image);
-        @chmod(public_path($filename), 0666);
+        $this->filesystem->disk($this->getConfiguredFilesystem())->writeStream($filename, $image, [
+            'visibility' => 'public',
+            'mimetype' => 'image/png',
+        ]);
+//        $this->finder->put(public_path($filename), $image);
+//        @chmod(public_path($filename), 0666);
     }
 
     /**
@@ -193,5 +204,10 @@ class Imagy
         }
 
         return $this->finder->delete($paths);
+    }
+
+    private function getConfiguredFilesystem()
+    {
+        return config('asgard.media.config.filesystem');
     }
 }
