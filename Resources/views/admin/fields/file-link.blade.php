@@ -57,7 +57,7 @@
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
 
-    <a class="btn btn-primary btn-browse" onclick="openMediaWindow(event, '{{ $zone }}');"><i class="fa fa-upload"></i>
+    <a class="btn btn-primary btn-browse" onclick="openMediaWindow(event, '{{ $zone }}');" <?php echo (isset(${$zone}->path))?'style="display:none;"':'' ?>><i class="fa fa-upload"></i>
         {{ trans('media::media.Browse') }}
     </a>
 
