@@ -1,6 +1,6 @@
 <?php namespace Modules\Media\Services;
 
-use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Queue\Queue;
 use Illuminate\Queue\Jobs\Job;
 use Modules\Media\Repositories\FileRepository;
@@ -13,22 +13,23 @@ class FileService
      */
     private $file;
     /**
-     * @var Repository
-     */
-    private $config;
-    /**
      * @var Queue
      */
     private $queue;
+    /**
+     * @var Factory
+     */
+    private $filesystem;
 
     public function __construct(
         FileRepository $file,
-        Repository $config,
-        Queue $queue)
+        Queue $queue,
+        Factory $filesystem
+    )
     {
         $this->file = $file;
-        $this->config = $config;
         $this->queue = $queue;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -37,16 +38,18 @@ class FileService
      */
     public function store(UploadedFile $file)
     {
-        // Save the file info to db
         try {
             $savedFile = $this->file->createFromFile($file);
         } catch (\InvalidArgumentException $e) {
             return $e->getMessage();
         }
 
-        // Move the uploaded file to files path
-        $file->move(public_path() . $this->config->get('asgard.media.config.files-path'), $savedFile->filename);
-        @chmod(public_path() . $this->config->get('asgard.media.config.files-path') . $savedFile->filename, 0666);
+        $path = $this->getDestinationPath($savedFile->getOriginal('path'));
+        $stream = fopen($file->getRealPath(), 'r+');
+        $this->filesystem->disk($this->getConfiguredFilesystem())->writeStream($path, $stream, [
+            'visibility' => 'public',
+            'mimetype' => $savedFile->mimetype,
+        ]);
 
         $this->createThumbnails($savedFile);
 
@@ -63,5 +66,25 @@ class FileService
             app('imagy')->createAll($savedFile->path);
             $job->delete();
         });
+    }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    private function getDestinationPath($path)
+    {
+        if ($this->getConfiguredFilesystem() === 'local') {
+            return basename(public_path()) . $path;
+        }
+        return $path;
+    }
+
+    /**
+     * @return string
+     */
+    private function getConfiguredFilesystem()
+    {
+        return config('asgard.media.config.filesystem');
     }
 }
