@@ -26,7 +26,7 @@
   "require": {
     "php": ">=5.4",
     "composer/installers": "~1.0",
-    "intervention/image": "~2.1",
+    "intervention/image": "^2.3",
     "asgardcms/core-module": "~1.0"
   },
   "require-dev": {
