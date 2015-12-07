@@ -14,10 +14,6 @@ class Imagy
      */
     private $image;
     /**
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    private $finder;
-    /**
      * @var ImageFactoryInterface
      */
     private $imageFactory;
@@ -48,7 +44,6 @@ class Imagy
     public function __construct(ImageFactoryInterface $imageFactory, ThumbnailsManager $manager, Repository $config)
     {
         $this->image = app('Intervention\Image\ImageManager');
-        $this->finder = app('Illuminate\Filesystem\Filesystem');
         $this->filesystem = app(Factory::class);
         $this->imageFactory = $imageFactory;
         $this->manager = $manager;
