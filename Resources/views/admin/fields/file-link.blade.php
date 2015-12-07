@@ -46,7 +46,9 @@
                                 '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                                 '<i class="fa fa-times-circle"></i>' +
                                 '</a>';
-                        window.zoneWrapper.append(html).fadeIn();
+                        window.zoneWrapper.append(html).fadeIn('slow',function(){
+                            toggleButton($(this));
+                        });
                     }
                 });
             };
@@ -55,7 +57,7 @@
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
 
-    <a class="btn btn-primary" onclick="openMediaWindow(event, '{{ $zone }}');"><i class="fa fa-upload"></i>
+    <a class="btn btn-primary btn-browse" onclick="openMediaWindow(event, '{{ $zone }}');" <?php echo (isset(${$zone}->path))?'style="display:none;"':'' ?>><i class="fa fa-upload"></i>
         {{ trans('media::media.Browse') }}
     </a>
 
@@ -85,7 +87,9 @@
                 },
                 success: function(data) {
                     if (data.error === false) {
-                        $(e.delegateTarget).fadeOut().html('');
+                        $(e.delegateTarget).fadeOut('slow',function(){
+                            toggleButton($(this));
+                        }).html('');
                     } else {
                         $(e.delegateTarget).append(data.message);
                     }
@@ -93,4 +97,13 @@
             });
         });
     });
+
+    function toggleButton(el){
+        var browseButton = el.parent().find('.btn-browse');
+        if(el.parent().find('.jsThumbnailImageWrapper').is(':visible')){
+            browseButton.hide();
+        }else{
+            browseButton.show();
+        }
+    }
 </script>
