@@ -49,10 +49,10 @@
                         'zone': window.mediaZone
                     },
                     success: function (data) {
-                        var html = '<img src="' + data.result.path + '" alt=""/>' +
+                        var html = '<figure><img src="' + data.result.path + '" alt=""/>' +
                                 '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                                 '<i class="fa fa-times-circle"></i>' +
-                                '</a>';
+                                '</a></figure>';
                         window.zoneWrapper.append(html).fadeIn();
                         if ($fileCount.length > 0) {
                             var count = parseInt($fileCount.text());
