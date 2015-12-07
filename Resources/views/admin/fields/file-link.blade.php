@@ -46,8 +46,9 @@
                                 '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
                                 '<i class="fa fa-times-circle"></i>' +
                                 '</a>';
-                        window.zoneWrapper.append(html).fadeIn('slow');
-                        toggleButton($(this));
+                        window.zoneWrapper.append(html).fadeIn('slow', function() {
+                            toggleButton($(this));
+                        });
                     }
                 });
             };
@@ -86,7 +87,7 @@
                 },
                 success: function(data) {
                     if (data.error === false) {
-                        $(e.delegateTarget).fadeOut('slow',function(){
+                        $(e.delegateTarget).fadeOut('slow', function() {
                             toggleButton($(this));
                         }).html('');
                     } else {
