@@ -1,6 +1,6 @@
 <?php namespace Modules\Media\ValueObjects;
 
-use Illuminate\Contracts\Filesystem\Factory;
+use Modules\Media\UrlResolvers\BaseUrlResolver;
 
 class MediaPath
 {
@@ -23,17 +23,7 @@ class MediaPath
      */
     public function getUrl()
     {
-        $factory = app(Factory::class);
-
-        switch ($this->getConfiguredFilesystem()) {
-            case 'local':
-                return $this->path;
-            case 's3':
-                return $factory->disk($this->getConfiguredFilesystem())->getDriver()->getAdapter()
-                    ->getClient()->getObjectUrl(config('filesystems.disks.s3.bucket'), ltrim($this->path, '/'));
-            default:
-                return $this->path;
-        }
+        return (new BaseUrlResolver())->resolve($this->path);
     }
 
     /**
@@ -46,14 +36,10 @@ class MediaPath
 
     public function __toString()
     {
-        return $this->getUrl();
-    }
-
-    /**
-     * @return string
-     */
-    private function getConfiguredFilesystem()
-    {
-        return config('asgard.media.config.filesystem');
+        try {
+            return $this->getUrl();
+        } catch (\Exception $e) {
+            return '';
+        }
     }
 }
