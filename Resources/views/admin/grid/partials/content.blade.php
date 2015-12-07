@@ -56,7 +56,11 @@
                         <tr>
                             <td>{{ $file->id }}</td>
                             <td>
-                                <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
+                                <?php if ($file->isImage()): ?>
+                                    <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
+                                <?php else: ?>
+                                    <i class="fa fa-file" style="font-size: 20px;"></i>
+                                <?php endif; ?>
                             </td>
                             <td>{{ $file->filename }}</td>
                             <td>

@@ -12,6 +12,11 @@ use Modules\Media\ValueObjects\MediaPath;
 class File extends Model
 {
     use Translatable;
+    /**
+     * All the different images types where thumbnails should be created
+     * @var array
+     */
+    private $imageExtensions = ['jpg', 'png', 'jpeg', 'gif'];
 
     protected $table = 'media__files';
     public $translatedAttributes = ['description', 'alt_attribute', 'keywords'];
@@ -32,5 +37,10 @@ class File extends Model
     public function getPathAttribute($value)
     {
         return new MediaPath($value);
+    }
+
+    public function isImage()
+    {
+        return in_array(pathinfo($this->path, PATHINFO_EXTENSION), $this->imageExtensions);
     }
 }

@@ -1,3 +1,6 @@
+<script>
+    $fileCount = $('.jsFileCount');
+</script>
 <div class="form-group">
     <style>
         .btn-upload {
@@ -7,7 +10,7 @@
             position: relative;
             display: inline-block;
             margin-right: 20px;
-            margin-bottom: 20px
+            margin-bottom: 20px;
             background-color: #fff;
             border: 1px solid #eee;
             padding: 3px;
@@ -46,10 +49,10 @@
                         'zone': window.mediaZone
                     },
                     success: function (data) {
-                        var html = '<img src="' + data.result.path + '" alt=""/>' +
+                        var html = '<figure><img src="' + data.result.path + '" alt=""/>' +
                                 '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                                 '<i class="fa fa-times-circle"></i>' +
-                                '</a>';
+                                '</a></figure>';
                         window.zoneWrapper.append(html).fadeIn();
                         if ($fileCount.length > 0) {
                             var count = parseInt($fileCount.text());
@@ -83,12 +86,10 @@
 </div>
 <script>
     $( document ).ready(function() {
-        $('.jsThumbnailImageWrapper').off('click', '.jsRemoveLink');
         $('.jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
             e.preventDefault();
             var imageableId = $(this).data('id'),
-                pictureWrapper = $(this).parent(),
-                $fileCount = $('.jsFileCount');
+                pictureWrapper = $(this).parent();
             $.ajax({
                 type: 'POST',
                 url: '{{ route('api.media.unlink') }}',

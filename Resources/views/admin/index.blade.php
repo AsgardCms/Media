@@ -48,7 +48,11 @@
                             <?php foreach ($files as $file): ?>
                                 <tr>
                                     <td>
-                                        <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
+                                        <?php if ($file->isImage()): ?>
+                                            <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
+                                        <?php else: ?>
+                                            <i class="fa fa-file" style="font-size: 20px;"></i>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.media.media.edit', [$file->id]) }}">
