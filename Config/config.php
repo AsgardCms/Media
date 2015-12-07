@@ -7,9 +7,9 @@ return [
     |--------------------------------------------------------------------------
     | Choose one or more of the filesystems you configured
     | in app/config/filesystems.php
-    | Default: "local"
+    | Supported: "local", "s3"
     */
-    'filesystem' => 's3',
+    'filesystem' => 'local',
     /*
     |--------------------------------------------------------------------------
     | The path where the media files will be uploaded
