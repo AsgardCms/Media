@@ -4,6 +4,7 @@ use GuzzleHttp\Mimetypes;
 use GuzzleHttp\Psr7\Stream;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Filesystem\Factory;
+use Intervention\Image\ImageManager;
 use Modules\Media\Entities\File;
 use Modules\Media\ValueObjects\MediaPath;
 
@@ -43,7 +44,7 @@ class Imagy
      */
     public function __construct(ImageFactoryInterface $imageFactory, ThumbnailsManager $manager, Repository $config)
     {
-        $this->image = app('Intervention\Image\ImageManager');
+        $this->image = app(ImageManager::class);
         $this->filesystem = app(Factory::class);
         $this->imageFactory = $imageFactory;
         $this->manager = $manager;
