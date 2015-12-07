@@ -56,6 +56,7 @@ abstract class MediaTestCase extends TestCase
             ],
         ];
         $app['path.base'] = __DIR__ . '/..';
+        $app['config']->set('asgard.media.config', ['filesystem' => 'local']);
         $app['config']->set('asgard.media.thumbnails', $conf);
         $app['config']->set('modules', [
             'namespace' => 'Modules',
