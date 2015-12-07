@@ -38,11 +38,7 @@ class FileService
      */
     public function store(UploadedFile $file)
     {
-        try {
-            $savedFile = $this->file->createFromFile($file);
-        } catch (\InvalidArgumentException $e) {
-            return $e->getMessage();
-        }
+        $savedFile = $this->file->createFromFile($file);
 
         $path = $this->getDestinationPath($savedFile->getOriginal('path'));
         $stream = fopen($file->getRealPath(), 'r+');
