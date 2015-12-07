@@ -46,9 +46,8 @@
                                 '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                                 '<i class="fa fa-times-circle"></i>' +
                                 '</a>';
-                        window.zoneWrapper.append(html).fadeIn('slow',function(){
-                            toggleButton($(this));
-                        });
+                        window.zoneWrapper.append(html).fadeIn('slow');
+                        toggleButton($(this));
                     }
                 });
             };
@@ -98,12 +97,8 @@
         });
     });
 
-    function toggleButton(el){
+    function toggleButton(el) {
         var browseButton = el.parent().find('.btn-browse');
-        if(el.parent().find('.jsThumbnailImageWrapper').is(':visible')){
-            browseButton.hide();
-        }else{
-            browseButton.show();
-        }
+        browseButton.toggle();
     }
 </script>
