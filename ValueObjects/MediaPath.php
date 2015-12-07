@@ -27,7 +27,7 @@ class MediaPath
 
         switch ($this->getConfiguredFilesystem()) {
             case 'local':
-                return $this->path;
+                return public_path($this->path);
             case 's3':
                 return $factory->disk($this->getConfiguredFilesystem())->getDriver()->getAdapter()
                     ->getClient()->getObjectUrl(config('filesystems.disks.s3.bucket'), ltrim($this->path, '/'));
