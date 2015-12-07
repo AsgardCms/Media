@@ -1,3 +1,6 @@
+<script>
+    $fileCount = $('.jsFileCount');
+</script>
 <div class="form-group">
     <style>
         .btn-upload {
@@ -7,7 +10,7 @@
             position: relative;
             display: inline-block;
             margin-right: 20px;
-            margin-bottom: 20px
+            margin-bottom: 20px;
             background-color: #fff;
             border: 1px solid #eee;
             padding: 3px;
@@ -87,8 +90,8 @@
         $('.jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
             e.preventDefault();
             var imageableId = $(this).data('id'),
-                pictureWrapper = $(this).parent(),
-                $fileCount = $('.jsFileCount');
+                pictureWrapper = $(this).parent();
+            console.log(pictureWrapper);
             $.ajax({
                 type: 'POST',
                 url: '{{ route('api.media.unlink') }}',
