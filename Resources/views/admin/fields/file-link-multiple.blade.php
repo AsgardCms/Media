@@ -86,12 +86,10 @@
 </div>
 <script>
     $( document ).ready(function() {
-        $('.jsThumbnailImageWrapper').off('click', '.jsRemoveLink');
         $('.jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
             e.preventDefault();
             var imageableId = $(this).data('id'),
                 pictureWrapper = $(this).parent();
-            console.log(pictureWrapper);
             $.ajax({
                 type: 'POST',
                 url: '{{ route('api.media.unlink') }}',

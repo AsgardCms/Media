@@ -43,7 +43,7 @@
                     },
                     success: function (data) {
                         var html = '<img src="' + data.result.path + '" alt=""/>' +
-                                '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
+                                '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
                                 '<i class="fa fa-times-circle"></i>' +
                                 '</a>';
                         window.zoneWrapper.append(html).fadeIn();
@@ -64,7 +64,7 @@
     <figure class="jsThumbnailImageWrapper">
         <?php if (isset(${$zone}->path)): ?>
             <img src="{{ Imagy::getThumbnail(${$zone}->path, 'mediumThumb') }}" alt=""/>
-            <a class="jsRemoveLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
+            <a class="jsRemoveSimpleLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
                 <i class="fa fa-times-circle"></i>
             </a>
         <?php endif; ?>
@@ -72,8 +72,8 @@
 </div>
 <script>
     $( document ).ready(function() {
-        $('.jsThumbnailImageWrapper').off('click', '.jsRemoveLink');
-        $('.jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
+        $('.jsThumbnailImageWrapper').off('click', '.jsRemoveSimpleLink');
+        $('.jsThumbnailImageWrapper').on('click', '.jsRemoveSimpleLink', function (e) {
             e.preventDefault();
             var imageableId = $(this).data('id');
             $.ajax({
