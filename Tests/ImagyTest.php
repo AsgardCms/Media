@@ -69,7 +69,7 @@ class ImagyTest extends MediaTestCase
     {
         $path = $this->imagy->getThumbnail("{$this->mediaPath}google-map.png", 'smallThumb');
 
-        $expected = public_path("google-map_smallThumb.png");
+        $expected = 'google-map_smallThumb.png';
 
         $this->assertEquals($expected, $path);
     }
