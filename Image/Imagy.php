@@ -110,7 +110,7 @@ class Imagy
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
             $image = $image->stream(pathinfo($path, PATHINFO_EXTENSION));
-            $this->writeImage($filename, $image);
+            $this->writeImage($filename, $image->detach());
         }
     }
 
