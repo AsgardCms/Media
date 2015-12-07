@@ -25,8 +25,7 @@ class FileService
         FileRepository $file,
         Queue $queue,
         Factory $filesystem
-    )
-    {
+    ) {
         $this->file = $file;
         $this->queue = $queue;
         $this->filesystem = $filesystem;
@@ -73,6 +72,7 @@ class FileService
         if ($this->getConfiguredFilesystem() === 'local') {
             return basename(public_path()) . $path;
         }
+
         return $path;
     }
 

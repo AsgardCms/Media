@@ -11,7 +11,7 @@ class MediaPath
 
     public function __construct($path)
     {
-        if ( ! is_string($path)) {
+        if (! is_string($path)) {
             throw new \InvalidArgumentException('The path must be a string');
         }
         $this->path = $path;
