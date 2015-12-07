@@ -1,5 +1,11 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.16.0":
+        added:
+            - Adding the timesteamps on the morph files relation
+            - Adding support for local and s3 file storage!
+        changed:
+            - If file with already present filename, new unique filename will be generated instead of throwing error
     "1.15.1":
         changed:
             - Including the Asgard js global definition
