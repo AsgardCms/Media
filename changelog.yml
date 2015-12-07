@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.17.0":
+        changed:
+            - Hiding the thumbnail display if file is not an image
     "1.16.0":
         added:
             - Adding the timesteamps on the morph files relation
