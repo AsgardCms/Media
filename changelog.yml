@@ -4,6 +4,7 @@ versions:
         changed:
             - Hiding the thumbnail display if file is not an image
             - Fixing the filename property on the edit view
+            - Removed language files, they are now in the translation module
     "1.16.0":
         added:
             - Adding the timesteamps on the morph files relation
