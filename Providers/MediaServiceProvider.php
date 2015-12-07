@@ -8,6 +8,7 @@ use Modules\Media\Image\Imagy;
 use Modules\Media\Image\Intervention\InterventionFactory;
 use Modules\Media\Image\ThumbnailsManager;
 use Modules\Media\Repositories\Eloquent\EloquentFileRepository;
+use Modules\Media\Repositories\FileRepository;
 use Modules\Media\Validators\MaxFolderSizeValidator;
 
 class MediaServiceProvider extends ServiceProvider
@@ -49,12 +50,9 @@ class MediaServiceProvider extends ServiceProvider
 
     private function registerBindings()
     {
-        $this->app->bind(
-            'Modules\Media\Repositories\FileRepository',
-            function ($app) {
-                return new EloquentFileRepository(new File(), $app['filesystem.disk']);
-            }
-        );
+        $this->app->bind(FileRepository::class, function ($app) {
+            return new EloquentFileRepository(new File(), $app['filesystem.disk']);
+        });
     }
 
     /**
@@ -72,14 +70,12 @@ class MediaServiceProvider extends ServiceProvider
     {
         $this->app->bindShared('command.media.refresh', function ($app) {
             $thumbnailManager = new ThumbnailsManager($app['config'], $app['modules']);
-            $imagy = new Imagy(new InterventionFactory(), $thumbnailManager, $app['config']);
+            $imagy = new Imagy(new InterventionFactory(), $thumbnailManager);
 
             return new RefreshThumbnailCommand($imagy, $app['Modules\Media\Repositories\FileRepository']);
         });
 
-        $this->commands(
-            'command.media.refresh'
-        );
+        $this->commands('command.media.refresh');
     }
 
     private function registerMaxFolderSizeValidator()
