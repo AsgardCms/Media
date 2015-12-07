@@ -83,7 +83,10 @@ class Imagy
             return $originalImage;
         }
 
-        return $this->config->get('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
+        $path = $this->newFilename($originalImage, $thumbnail);
+        $dir = pathinfo($originalImage, PATHINFO_DIRNAME);
+
+        return "{$dir}/{$path}";
     }
 
     /**

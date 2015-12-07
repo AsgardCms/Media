@@ -71,7 +71,7 @@ class ImagyTest extends MediaTestCase
     public function it_should_return_thumbnail_path()
     {
         $path = $this->mediaPath;
-        $path .= $this->imagy->getThumbnail("{$this->mediaPath}google-map.png", 'smallThumb');
+        $path .= $this->imagy->getThumbnail("google-map.png", 'smallThumb');
         $expected = "{$this->mediaPath}google-map_smallThumb.png";
 
         $this->assertEquals($expected, $path);
@@ -80,7 +80,7 @@ class ImagyTest extends MediaTestCase
     /** @test */
     public function it_should_return_same_path_for_non_images()
     {
-        $path = $this->imagy->getThumbnail("{$this->mediaPath}test-pdf.pdf", 'smallThumb');
+        $path = $this->imagy->getThumbnail("test-pdf.pdf", 'smallThumb');
         $expected = "{$this->mediaPath}test-pdf.pdf";
 
         $this->assertEquals($expected, $path);
