@@ -9,7 +9,7 @@
             border-radius: 3px;
             margin-top: 20px;
         }
-        figure.jsThumbnailImageWrapper i {
+        figure.jsThumbnailImageWrapper i.removeIcon {
             position: absolute;
             top:-10px;
             right:-10px;
@@ -44,7 +44,7 @@
                     success: function (data) {
                         var html = '<img src="' + data.result.path + '" alt=""/>' +
                                 '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
-                                '<i class="fa fa-times-circle"></i>' +
+                                '<i class="fa fa-times-circle removeIcon"></i>' +
                                 '</a>';
                         window.zoneWrapper.append(html).fadeIn('slow', function() {
                             toggleButton($(this));
@@ -65,9 +65,13 @@
 
     <figure class="jsThumbnailImageWrapper">
         <?php if (isset(${$zone}->path)): ?>
-            <img src="{{ Imagy::getThumbnail(${$zone}->path, 'mediumThumb') }}" alt=""/>
+            <?php if (${$zone}->isImage()): ?>
+                <img src="{{ Imagy::getThumbnail(${$zone}->path, 'mediumThumb') }}" alt=""/>
+            <?php else: ?>
+                <i class="fa fa-file" style="font-size: 50px;"></i>
+            <?php endif; ?>
             <a class="jsRemoveSimpleLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
-                <i class="fa fa-times-circle"></i>
+                <i class="fa fa-times-circle removeIcon"></i>
             </a>
         <?php endif; ?>
     </figure>

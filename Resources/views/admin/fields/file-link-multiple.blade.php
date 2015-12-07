@@ -16,7 +16,7 @@
             padding: 3px;
             border-radius: 3px;
         }
-        .jsThumbnailImageWrapper i {
+        .jsThumbnailImageWrapper i.removeIcon {
             position: absolute;
             top:-10px;
             right:-10px;
@@ -51,7 +51,7 @@
                     success: function (data) {
                         var html = '<figure><img src="' + data.result.path + '" alt=""/>' +
                                 '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
-                                '<i class="fa fa-times-circle"></i>' +
+                                '<i class="fa fa-times-circle removeIcon"></i>' +
                                 '</a></figure>';
                         window.zoneWrapper.append(html).fadeIn();
                         if ($fileCount.length > 0) {
@@ -77,7 +77,7 @@
         <figure>
             <img src="{{ Imagy::getThumbnail($file->path, 'mediumThumb') }}" alt=""/>
             <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
-                <i class="fa fa-times-circle"></i>
+                <i class="fa fa-times-circle removeIcon"></i>
             </a>
         </figure>
         <?php endforeach; ?>
