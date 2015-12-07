@@ -3,6 +3,7 @@ versions:
     "1.17.0":
         changed:
             - Hiding the thumbnail display if file is not an image
+            - Fixing the filename property on the edit view
     "1.16.0":
         added:
             - Adding the timesteamps on the morph files relation
