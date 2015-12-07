@@ -2,7 +2,6 @@
 
 use GuzzleHttp\Mimetypes;
 use GuzzleHttp\Psr7\Stream;
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Filesystem\Factory;
 use Intervention\Image\ImageManager;
 use Modules\Media\Entities\File;
@@ -29,26 +28,20 @@ class Imagy
      */
     private $imageExtensions = ['jpg', 'png', 'jpeg', 'gif'];
     /**
-     * @var Repository
-     */
-    private $config;
-    /**
      * @var Factory
      */
     private $filesystem;
 
     /**
      * @param ImageFactoryInterface $imageFactory
-     * @param ThumbnailsManager     $manager
-     * @param Repository            $config
+     * @param ThumbnailsManager $manager
      */
-    public function __construct(ImageFactoryInterface $imageFactory, ThumbnailsManager $manager, Repository $config)
+    public function __construct(ImageFactoryInterface $imageFactory, ThumbnailsManager $manager)
     {
         $this->image = app(ImageManager::class);
         $this->filesystem = app(Factory::class);
         $this->imageFactory = $imageFactory;
         $this->manager = $manager;
-        $this->config = $config;
     }
 
     /**
@@ -64,7 +57,7 @@ class Imagy
             return;
         }
 
-        $filename = $this->config->get('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail);
+        $filename = config('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail);
 
         if ($this->returnCreatedFile($filename, $forceCreate)) {
             return $filename;
@@ -91,7 +84,7 @@ class Imagy
             return $originalImage;
         }
 
-        $path = $this->config->get('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
+        $path = config('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
 
         return (new MediaPath($path))->getUrl();
     }
@@ -108,7 +101,7 @@ class Imagy
 
         foreach ($this->manager->all() as $thumbnail) {
             $image = $this->image->make($path->getUrl());
-            $filename = $this->config->get('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail->name());
+            $filename = config('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail->name());
             foreach ($thumbnail->filters() as $manipulation => $options) {
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
@@ -203,7 +196,7 @@ class Imagy
         $fileName = pathinfo($file->path, PATHINFO_FILENAME);
         $extension = pathinfo($file->path, PATHINFO_EXTENSION);
         foreach ($this->manager->all() as $thumbnail) {
-            $path = $this->config->get('asgard.media.config.files-path') . "{$fileName}_{$thumbnail->name()}.{$extension}";
+            $path = config('asgard.media.config.files-path') . "{$fileName}_{$thumbnail->name()}.{$extension}";
             $paths[] = (new MediaPath($path))->getRelativeUrl();
         }
 
