@@ -1,10 +1,11 @@
 <?php namespace Modules\Media\Image;
 
+use GuzzleHttp\Mimetypes;
+use GuzzleHttp\Psr7\Stream;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Filesystem\Factory;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Storage;
 use Modules\Media\Entities\File;
+use Modules\Media\ValueObjects\MediaPath;
 
 class Imagy
 {
@@ -72,10 +73,14 @@ class Imagy
         if ($this->returnCreatedFile($filename, $forceCreate)) {
             return $filename;
         }
+        if ($this->fileExists($filename) === true) {
+            $this->filesystem->disk($this->getConfiguredFilesystem())->delete($filename);
+        }
 
-        $this->makeNew($path, $filename, $thumbnail);
+        $mediaPath = (new MediaPath($filename))->getUrl();
+        $this->makeNew($path, $mediaPath, $thumbnail);
 
-        return $filename;
+        return (new MediaPath($filename))->getUrl();
     }
 
     /**
@@ -90,7 +95,9 @@ class Imagy
             return $originalImage;
         }
 
-        return $this->config->get('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
+        $path = $this->config->get('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);
+
+        return (new MediaPath($path))->getUrl();
     }
 
     /**
@@ -110,7 +117,7 @@ class Imagy
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
             $image = $image->stream(pathinfo($path, PATHINFO_EXTENSION));
-            $this->writeImage($filename, $image->detach());
+            $this->writeImage($filename, $image);
         }
     }
 
@@ -135,39 +142,41 @@ class Imagy
      */
     private function returnCreatedFile($filename, $forceCreate)
     {
-        return $this->finder->isFile(public_path() . $filename) && !$forceCreate;
+        return $this->fileExists($filename) && $forceCreate === false;
     }
 
     /**
      * Write the given image
      * @param string $filename
-     * @param string $image
+     * @param Stream $image
      */
-    private function writeImage($filename, $image)
+    private function writeImage($filename, Stream $image)
     {
-        $this->filesystem->disk($this->getConfiguredFilesystem())->writeStream($filename, $image, [
+        $resource = $image->detach();
+        $config = [
             'visibility' => 'public',
-            'mimetype' => 'image/png',
-        ]);
-//        $this->finder->put(public_path($filename), $image);
-//        @chmod(public_path($filename), 0666);
+            'mimetype' => Mimetypes::getInstance()->fromFilename($filename),
+        ];
+        if ($this->fileExists($filename)) {
+            return $this->filesystem->disk($this->getConfiguredFilesystem())->updateStream($filename, $resource, $config);
+        }
+        $this->filesystem->disk($this->getConfiguredFilesystem())->writeStream($filename, $resource, $config);
     }
 
     /**
      * Make a new image
-     * @param string      $path
+     * @param MediaPath      $path
      * @param string      $filename
      * @param string null $thumbnail
      */
-    private function makeNew($path, $filename, $thumbnail)
+    private function makeNew(MediaPath $path, $filename, $thumbnail)
     {
-        $image = $this->image->make(public_path() . $path);
+        $image = $this->image->make($path->getUrl());
 
         foreach ($this->manager->find($thumbnail) as $manipulation => $options) {
             $image = $this->imageFactory->make($manipulation)->handle($image, $options);
         }
-
-        $image = $image->encode(pathinfo($path, PATHINFO_EXTENSION));
+        $image = $image->stream(pathinfo($path, PATHINFO_EXTENSION));
 
         $this->writeImage($filename, $image);
     }
@@ -191,23 +200,31 @@ class Imagy
     public function deleteAllFor(File $file)
     {
         if (!$this->isImage($file->path)) {
-            return $this->finder->delete($file->path);
+            return $this->filesystem->disk($this->getConfiguredFilesystem())->delete($file->path->getUrl());
         }
 
-        $paths[] = public_path() . $file->path;
+        $paths[] = $file->path->getRelativeUrl();
         $fileName = pathinfo($file->path, PATHINFO_FILENAME);
         $extension = pathinfo($file->path, PATHINFO_EXTENSION);
         foreach ($this->manager->all() as $thumbnail) {
-            $paths[] = public_path() . $this->config->get(
-                    'asgard.media.config.files-path'
-                ) . "{$fileName}_{$thumbnail->name()}.{$extension}";
+            $path = $this->config->get('asgard.media.config.files-path') . "{$fileName}_{$thumbnail->name()}.{$extension}";
+            $paths[] = (new MediaPath($path))->getRelativeUrl();
         }
 
-        return $this->finder->delete($paths);
+        return $this->filesystem->disk($this->getConfiguredFilesystem())->delete($paths);
     }
 
     private function getConfiguredFilesystem()
     {
         return config('asgard.media.config.filesystem');
+    }
+
+    /**
+     * @param $filename
+     * @return bool
+     */
+    private function fileExists($filename)
+    {
+        return $this->filesystem->disk($this->getConfiguredFilesystem())->exists($filename);
     }
 }
