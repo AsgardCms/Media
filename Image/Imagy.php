@@ -200,7 +200,7 @@ class Imagy
     public function deleteAllFor(File $file)
     {
         if (!$this->isImage($file->path)) {
-            return $this->filesystem->disk($this->getConfiguredFilesystem())->delete($file->path->getUrl());
+            return $this->filesystem->disk($this->getConfiguredFilesystem())->delete($file->path->getRelativeUrl());
         }
 
         $paths[] = $file->path->getRelativeUrl();
