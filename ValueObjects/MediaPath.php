@@ -36,6 +36,14 @@ class MediaPath
         }
     }
 
+    /**
+     * @return string
+     */
+    public function getRelativeUrl()
+    {
+        return $this->path;
+    }
+
     public function __toString()
     {
         return $this->getUrl();
