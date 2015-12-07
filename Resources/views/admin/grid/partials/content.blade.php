@@ -65,21 +65,25 @@
                             <td>{{ $file->filename }}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        {{ trans('media::media.insert') }} <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <?php foreach ($thumbnails as $thumbnail): ?>
-                                        <li data-file="{{ Imagy::getThumbnail($file->path, $thumbnail->name()) }}"
-                                            data-id="{{ $file->id }}" class="jsInsertImage">
-                                            <a href="">{{ $thumbnail->name() }} ({{ $thumbnail->size() }})</a>
-                                        </li>
-                                        <?php endforeach; ?>
-                                        <li class="divider"></li>
-                                        <li data-file="{{ $file->path }}" data-id="{{ $file->id }}" class="jsInsertImage">
-                                            <a href="">Original</a>
-                                        </li>
-                                    </ul>
+                                    <?php if ($file->isImage()): ?>
+                                        <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            {{ trans('media::media.insert') }} <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <?php foreach ($thumbnails as $thumbnail): ?>
+                                            <li data-file="{{ Imagy::getThumbnail($file->path, $thumbnail->name()) }}"
+                                                data-id="{{ $file->id }}" class="jsInsertImage">
+                                                <a href="">{{ $thumbnail->name() }} ({{ $thumbnail->size() }})</a>
+                                            </li>
+                                            <?php endforeach; ?>
+                                            <li class="divider"></li>
+                                            <li data-file="{{ $file->path }}" data-id="{{ $file->id }}" class="jsInsertImage">
+                                                <a href="">Original</a>
+                                            </li>
+                                        </ul>
+                                    <?php else: ?>
+                                        <a href=""  class="btn btn-primary jsInsertImage">{{ trans('media::media.insert') }}</a>
+                                    <?php endif; ?>
                                 </div>
                             </td>
                         </tr>
