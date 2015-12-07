@@ -34,7 +34,7 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
         $exists = $this->model->whereFilename($fileName)->first();
 
         if ($exists) {
-            throw new \InvalidArgumentException('File slug already exists');
+            $fileName = $this->getNewUniqueFilename($fileName);
         }
 
         return $this->model->create([
@@ -85,5 +85,22 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
         }
 
         return new Collection($files);
+    }
+
+    /**
+     * @param $fileName
+     * @return string
+     */
+    private function getNewUniqueFilename($fileName)
+    {
+        $fileNameOnly = pathinfo($fileName, PATHINFO_FILENAME);
+        $model = $this->model->where('filename', 'LIKE', "$fileNameOnly%")->orderBy('created_at', 'desc')->first();
+        $latestFilename = pathinfo($model->filename, PATHINFO_FILENAME);
+        $extension = pathinfo($model->filename, PATHINFO_EXTENSION);
+
+        $version = substr($latestFilename, -1, strpos($latestFilename, '_'));
+        $version++;
+
+        return $fileNameOnly . '_' . $version . '.' . $extension;
     }
 }
