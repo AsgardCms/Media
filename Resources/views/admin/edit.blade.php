@@ -34,10 +34,16 @@
         </div> {{-- end nav-tabs-custom --}}
     </div>
     <div class="col-md-4">
-        <img src="{{ $file->path }}" alt="" style="width: 100%;"/>
+        <?php if ($file->isImage()): ?>
+            <img src="{{ $file->path }}" alt="" style="width: 100%;"/>
+        <?php else: ?>
+            <i class="fa fa-file" style="font-size: 50px;"></i>
+        <?php endif; ?>
     </div>
 </div>
 
+
+<?php if ($file->isImage()): ?>
 <div class="row">
     <div class="col-md-12">
         <h3>Thumbnails</h3>
@@ -52,6 +58,7 @@
         </ul>
     </div>
 </div>
+<?php endif; ?>
 {!! Form::close() !!}
 @stop
 
