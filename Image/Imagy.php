@@ -193,7 +193,6 @@ class Imagy
             return $this->filesystem->disk($this->getConfiguredFilesystem())->delete($file->path->getRelativeUrl());
         }
 
-        config()->set('filesystems.disks.local.root', public_path());
         $paths[] = $file->path->getRelativeUrl();
         $fileName = pathinfo($file->path, PATHINFO_FILENAME);
         $extension = pathinfo($file->path, PATHINFO_EXTENSION);
