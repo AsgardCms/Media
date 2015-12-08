@@ -102,6 +102,7 @@ class Imagy
         foreach ($this->manager->all() as $thumbnail) {
             $image = $this->image->make($path->getUrl());
             $filename = config('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail->name());
+            dd($filename);
             foreach ($thumbnail->filters() as $manipulation => $options) {
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
@@ -192,12 +193,15 @@ class Imagy
             return $this->filesystem->disk($this->getConfiguredFilesystem())->delete($file->path->getRelativeUrl());
         }
 
+        config()->set('filesystems.disks.local.root', public_path());
         $paths[] = $file->path->getRelativeUrl();
         $fileName = pathinfo($file->path, PATHINFO_FILENAME);
         $extension = pathinfo($file->path, PATHINFO_EXTENSION);
         foreach ($this->manager->all() as $thumbnail) {
             $path = config('asgard.media.config.files-path') . "{$fileName}_{$thumbnail->name()}.{$extension}";
-            $paths[] = (new MediaPath($path))->getRelativeUrl();
+            if ($this->fileExists($path)) {
+                $paths[] = (new MediaPath($path))->getRelativeUrl();
+            }
         }
 
         return $this->filesystem->disk($this->getConfiguredFilesystem())->delete($paths);
