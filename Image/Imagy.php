@@ -100,9 +100,8 @@ class Imagy
         }
 
         foreach ($this->manager->all() as $thumbnail) {
-            $image = $this->image->make($path->getUrl());
+            $image = $this->image->make($this->getDestinationPath($path->getUrl()));
             $filename = config('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail->name());
-            dd($filename);
             foreach ($thumbnail->filters() as $manipulation => $options) {
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
@@ -202,6 +201,11 @@ class Imagy
                 $paths[] = (new MediaPath($path))->getRelativeUrl();
             }
         }
+        if ($this->getConfiguredFilesystem() === 'local') {
+            foreach ($paths as $i => $path) {
+                $paths[$i] = 'public' . $path;
+            }
+        }
 
         return $this->filesystem->disk($this->getConfiguredFilesystem())->delete($paths);
     }
@@ -218,5 +222,18 @@ class Imagy
     private function fileExists($filename)
     {
         return $this->filesystem->disk($this->getConfiguredFilesystem())->exists($filename);
+    }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    private function getDestinationPath($path)
+    {
+        if ($this->getConfiguredFilesystem() === 'local') {
+            return basename(public_path()) . $path;
+        }
+
+        return $path;
     }
 }
