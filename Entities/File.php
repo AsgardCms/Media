@@ -33,10 +33,16 @@ class File extends Model
         'filesize',
         'folder_id',
     ];
+    protected $appends = ['path_string'];
 
     public function getPathAttribute($value)
     {
         return new MediaPath($value);
+    }
+
+    public function getPathStringAttribute()
+    {
+        return (string) $this->path;
     }
 
     public function isImage()
