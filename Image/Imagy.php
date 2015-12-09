@@ -100,7 +100,7 @@ class Imagy
         }
 
         foreach ($this->manager->all() as $thumbnail) {
-            $image = $this->image->make($this->getDestinationPath($path->getUrl()));
+            $image = $this->image->make($this->filesystem->disk($this->getConfiguredFilesystem())->get($this->getDestinationPath($path->getRelativeUrl())));
             $filename = config('asgard.media.config.files-path') . $this->newFilename($path, $thumbnail->name());
             foreach ($thumbnail->filters() as $manipulation => $options) {
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
@@ -141,6 +141,7 @@ class Imagy
      */
     private function writeImage($filename, Stream $image)
     {
+        $filename = $this->getDestinationPath($filename);
         $resource = $image->detach();
         $config = [
             'visibility' => 'public',
@@ -192,18 +193,13 @@ class Imagy
             return $this->filesystem->disk($this->getConfiguredFilesystem())->delete($file->path->getRelativeUrl());
         }
 
-        $paths[] = $file->path->getRelativeUrl();
+        $paths[] = $this->getDestinationPath($file->path->getRelativeUrl());
         $fileName = pathinfo($file->path, PATHINFO_FILENAME);
         $extension = pathinfo($file->path, PATHINFO_EXTENSION);
         foreach ($this->manager->all() as $thumbnail) {
             $path = config('asgard.media.config.files-path') . "{$fileName}_{$thumbnail->name()}.{$extension}";
-            if ($this->fileExists($path)) {
-                $paths[] = (new MediaPath($path))->getRelativeUrl();
-            }
-        }
-        if ($this->getConfiguredFilesystem() === 'local') {
-            foreach ($paths as $i => $path) {
-                $paths[$i] = 'public' . $path;
+            if ($this->fileExists($this->getDestinationPath($path))) {
+                $paths[] = (new MediaPath($this->getDestinationPath($path)))->getRelativeUrl();
             }
         }
 
