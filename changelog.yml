@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.17.2":
+        added:
+            - Method to get the file path as a string using <code>$file->path_string</code>
     "1.17.1":
         changed:
             - Fixed extension guessing
