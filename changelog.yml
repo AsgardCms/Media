@@ -1,5 +1,9 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.17.1":
+        changed:
+            - Fixed extension guessing
+            - Fixed file location for non images files
     "1.17.0":
         changed:
             - Hiding the thumbnail display if file is not an image
