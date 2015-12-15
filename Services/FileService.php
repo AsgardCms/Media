@@ -2,12 +2,17 @@
 
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Queue\Queue;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\Jobs\Job;
+use Modules\Media\Jobs\CreateThumbnails;
+use Modules\Media\Jobs\RebuildThumbnails;
 use Modules\Media\Repositories\FileRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileService
 {
+    use DispatchesJobs;
+
     /**
      * @var FileRepository
      */
@@ -57,10 +62,7 @@ class FileService
      */
     private function createThumbnails($savedFile)
     {
-        $this->queue->push(function (Job $job) use ($savedFile) {
-            app('imagy')->createAll($savedFile->path);
-            $job->delete();
-        });
+        $this->dispatch(new CreateThumbnails($savedFile->path));
     }
 
     /**
