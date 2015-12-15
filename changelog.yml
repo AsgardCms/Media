@@ -1,5 +1,9 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.18.0":
+        changed:
+            - Queue closures in the <code>FileService</code> has ben extracted to a queued job
+            - The refresh thumbnail command now uses a queued job
     "1.17.2":
         added:
             - Method to get the file path as a string using <code>$file->path_string</code>
