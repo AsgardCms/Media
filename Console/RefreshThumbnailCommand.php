@@ -1,26 +1,23 @@
 <?php namespace Modules\Media\Console;
 
 use Illuminate\Console\Command;
-use Modules\Media\Image\Imagy;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Modules\Media\Jobs\RebuildThumbnails;
 use Modules\Media\Repositories\FileRepository;
 
 class RefreshThumbnailCommand extends Command
 {
+    use DispatchesJobs;
     protected $name = 'asgard:media:refresh';
     protected $description = 'Create and or refresh the thumbnails';
-    /**
-     * @var Imagy
-     */
-    private $imagy;
     /**
      * @var FileRepository
      */
     private $file;
 
-    public function __construct(Imagy $imagy, FileRepository $file)
+    public function __construct(FileRepository $file)
     {
         parent::__construct();
-        $this->imagy = $imagy;
         $this->file = $file;
     }
 
@@ -33,9 +30,7 @@ class RefreshThumbnailCommand extends Command
     {
         $this->line('Preparing to regenerate all thumbnails...');
 
-        foreach ($this->file->all() as $file) {
-            $this->imagy->createAll($file->path);
-        }
+        $this->dispatch(new RebuildThumbnails($this->file->all()->pluck('path')));
 
         $this->info('All thumbnails refreshed');
     }
