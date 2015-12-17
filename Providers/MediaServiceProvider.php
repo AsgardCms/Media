@@ -69,10 +69,7 @@ class MediaServiceProvider extends ServiceProvider
     private function registerRefreshCommand()
     {
         $this->app->bindShared('command.media.refresh', function ($app) {
-            $thumbnailManager = new ThumbnailsManager($app['config'], $app['modules']);
-            $imagy = new Imagy(new InterventionFactory(), $thumbnailManager);
-
-            return new RefreshThumbnailCommand($imagy, $app['Modules\Media\Repositories\FileRepository']);
+            return new RefreshThumbnailCommand($app['Modules\Media\Repositories\FileRepository']);
         });
 
         $this->commands('command.media.refresh');

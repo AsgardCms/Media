@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.18.1":
+        changed:
+            - Fixing instantiation of the <code>RefreshThumbnailCommand</code>
     "1.18.0":
         changed:
             - Queue closures in the <code>FileService</code> has ben extracted to a queued job
