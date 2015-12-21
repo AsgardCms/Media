@@ -8,6 +8,6 @@ trait MediaRelation
      */
     public function files()
     {
-        return $this->morphToMany('Modules\Media\Entities\File', 'imageable', 'media__imageables')->withPivot('zone', 'id')->withTimestamps();
+        return $this->morphToMany('Modules\Media\Entities\File', 'imageable', 'media__imageables')->withPivot('zone', 'id')->withTimestamps()->orderBy('order');
     }
 }

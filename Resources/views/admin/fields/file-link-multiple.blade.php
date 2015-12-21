@@ -1,3 +1,7 @@
+{!! Theme::style('vendor/jquery-ui/ui/minified/core.min.js') !!}
+{!! Theme::style('vendor/jquery-ui/ui/minified/draggable.min.js') !!}
+{!! Theme::style('vendor/jquery-ui/jquery-ui.min.js') !!}
+
 <script>
     $fileCount = $('.jsFileCount');
 </script>
@@ -14,6 +18,7 @@
         border: 1px solid #eee;
         padding: 3px;
         border-radius: 3px;
+        cursor:grab;
     }
     .jsThumbnailImageWrapper i.removeIcon {
         position: absolute;
@@ -74,7 +79,7 @@
         <?php $zoneVar = "{$zone}Files"  ?>
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
-                <figure>
+                <figure data-id="{{ $file->pivot->id }}">
                     <img src="{{ Imagy::getThumbnail($file->path, 'mediumThumb') }}" alt=""/>
                     <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
                         <i class="fa fa-times-circle removeIcon"></i>
@@ -109,6 +114,27 @@
                     }
                 }
             });
+        });
+
+        $(".jsThumbnailImageWrapper").sortable({
+            tolerance: 'pointer',
+            revert: 'invalid',
+            forceHelperSize: true,
+            update:function(event, ui) {
+                var dataSortable = $(this).sortable('toArray', {attribute: 'data-id'});
+                console.log(dataSortable);
+                $.ajax({
+                    global:false, /* leave it to false */
+                    type: 'POST',
+                    url: '{{ route('api.media.sort') }}',
+                    data: {
+                        'entityClass': '{{ $entityClass }}',
+                        'zone': '{{ $zone }}',
+                        'sortable': dataSortable,
+                        '_token': '{{ csrf_token() }}'
+                    }
+                });
+            }
         });
     });
 </script>
