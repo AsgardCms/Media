@@ -1,7 +1,23 @@
+<!--
+
+Not working
 {!! Theme::style('vendor/jquery-ui/ui/minified/core.min.js') !!}
 {!! Theme::style('vendor/jquery-ui/ui/minified/draggable.min.js') !!}
+
+
+Also not working
 {!! Theme::style('vendor/jquery-ui/jquery-ui.min.js') !!}
 
+The only way for me was to modify config -> asgard.core.core.php
+in admin-assets add
+
+'jquery-ui' => ['module' => 'dashboard:vendor/jquery-ui/jquery-ui.min.js']
+
+and load it in admin-required-assets -> js
+
+'jquery-ui',
+
+-->
 <script>
     $fileCount = $('.jsFileCount');
 </script>
