@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.19.0":
+        changed:
+            - Adding the publishing of the media main config file in the media module
     "1.18.1":
         changed:
             - Fixing instantiation of the <code>RefreshThumbnailCommand</code>
