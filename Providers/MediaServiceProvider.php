@@ -36,6 +36,9 @@ class MediaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerMaxFolderSizeValidator();
+
+        $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'asgard.media.config');
+        $this->publishes([__DIR__ . '/../Config/config.php' => config_path('asgard.media.config' . '.php'), ], 'config');
     }
 
     /**
