@@ -138,7 +138,6 @@ and load it in admin-required-assets -> js
             forceHelperSize: true,
             update:function(event, ui) {
                 var dataSortable = $(this).sortable('toArray', {attribute: 'data-id'});
-                console.log(dataSortable);
                 $.ajax({
                     global:false, /* leave it to false */
                     type: 'POST',
