@@ -66,7 +66,7 @@
     <figure class="jsThumbnailImageWrapper">
         <?php if (isset(${$zone}->path)): ?>
             <?php if (${$zone}->isImage()): ?>
-                <img src="{{ Imagy::getThumbnail(${$zone}->path, 'mediumThumb') }}" alt=""/>
+                <img src="{{ Imagy::getThumbnail(${$zone}->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ ${$zone}->alt_attribute }}"/>
             <?php else: ?>
                 <i class="fa fa-file" style="font-size: 50px;"></i>
             <?php endif; ?>
