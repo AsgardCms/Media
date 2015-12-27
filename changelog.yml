@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.20.0":
+        changed:
+            - A <code>thumbnail</code> option can be sent to the file partials to decide which thumbnail to use on display
     "1.19.0":
         changed:
             - Adding the publishing of the media main config file in the media module

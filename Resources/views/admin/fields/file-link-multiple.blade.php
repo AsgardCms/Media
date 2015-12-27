@@ -1,23 +1,3 @@
-<!--
-
-Not working
-{!! Theme::style('vendor/jquery-ui/ui/minified/core.min.js') !!}
-{!! Theme::style('vendor/jquery-ui/ui/minified/draggable.min.js') !!}
-
-
-Also not working
-{!! Theme::style('vendor/jquery-ui/jquery-ui.min.js') !!}
-
-The only way for me was to modify config -> asgard.core.core.php
-in admin-assets add
-
-'jquery-ui' => ['module' => 'dashboard:vendor/jquery-ui/jquery-ui.min.js']
-
-and load it in admin-required-assets -> js
-
-'jquery-ui',
-
--->
 <script>
     $fileCount = $('.jsFileCount');
 </script>
@@ -34,7 +14,7 @@ and load it in admin-required-assets -> js
         border: 1px solid #eee;
         padding: 3px;
         border-radius: 3px;
-        cursor:grab;
+        cursor: grab;
     }
     .jsThumbnailImageWrapper i.removeIcon {
         position: absolute;
@@ -69,7 +49,7 @@ and load it in admin-required-assets -> js
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                    var html = '<figure><img src="' + data.result.path + '" alt=""/>' +
+                    var html = '<figure data-id="{{ data.result.imageableId }}"><img src="' + data.result.path + '" alt=""/>' +
                             '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                             '<i class="fa fa-times-circle removeIcon"></i>' +
                             '</a></figure>';
@@ -96,7 +76,7 @@ and load it in admin-required-assets -> js
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
                 <figure data-id="{{ $file->pivot->id }}">
-                    <img src="{{ Imagy::getThumbnail($file->path, 'mediumThumb') }}" alt=""/>
+                    <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnail) ? $thumbnail : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
                     <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
                         <i class="fa fa-times-circle removeIcon"></i>
                     </a>
