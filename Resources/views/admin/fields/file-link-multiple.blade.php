@@ -8,7 +8,7 @@
     .jsThumbnailImageWrapper figure {
         position: relative;
         display: inline-block;
-        margin-right: 20px;f
+        margin-right: 20px;
         margin-bottom: 20px;
         background-color: #fff;
         border: 1px solid #eee;
