@@ -8,7 +8,7 @@
     .jsThumbnailImageWrapper figure {
         position: relative;
         display: inline-block;
-        margin-right: 20px;
+        margin-right: 20px;f
         margin-bottom: 20px;
         background-color: #fff;
         border: 1px solid #eee;
@@ -76,7 +76,7 @@
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
                 <figure data-id="{{ $file->pivot->id }}">
-                    <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnail) ? $thumbnail : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
+                    <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
                     <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
                         <i class="fa fa-times-circle removeIcon"></i>
                     </a>
