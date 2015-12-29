@@ -40,7 +40,7 @@ class MediaServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'asgard.media.config');
         $this->publishes([__DIR__ . '/../Config/config.php' => config_path('asgard.media.config' . '.php'), ], 'config');
 
-        view()->creator('media::admin.fields.file-link-multiple', function () {
+        view()->composer('media::admin.fields.file-link-multiple', function () {
             $this->assetPipeline = app('Modules\Core\Foundation\Asset\Pipeline\AssetPipeline');
             $this->assetManager = app('Modules\Core\Foundation\Asset\Manager\AssetManager');
 
