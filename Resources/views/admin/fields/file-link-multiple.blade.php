@@ -76,7 +76,7 @@
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
                 <figure data-id="{{ $file->pivot->id }}">
-                    <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
+                    <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnail) ? $thumbnail : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
                     <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
                         <i class="fa fa-times-circle removeIcon"></i>
                     </a>
