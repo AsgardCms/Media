@@ -1,3 +1,4 @@
+<script src="{{ Module::asset('dashboard:vendor/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>
     $fileCount = $('.jsFileCount');
 </script>
@@ -14,6 +15,7 @@
         border: 1px solid #eee;
         padding: 3px;
         border-radius: 3px;
+        cursor:grab;
     }
     .jsThumbnailImageWrapper i.removeIcon {
         position: absolute;
@@ -48,7 +50,7 @@
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                    var html = '<figure><img src="' + data.result.path + '" alt=""/>' +
+                    var html = '<figure data-id="' + data.result.imageableId + '"><img src="' + data.result.path + '" alt=""/>' +
                             '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                             '<i class="fa fa-times-circle removeIcon"></i>' +
                             '</a></figure>';
@@ -107,6 +109,28 @@
                     } else {
                         pictureWrapper.append(data.message);
                     }
+                }
+            });
+
+            $(".jsThumbnailImageWrapper").sortable({
+                tolerance: 'pointer',
+                containment: 'parent',
+                forcePlaceholderSize:true,
+                forceHelperSize: true,
+                cursor:'move',
+                update:function(event, ui) {
+                    var dataSortable = $(this).sortable('toArray', {attribute: 'data-id'});
+                    $.ajax({
+                        global:false, /* leave it to false */
+                        type: 'POST',
+                        url: '{{ route('api.media.sort') }}',
+                        data: {
+                            'entityClass': '{{ $entityClass }}',
+                            'zone': '{{ $zone }}',
+                            'sortable': dataSortable,
+                            '_token': '{{ csrf_token() }}'
+                        }
+                    });
                 }
             });
         });
