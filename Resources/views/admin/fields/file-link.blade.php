@@ -41,10 +41,10 @@
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                    var html = '<img src="' + data.result.path + '" alt=""/>' +
+                    var html = '<figure data-id="'+ data.result.imageableId +'"><img src="' + data.result.path + '" alt=""/>' +
                             '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
                             '<i class="fa fa-times-circle removeIcon"></i>' +
-                            '</a>';
+                            '</a></figure>';
                     window.zoneWrapper.append(html).fadeIn('slow', function() {
                         toggleButton($(this));
                     });
@@ -65,14 +65,14 @@
 
     <figure class="jsThumbnailImageWrapper">
         <?php if (isset(${$zone}->path)): ?>
-            <?php if (${$zone}->isImage()): ?>
-                <img src="{{ Imagy::getThumbnail(${$zone}->path, (isset($thumbnail) ? $thumbnail : 'mediumThumb')) }}" alt="{{ ${$zone}->alt_attribute }}"/>
-            <?php else: ?>
-                <i class="fa fa-file" style="font-size: 50px;"></i>
-            <?php endif; ?>
-            <a class="jsRemoveSimpleLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
-                <i class="fa fa-times-circle removeIcon"></i>
-            </a>
+        <?php if (${$zone}->isImage()): ?>
+        <img src="{{ Imagy::getThumbnail(${$zone}->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ ${$zone}->alt_attribute }}"/>
+        <?php else: ?>
+        <i class="fa fa-file" style="font-size: 50px;"></i>
+        <?php endif; ?>
+        <a class="jsRemoveSimpleLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
+            <i class="fa fa-times-circle removeIcon"></i>
+        </a>
         <?php endif; ?>
     </figure>
 </div>

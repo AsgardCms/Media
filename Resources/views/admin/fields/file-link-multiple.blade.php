@@ -14,6 +14,7 @@
         border: 1px solid #eee;
         padding: 3px;
         border-radius: 3px;
+        cursor: grab;
     }
     .jsThumbnailImageWrapper i.removeIcon {
         position: absolute;
@@ -48,7 +49,7 @@
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                    var html = '<figure><img src="' + data.result.path + '" alt=""/>' +
+                    var html = '<figure data-id="' + data.result.imageableId + '"><img src="' + data.result.path + '" alt=""/>' +
                             '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                             '<i class="fa fa-times-circle removeIcon"></i>' +
                             '</a></figure>';
@@ -74,7 +75,7 @@
         <?php $zoneVar = "{$zone}Files"  ?>
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
-                <figure>
+                <figure data-id="{{ $file->pivot->id }}">
                     <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnail) ? $thumbnail : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
                     <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
                         <i class="fa fa-times-circle removeIcon"></i>
@@ -109,6 +110,26 @@
                     }
                 }
             });
+        });
+
+        $(".jsThumbnailImageWrapper").sortable({
+            tolerance: 'pointer',
+            revert: 'invalid',
+            forceHelperSize: true,
+            update:function(event, ui) {
+                var dataSortable = $(this).sortable('toArray', {attribute: 'data-id'});
+                $.ajax({
+                    global:false, /* leave it to false */
+                    type: 'POST',
+                    url: '{{ route('api.media.sort') }}',
+                    data: {
+                        'entityClass': '{{ $entityClass }}',
+                        'zone': '{{ $zone }}',
+                        'sortable': dataSortable,
+                        '_token': '{{ csrf_token() }}'
+                    }
+                });
+            }
         });
     });
 </script>
