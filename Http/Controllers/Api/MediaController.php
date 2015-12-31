@@ -105,4 +105,22 @@ class MediaController extends Controller
 
         return Response::json(['error' => false, 'message' => 'The link has been removed.']);
     }
+
+    /**
+     * Sort the record in the media__imageables table for the given array
+     * @param Request $request
+     */
+    public function sortMedia(Request $request)
+    {
+        $imageableIdArray = $request->get('sortable');
+
+        $order = 1;
+
+        foreach ($imageableIdArray as $id) {
+            $updated = DB::table('media__imageables')->whereId($id)->update(['order' => $order]);
+            $order++;
+        }
+
+        return Response::json(['error' => false, 'message' => 'The items have been reorder.']);
+    }
 }
