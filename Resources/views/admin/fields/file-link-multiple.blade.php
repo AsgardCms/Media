@@ -49,7 +49,7 @@
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                    var html = '<figure data-id="{{ data.result.imageableId }}"><img src="' + data.result.path + '" alt=""/>' +
+                    var html = '<figure data-id="' + data.result.imageableId + '"><img src="' + data.result.path + '" alt=""/>' +
                             '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                             '<i class="fa fa-times-circle removeIcon"></i>' +
                             '</a></figure>';
