@@ -15,7 +15,7 @@
         border: 1px solid #eee;
         padding: 3px;
         border-radius: 3px;
-        cursor:grab;
+        cursor: grab;
     }
     .jsThumbnailImageWrapper i.removeIcon {
         position: absolute;
@@ -26,6 +26,12 @@
         background: white;
         border-radius: 20px;
         height: 25px;
+    }
+
+    figure.ui-state-highlight {
+        border: none;
+        width:100px;
+        height: 0;
     }
 </style>
 <script>
@@ -72,7 +78,7 @@
         {{ trans('media::media.Browse') }}
     </a>
     <div class="clearfix"></div>
-    <div class="jsThumbnailImageWrapper">
+    <div class="jsThumbnailImageWrapper" style="position:relative;">
         <?php $zoneVar = "{$zone}Files"  ?>
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
@@ -91,7 +97,7 @@
         $('.jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
             e.preventDefault();
             var imageableId = $(this).data('id'),
-                pictureWrapper = $(this).parent();
+                    pictureWrapper = $(this).parent();
             $.ajax({
                 type: 'POST',
                 url: '{{ route('api.media.unlink') }}',
@@ -111,28 +117,30 @@
                     }
                 }
             });
+        });
 
-            $(".jsThumbnailImageWrapper").sortable({
-                tolerance: 'pointer',
-                containment: 'parent',
-                forcePlaceholderSize:true,
-                forceHelperSize: true,
-                cursor:'move',
-                update:function(event, ui) {
-                    var dataSortable = $(this).sortable('toArray', {attribute: 'data-id'});
-                    $.ajax({
-                        global:false, /* leave it to false */
-                        type: 'POST',
-                        url: '{{ route('api.media.sort') }}',
-                        data: {
-                            'entityClass': '{{ $entityClass }}',
-                            'zone': '{{ $zone }}',
-                            'sortable': dataSortable,
-                            '_token': '{{ csrf_token() }}'
-                        }
-                    });
-                }
-            });
+        $(".jsThumbnailImageWrapper").sortable({
+            axis: 'x',
+            placeholder: 'ui-state-highlight',
+            cursor:'move',
+            helper: 'clone',
+            containment: 'parent',
+            forcePlaceholderSize: false,
+            forceHelperSize: true,
+            update:function(event, ui) {
+                var dataSortable = $(this).sortable('toArray', {attribute: 'data-id'});
+                $.ajax({
+                    global: false, /* leave it to false */
+                    type: 'POST',
+                    url: '{{ route('api.media.sort') }}',
+                    data: {
+                        'entityClass': '{{ $entityClass }}',
+                        'zone': '{{ $zone }}',
+                        'sortable': dataSortable,
+                        '_token': '{{ csrf_token() }}'
+                    }
+                });
+            }
         });
     });
 </script>
