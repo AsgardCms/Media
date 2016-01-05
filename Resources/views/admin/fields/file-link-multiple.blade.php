@@ -120,7 +120,6 @@
         });
 
         $(".jsThumbnailImageWrapper").sortable({
-            axis: 'x',
             placeholder: 'ui-state-highlight',
             cursor:'move',
             helper: 'clone',
