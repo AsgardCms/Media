@@ -41,10 +41,10 @@
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                    var html = '<img src="' + data.result.path + '" alt=""/>' +
+                    var html = '<figure data-id="'+ data.result.imageableId +'"><img src="' + data.result.path + '" alt=""/>' +
                             '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
                             '<i class="fa fa-times-circle removeIcon"></i>' +
-                            '</a>';
+                            '</a></figure>';
                     window.zoneWrapper.append(html).fadeIn('slow', function() {
                         toggleButton($(this));
                     });

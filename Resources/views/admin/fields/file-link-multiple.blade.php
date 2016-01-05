@@ -1,3 +1,4 @@
+<script src="{{ Module::asset('dashboard:vendor/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>
     $fileCount = $('.jsFileCount');
 </script>
@@ -14,6 +15,7 @@
         border: 1px solid #eee;
         padding: 3px;
         border-radius: 3px;
+        cursor: grab;
     }
     .jsThumbnailImageWrapper i.removeIcon {
         position: absolute;
@@ -24,6 +26,12 @@
         background: white;
         border-radius: 20px;
         height: 25px;
+    }
+
+    figure.ui-state-highlight {
+        border: none;
+        width:100px;
+        height: 0;
     }
 </style>
 <script>
@@ -48,7 +56,7 @@
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                    var html = '<figure><img src="' + data.result.path + '" alt=""/>' +
+                    var html = '<figure data-id="' + data.result.imageableId + '"><img src="' + data.result.path + '" alt=""/>' +
                             '<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                             '<i class="fa fa-times-circle removeIcon"></i>' +
                             '</a></figure>';
@@ -74,7 +82,7 @@
         <?php $zoneVar = "{$zone}Files"  ?>
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
-                <figure>
+                <figure data-id="{{ $file->pivot->id }}">
                     <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnail) ? $thumbnail : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
                     <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
                         <i class="fa fa-times-circle removeIcon"></i>
@@ -89,7 +97,7 @@
         $('.jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
             e.preventDefault();
             var imageableId = $(this).data('id'),
-                pictureWrapper = $(this).parent();
+                    pictureWrapper = $(this).parent();
             $.ajax({
                 type: 'POST',
                 url: '{{ route('api.media.unlink') }}',
@@ -109,6 +117,29 @@
                     }
                 }
             });
+        });
+
+        $(".jsThumbnailImageWrapper").sortable({
+            placeholder: 'ui-state-highlight',
+            cursor:'move',
+            helper: 'clone',
+            containment: 'parent',
+            forcePlaceholderSize: false,
+            forceHelperSize: true,
+            update:function(event, ui) {
+                var dataSortable = $(this).sortable('toArray', {attribute: 'data-id'});
+                $.ajax({
+                    global: false, /* leave it to false */
+                    type: 'POST',
+                    url: '{{ route('api.media.sort') }}',
+                    data: {
+                        'entityClass': '{{ $entityClass }}',
+                        'zone': '{{ $zone }}',
+                        'sortable': dataSortable,
+                        '_token': '{{ csrf_token() }}'
+                    }
+                });
+            }
         });
     });
 </script>
