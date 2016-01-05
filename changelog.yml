@@ -1,6 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
     "1.20.0":
+        added:
+            - Drag & drop on the multi file relation file
         changed:
             - A <code>thumbnail</code> option can be sent to the file partials to decide which thumbnail to use on display
             - Added file path data attribute on the media grid popup
