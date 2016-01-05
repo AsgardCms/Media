@@ -78,7 +78,7 @@
         {{ trans('media::media.Browse') }}
     </a>
     <div class="clearfix"></div>
-    <div class="jsThumbnailImageWrapper" style="position:relative;">
+    <div class="jsThumbnailImageWrapper">
         <?php $zoneVar = "{$zone}Files"  ?>
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
