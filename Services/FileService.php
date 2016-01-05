@@ -4,6 +4,7 @@ use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Queue\Queue;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\Jobs\Job;
+use Modules\Media\Entities\File;
 use Modules\Media\Jobs\CreateThumbnails;
 use Modules\Media\Jobs\RebuildThumbnails;
 use Modules\Media\Repositories\FileRepository;
@@ -52,7 +53,7 @@ class FileService
      * Create the necessary thumbnails for the given file
      * @param $savedFile
      */
-    private function createThumbnails($savedFile)
+    private function createThumbnails(File $savedFile)
     {
         $this->dispatch(new CreateThumbnails($savedFile->path));
     }
