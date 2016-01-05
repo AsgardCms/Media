@@ -18,21 +18,13 @@ class FileService
      */
     private $file;
     /**
-     * @var Queue
-     */
-    private $queue;
-    /**
      * @var Factory
      */
     private $filesystem;
 
-    public function __construct(
-        FileRepository $file,
-        Queue $queue,
-        Factory $filesystem
-    ) {
+    public function __construct(FileRepository $file, Factory $filesystem)
+    {
         $this->file = $file;
-        $this->queue = $queue;
         $this->filesystem = $filesystem;
     }
 
