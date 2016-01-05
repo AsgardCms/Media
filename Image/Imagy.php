@@ -91,9 +91,9 @@ class Imagy
 
     /**
      * Create all thumbnails for the given image path
-     * @param string $path
+     * @param MediaPath $path
      */
-    public function createAll($path)
+    public function createAll(MediaPath $path)
     {
         if (!$this->isImage($path)) {
             return;
