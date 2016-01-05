@@ -117,7 +117,7 @@ class MediaController extends Controller
         $order = 1;
 
         foreach ($imageableIdArray as $id) {
-            $updated = DB::table('media__imageables')->whereId($id)->update(['order' => $order]);
+            DB::table('media__imageables')->whereId($id)->update(['order' => $order]);
             $order++;
         }
 
