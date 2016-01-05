@@ -1,12 +1,9 @@
 <?php namespace Modules\Media\Services;
 
 use Illuminate\Contracts\Filesystem\Factory;
-use Illuminate\Contracts\Queue\Queue;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Queue\Jobs\Job;
 use Modules\Media\Entities\File;
 use Modules\Media\Jobs\CreateThumbnails;
-use Modules\Media\Jobs\RebuildThumbnails;
 use Modules\Media\Repositories\FileRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
