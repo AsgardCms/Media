@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.20.1":
+        changed:
+            - Re-releasing
     "1.20.0":
         added:
             - Drag & drop on the multi file relation file
