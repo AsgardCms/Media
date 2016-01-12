@@ -11,6 +11,6 @@ class LocalUrlResolver
      */
     public function resolve(Local $adapter, $path)
     {
-        return $path;
+        return asset($path);
     }
 }
