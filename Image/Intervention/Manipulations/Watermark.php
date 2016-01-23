@@ -21,6 +21,6 @@ class Watermark implements ImageHandlerInterface
     {
         $options = array_merge($this->defaults, $options);
 
-        return $image->insert($options['source'],$options['position'], $options['x'], $options['y']);
+        return $image->insert($options['source'], $options['position'], $options['x'], $options['y']);
     }
 }
