@@ -68,9 +68,8 @@
     </a>
     <div class="clearfix"></div>
     <div class="jsThumbnailImageWrapper">
-        <?php $zoneVar = "{$zone}Files"  ?>
-        <?php if (isset($$zoneVar)): ?>
-        <?php foreach ($$zoneVar as $file): ?>
+        <?php if (count(${$zone})): ?>
+        <?php foreach (${$zone} as $file): ?>
         <figure>
             <img src="{{ Imagy::getThumbnail($file->path, 'mediumThumb') }}" alt=""/>
             <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
