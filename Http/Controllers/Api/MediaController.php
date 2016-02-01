@@ -71,10 +71,11 @@ class MediaController extends Controller
         $mediaId = $request->get('mediaId');
         $entityClass = $request->get('entityClass');
         $entityId = $request->get('entityId');
+        $order = $request->get('order');
 
         $entity = $entityClass::find($entityId);
         $zone = $request->get('zone');
-        $entity->files()->attach($mediaId, ['imageable_type' => $entityClass, 'zone' => $zone]);
+        $entity->files()->attach($mediaId, ['imageable_type' => $entityClass, 'zone' => $zone, 'order' => $order]);
         $imageable = DB::table('media__imageables')->whereFileId($mediaId)->whereZone($zone)->whereImageableType($entityClass)->first();
         $file = $this->file->find($imageable->file_id);
 
