@@ -69,7 +69,7 @@ class ImagyTest extends MediaTestCase
     {
         $path = $this->imagy->getThumbnail("{$this->mediaPath}google-map.png", 'smallThumb');
 
-        $expected = config('asgard.media.config.files-path') . 'google-map_smallThumb.png';
+        $expected = config('app.url') . config('asgard.media.config.files-path') . 'google-map_smallThumb.png';
 
         $this->assertEquals($expected, $path);
     }
