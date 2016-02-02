@@ -53,7 +53,8 @@
                     '_token': '{{ csrf_token() }}',
                     'entityClass': '{{ $entityClass }}',
                     'entityId': '{{ $entityId }}',
-                    'zone': window.mediaZone
+                    'zone': window.mediaZone,
+                    'order': $('.jsThumbnailImageWrapper figure').size() + 1
                 },
                 success: function (data) {
                     var html = '<figure data-id="' + data.result.imageableId + '"><img src="' + data.result.path + '" alt=""/>' +
