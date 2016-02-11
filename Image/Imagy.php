@@ -1,6 +1,6 @@
 <?php namespace Modules\Media\Image;
 
-use GuzzleHttp\Mimetypes;
+use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Stream;
 use Illuminate\Contracts\Filesystem\Factory;
 use Intervention\Image\ImageManager;
@@ -145,7 +145,7 @@ class Imagy
         $resource = $image->detach();
         $config = [
             'visibility' => 'public',
-            'mimetype' => Mimetypes::getInstance()->fromFilename($filename),
+            'mimetype' => Psr7\mimetype_from_filename($filename),
         ];
         if ($this->fileExists($filename)) {
             return $this->filesystem->disk($this->getConfiguredFilesystem())->updateStream($filename, $resource, $config);
