@@ -82,7 +82,8 @@
                                             </li>
                                         </ul>
                                     <?php else: ?>
-                                        <a href="" class="btn btn-primary jsInsertImage" data-id="{{ $file->id }}">
+                                        <a href="" class="btn btn-primary jsInsertImage" data-id="{{ $file->id }}"
+                                           data-file="{{ $file->path }}">
                                             {{ trans('media::media.insert') }}
                                         </a>
                                     <?php endif; ?>
