@@ -53,43 +53,48 @@
                     <tbody>
                     <?php if ($files): ?>
                     <?php foreach ($files as $file): ?>
-                        <tr>
-                            <td>{{ $file->id }}</td>
-                            <td>
-                                <?php if ($file->isImage()): ?>
-                                    <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
+                    <tr>
+                        <td>{{ $file->id }}</td>
+                        <td>
+                            <?php if ($file->isImage()): ?>
+                                <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
+                            <?php else: ?>
+                                <i class="fa fa-file" style="font-size: 20px;"></i>
+                            <?php endif; ?>
+                        </td>
+                        <td>{{ $file->filename }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <?php if (config('asgard.media.config.media-grid-simple-action', false)): ?>
+                                    <a href="" class="btn btn-primary btn-flat jsInsertImage" data-file="{{ $file->path }}" data-id="{{ $file->id }}" data-file-path="{{ $file->path }}">
+                                        {{ trans('media::media.insert') }}
+                                    </a>
                                 <?php else: ?>
-                                    <i class="fa fa-file" style="font-size: 20px;"></i>
+                                <?php if ($file->isImage()): ?>
+                                    <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        {{ trans('media::media.insert') }} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <?php foreach ($thumbnails as $thumbnail): ?>
+                                        <li data-file="{{ Imagy::getThumbnail($file->path, $thumbnail->name()) }}"
+                                            data-id="{{ $file->id }}" class="jsInsertImage">
+                                            <a href="">{{ $thumbnail->name() }} ({{ $thumbnail->size() }})</a>
+                                        </li>
+                                        <?php endforeach; ?>
+                                        <li class="divider"></li>
+                                        <li data-file="{{ $file->path }}" data-id="{{ $file->id }}" data-file-path="{{ $file->path }}" class="jsInsertImage">
+                                            <a href="">Original</a>
+                                        </li>
+                                    </ul>
+                                <?php else: ?>
+                                    <a href="" class="btn btn-primary jsInsertImage" data-id="{{ $file->id }}">
+                                        {{ trans('media::media.insert') }}
+                                    </a>
                                 <?php endif; ?>
-                            </td>
-                            <td>{{ $file->filename }}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <?php if ($file->isImage()): ?>
-                                        <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            {{ trans('media::media.insert') }} <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <?php foreach ($thumbnails as $thumbnail): ?>
-                                            <li data-file="{{ Imagy::getThumbnail($file->path, $thumbnail->name()) }}"
-                                                data-id="{{ $file->id }}" class="jsInsertImage">
-                                                <a href="">{{ $thumbnail->name() }} ({{ $thumbnail->size() }})</a>
-                                            </li>
-                                            <?php endforeach; ?>
-                                            <li class="divider"></li>
-                                            <li data-file="{{ $file->path }}" data-id="{{ $file->id }}" data-file-path="{{ $file->path }}" class="jsInsertImage">
-                                                <a href="">Original</a>
-                                            </li>
-                                        </ul>
-                                    <?php else: ?>
-                                        <a href="" class="btn btn-primary jsInsertImage" data-id="{{ $file->id }}"
-                                           data-file="{{ $file->path }}">
-                                            {{ trans('media::media.insert') }}
-                                        </a>
-                                    <?php endif; ?>
-                                </div>
-                            </td>
-                        </tr>
+                                <?php endif; ?>
+                            </div>
+                        </td>
+                    </tr>
                     <?php endforeach; ?>
                     <?php endif; ?>
                     </tbody>

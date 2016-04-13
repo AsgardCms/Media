@@ -38,4 +38,14 @@ return [
     | Expressed in bytes
     */
     'max-total-size' => 1000000000,
+
+    /*
+    |--------------------------------------------------------------------------
+    | false - dropdown menu with thumbs choice (default)
+    | true - use simple choose for adding only original image
+    |
+    |--------------------------------------------------------------------------
+    | Supported: boolean
+    */
+    'media-grid-simple-action' => false,
 ];
