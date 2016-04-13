@@ -1,5 +1,10 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.21.0":
+        changed:
+            - Using the validator::extend instead of resolve.
+            - Renamed the <code>$thumbnail</code> variable in partial view of linking media
+            - Include data file attribute to non image files
     "1.20.1":
         changed:
             - Re-releasing
