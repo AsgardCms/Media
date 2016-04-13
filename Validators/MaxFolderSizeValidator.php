@@ -1,11 +1,10 @@
 <?php namespace Modules\Media\Validators;
 
-use Illuminate\Validation\Validator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class MaxFolderSizeValidator extends Validator
+class MaxFolderSizeValidator
 {
     public function validateMaxSize($attribute, UploadedFile $value, $parameters)
     {
