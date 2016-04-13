@@ -98,7 +98,7 @@ class MediaController extends Controller
             ->first();
         $file = $this->file->find($imageable->file_id);
         
-        if ($file->mimetype == 'video/mp4' || $file->mimetype == 'video/ogv' || $file->mimetype == 'video/webm') {
+        if (strpos($file->mimetype, 'video') !== 0) {
             $thumbnailPath = $file->path->getRelativeUrl();
             $mediaType = 'video';
         } else {
