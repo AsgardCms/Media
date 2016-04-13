@@ -41,10 +41,17 @@
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                    var html = '<figure data-id="'+ data.result.imageableId +'"><img src="' + data.result.path + '" alt=""/>' +
-                            '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
-                            '<i class="fa fa-times-circle removeIcon"></i>' +
-                            '</a></figure>';
+                	if (data.result.mediaType === 'image') {
+                        var mediaPlaceholder = '<img src="' + data.result.path + '" alt=""/>';
+	                    
+                    }
+                    else {
+                    	var mediaPlaceholder = '<video src="' + data.result.path + '" controls + width="320"></video>';
+                    }
+                    var html = '<figure data-id="'+ data.result.imageableId +'">' + mediaPlaceholder +
+	                    '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
+	                    '<i class="fa fa-times-circle removeIcon"></i>' +
+	                    '</a></figure>';
                     window.zoneWrapper.append(html).fadeIn('slow', function() {
                         toggleButton($(this));
                     });

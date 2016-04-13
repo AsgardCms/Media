@@ -71,22 +71,28 @@ class MediaController extends Controller
         $mediaId = $request->get('mediaId');
         $entityClass = $request->get('entityClass');
         $entityId = $request->get('entityId');
-        $order = $request->get('order');
 
         $entity = $entityClass::find($entityId);
         $zone = $request->get('zone');
-        $entity->files()->attach($mediaId, ['imageable_type' => $entityClass, 'zone' => $zone, 'order' => $order]);
+        $entity->files()->attach($mediaId, ['imageable_type' => $entityClass, 'zone' => $zone]);
         $imageable = DB::table('media__imageables')->whereFileId($mediaId)->whereZone($zone)->whereImageableType($entityClass)->first();
         $file = $this->file->find($imageable->file_id);
-
-        $thumbnailPath = $this->imagy->getThumbnail($file->path, 'mediumThumb');
+                
+        if ($file->mimetype == 'video/mp4' || $file->mimetype == 'video/ogv' || $file->mimetype == 'video/webm') {
+        	$thumbnailPath = $file->path->getRelativeUrl();
+        	$mediaType = 'video';
+        }
+        else {
+        	$thumbnailPath = $this->imagy->getThumbnail($file->path, 'mediumThumb');
+        	$mediaType = 'image';
+        }
 
         event(new FileWasLinked($file, $entity));
 
         return Response::json([
             'error' => false,
             'message' => 'The link has been added.',
-            'result' => ['path' => $thumbnailPath, 'imageableId' => $imageable->id]
+            'result' => ['path' => $thumbnailPath, 'imageableId' => $imageable->id, 'mediaType' => $mediaType]
         ]);
     }
 
