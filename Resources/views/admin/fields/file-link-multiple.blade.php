@@ -33,6 +33,9 @@
         width:100px;
         height: 0;
     }
+    .gallery-wrap {
+        overflow: auto;
+    }
 </style>
 <script>
     if (typeof window.openMediaWindow === 'undefined') {
@@ -71,7 +74,7 @@
         };
     }
 </script>
-<div class="form-group">
+<div class="form-group gallery-wrap">
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
     <?php $url = route('media.grid.select') ?>
