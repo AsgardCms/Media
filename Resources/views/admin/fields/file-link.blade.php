@@ -81,7 +81,7 @@
         $('.jsThumbnailImageWrapper').off('click', '.jsRemoveSimpleLink');
         $('.jsThumbnailImageWrapper').on('click', '.jsRemoveSimpleLink', function (e) {
             e.preventDefault();
-            var imageableId = $(this).data('id');
+            var $this = $(this), imageableId = $this.data('id');
             $.ajax({
                 type: 'POST',
                 url: '{{ route('api.media.unlink') }}',
@@ -92,7 +92,7 @@
                 success: function(data) {
                     if (data.error === false) {
                         $(e.delegateTarget).fadeOut('slow', function() {
-                            toggleButton($(this));
+                            toggleButton($this);
                         }).html('');
                     } else {
                         $(e.delegateTarget).append(data.message);
