@@ -98,7 +98,7 @@
 </div>
 <script>
     $( document ).ready(function() {
-        $('.jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
+        $('.gallery-wrap .jsThumbnailImageWrapper').on('click', '.jsRemoveLink', function (e) {
             e.preventDefault();
             var imageableId = $(this).data('id'),
                     pictureWrapper = $(this).parent();
@@ -123,7 +123,7 @@
             });
         });
 
-        $(".jsThumbnailImageWrapper").sortable({
+        $(".gallery-wrap .jsThumbnailImageWrapper").sortable({
             placeholder: 'ui-state-highlight',
             cursor:'move',
             helper: 'clone',
