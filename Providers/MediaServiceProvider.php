@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Modules\Media\Console\RefreshThumbnailCommand;
 use Modules\Media\Entities\File;
+use Modules\Media\Events\Handlers\HandleMediaStorage;
 use Modules\Media\Repositories\Eloquent\EloquentFileRepository;
 use Modules\Media\Repositories\FileRepository;
-use Modules\Media\Validators\MaxFolderSizeValidator;
+use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 
 class MediaServiceProvider extends ServiceProvider
 {
@@ -30,12 +31,16 @@ class MediaServiceProvider extends ServiceProvider
         $this->registerCommands();
     }
 
-    public function boot()
+    public function boot(DispatcherContract $events)
     {
         $this->registerMaxFolderSizeValidator();
 
         $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'asgard.media.config');
         $this->publishes([__DIR__ . '/../Config/config.php' => config_path('asgard.media.config' . '.php'), ], 'config');
+
+        foreach (config('asgard.media.events') as $event) {
+            $events->listen($event, HandleMediaStorage::class);
+        }
     }
 
     /**
