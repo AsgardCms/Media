@@ -38,7 +38,7 @@ class MediaServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'asgard.media.config');
         $this->publishes([__DIR__ . '/../Config/config.php' => config_path('asgard.media.config' . '.php'), ], 'config');
 
-        foreach (config('asgard.media.events') as $event) {
+        foreach (config('asgard.media.events', []) as $event) {
             $events->listen($event, HandleMediaStorage::class);
         }
     }
