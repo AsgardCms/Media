@@ -11,6 +11,6 @@ class FtpUrlResolver
      */
     public function resolve(Ftp $adapter, $path)
     {
-        return $path;
+        return 'ftp://' . config('filesystems.disks.ftp.host') . $path;
     }
 }
