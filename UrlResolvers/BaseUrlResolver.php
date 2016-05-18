@@ -1,6 +1,7 @@
 <?php namespace Modules\Media\UrlResolvers;
 
 use Illuminate\Contracts\Filesystem\Factory;
+use League\Flysystem\Adapter\Ftp;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\AwsS3v3\AwsS3Adapter;
 
@@ -16,6 +17,7 @@ class BaseUrlResolver
         $this->resolvers = [
             Local::class => new LocalUrlResolver(),
             AwsS3Adapter::class => new AwsS3UrlResolver(),
+            Ftp::class => new FtpUrlResolver(),
         ];
     }
 
