@@ -54,6 +54,10 @@ class HandleMediaStorage
     {
         $orderString = array_get($submissionData, 'orders');
 
+        if ($orderString === null) {
+            return [];
+        }
+
         return explode(',', $orderString);
     }
 }
