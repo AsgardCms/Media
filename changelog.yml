@@ -1,5 +1,9 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.22.0":
+        added:
+            - new way to handle media on create views (multiple images and single image)
+            - FTP media file adapter
     "1.21.0":
         changed:
             - Using the validator::extend instead of resolve.

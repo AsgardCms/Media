@@ -69,6 +69,7 @@ class HandleMediaStorage
     {
         return array_get($submissionData, 'zone');
     }
+
     private function getPostedMediasFrom(array $submissionData)
     {
         return array_get($submissionData, 'medias', []);
