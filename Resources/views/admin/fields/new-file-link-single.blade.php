@@ -33,7 +33,7 @@
             var html = '<figure data-id="'+ mediaId +'"><img src="' + filePath + '" alt=""/>' +
                     '<a class="jsRemoveSimpleLink" href="#" data-id="' + mediaId + '">' +
                     '<i class="fa fa-times-circle removeIcon"></i></a>' +
-                    '<input type="hidden" name="medias[]" value="' + mediaId + '">' +
+                    '<input type="hidden" name="medias_single['+ window.mediaZone +']" value="' + mediaId + '">' +
                     '</figure>';
             window.zoneWrapper.append(html).fadeIn('slow', function() {
                 toggleButton($(this));
@@ -42,7 +42,6 @@
     }
 </script>
 <div class="form-group">
-    <input type="hidden" name="zone" value="{{ $zone }}">
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
 
@@ -54,14 +53,14 @@
 
     <figure class="jsThumbnailImageWrapper">
         <?php if (isset(${$zone}->path)): ?>
-            <?php if (${$zone}->isImage()): ?>
-                <img src="{{ Imagy::getThumbnail(${$zone}->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ ${$zone}->alt_attribute }}"/>
-            <?php else: ?>
-                <i class="fa fa-file" style="font-size: 50px;"></i>
-            <?php endif; ?>
-            <a class="jsRemoveSimpleLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
-                <i class="fa fa-times-circle removeIcon"></i>
-            </a>
+        <?php if (${$zone}->isImage()): ?>
+        <img src="{{ Imagy::getThumbnail(${$zone}->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ ${$zone}->alt_attribute }}"/>
+        <?php else: ?>
+        <i class="fa fa-file" style="font-size: 50px;"></i>
+        <?php endif; ?>
+        <a class="jsRemoveSimpleLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
+            <i class="fa fa-times-circle removeIcon"></i>
+        </a>
         <?php endif; ?>
     </figure>
 </div>
