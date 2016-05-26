@@ -50,7 +50,7 @@
                     '<a class="jsRemoveLink" href="#" data-id="' + mediaId + '">' +
                         '<i class="fa fa-times-circle removeIcon"></i>' +
                     '</a>' +
-                    '<input type="hidden" name="medias[]" value="' + mediaId + '">' +
+                    '<input type="hidden" name="medias_multi[' + window.mediaZone + '][files][]" value="' + mediaId + '">' +
                     '</figure>';
             window.zoneWrapper.append(html).fadeIn();
             if ($fileCount.length > 0) {
@@ -61,8 +61,6 @@
     }
 </script>
 <div class="form-group">
-    <input type="hidden" name="zone" value="{{ $zone }}">
-    <input type="hidden" name="orders" value="">
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
     <?php $url = route('media.grid.select') ?>
@@ -71,6 +69,7 @@
     </a>
     <div class="clearfix"></div>
     <div class="jsThumbnailImageWrapper">
+        <input type="hidden" name="medias_multi[{{ $zone }}][orders]" value="" class="orders">
         <?php $zoneVar = "{$zone}Files" ?>
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
@@ -106,7 +105,7 @@
             forceHelperSize: true,
             update:function(event, ui) {
                 var dataSortable = $(this).sortable('toArray', {attribute: 'data-id'});
-                $('input[name=orders]').val(dataSortable);
+                $(this).find($('.orders')).val(dataSortable);
             }
         });
     });

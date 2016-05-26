@@ -41,13 +41,14 @@ class HandleMediaStorage
     private function handleMultiMedia(StoringMedia $event)
     {
         $entity = $event->getEntity();
-        $zone = $this->getZoneFrom($event->getSubmissionData());
-        $postMedias = $this->getPostedMediasFrom($event->getSubmissionData());
-        $orders = $this->getOrdersFrom($event->getSubmissionData());
+        $postMedias = array_get($event->getSubmissionData(), 'medias_multi', []);
 
-        foreach ($postMedias as $key => $fileId) {
-            $order = array_search($fileId, $orders);
-            $entity->files()->attach($fileId, ['imageable_type' => get_class($entity), 'zone' => $zone, 'order' => $order]);
+        foreach ($postMedias as $zone => $attributes) {
+            $orders = $this->getOrdersFrom($attributes);
+            foreach ($attributes['files'] as $fileId) {
+                $order = array_search($fileId, $orders);
+                $entity->files()->attach($fileId, ['imageable_type' => get_class($entity), 'zone' => $zone, 'order' => $order]);
+            }
         }
     }
 
@@ -65,24 +66,21 @@ class HandleMediaStorage
         }
     }
 
-    private function getZoneFrom(array $submissionData)
+    /**
+     * Parse the orders input and return an array of file ids, in order
+     * @param array $attributes
+     * @return array
+     */
+    private function getOrdersFrom(array $attributes)
     {
-        return array_get($submissionData, 'zone');
-    }
-
-    private function getPostedMediasFrom(array $submissionData)
-    {
-        return array_get($submissionData, 'medias', []);
-    }
-
-    private function getOrdersFrom(array $submissionData)
-    {
-        $orderString = array_get($submissionData, 'orders');
+        $orderString = array_get($attributes, 'orders');
 
         if ($orderString === null) {
             return [];
         }
 
-        return explode(',', $orderString);
+        $orders = explode(',', $orderString);
+
+        return array_filter($orders);
     }
 }
