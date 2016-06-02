@@ -11,7 +11,7 @@ class FileHelper
 
         $name = Str::slug($name);
 
-        return $name . $extension;
+        return $name . strtolower($extension);
     }
 
     /**
@@ -21,6 +21,6 @@ class FileHelper
      */
     private static function getExtension($name)
     {
-        return strtolower(substr($name, strrpos($name, '.')));
+        return substr($name, strrpos($name, '.'));
     }
 }
