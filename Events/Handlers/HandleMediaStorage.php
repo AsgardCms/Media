@@ -27,7 +27,7 @@ class HandleMediaStorage
         $this->imagy = $imagy;
     }
 
-    public function handle($event)
+    public function handle($event = null)
     {
         if ($event instanceof StoringMedia) {
             $this->handleMultiMedia($event);

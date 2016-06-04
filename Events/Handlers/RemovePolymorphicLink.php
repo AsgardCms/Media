@@ -5,7 +5,7 @@ use Modules\Media\Contracts\DeletingMedia;
 
 class RemovePolymorphicLink
 {
-    public function handle($event)
+    public function handle($event = null)
     {
         if ($event instanceof DeletingMedia) {
             DB::table('media__imageables')->where('imageable_id', $event->getEntityId())
