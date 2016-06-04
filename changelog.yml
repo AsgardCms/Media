@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.23.0":
+        changed:
+            - Removing the need of adding the events in <code>events.php</code>
     "1.22.1":
         changed:
             - Fix thumbnail include
