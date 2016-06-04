@@ -3,8 +3,9 @@
     $(document).ready(function () {
         $('.jsInsertImage').on('click', function (e) {
             e.preventDefault();
-            var mediaId = $(this).data('id');
-            window.opener.includeMedia(mediaId);
+            var mediaId = $(this).data('id'),
+                filePath = $(this).data('file-path');
+            window.opener.includeMedia(mediaId, filePath);
             window.close();
         });
     });
