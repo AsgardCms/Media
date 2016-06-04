@@ -45,7 +45,7 @@ class MediaController extends Controller
     public function all()
     {
         $files = $this->file->all();
-        
+
         return [
             'count' => $files->count(),
             'data' => $files
@@ -54,29 +54,29 @@ class MediaController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
-     * @param UploadMediaRequest $request            
+     *
+     * @param UploadMediaRequest $request
      * @return Response
      */
     public function store(UploadMediaRequest $request)
     {
         $savedFile = $this->fileService->store($request->file('file'));
-        
+
         if (is_string($savedFile)) {
             return Response::json([
                 'error' => $savedFile
             ], 409);
         }
-        
+
         event(new FileWasUploaded($savedFile));
-        
+
         return Response::json($savedFile->toArray());
     }
 
     /**
      * Link the given entity with a media file
-     * 
-     * @param Request $request            
+     *
+     * @param Request $request
      */
     public function linkMedia(Request $request)
     {
@@ -84,12 +84,12 @@ class MediaController extends Controller
         $entityClass = $request->get('entityClass');
         $entityId = $request->get('entityId');
         $order = $request->get('order');
-        
+
         $entity = $entityClass::find($entityId);
         $zone = $request->get('zone');
         $entity->files()->attach($mediaId, [
             'imageable_type' => $entityClass,
-            'zone' => $zone, 
+            'zone' => $zone,
             'order' => $order
         ]);
         $imageable = DB::table('media__imageables')->whereFileId($mediaId)
@@ -97,17 +97,17 @@ class MediaController extends Controller
             ->whereImageableType($entityClass)
             ->first();
         $file = $this->file->find($imageable->file_id);
-        
-        if (strpos($file->mimetype, 'video') !== 0) {
+
+        if (str_contains($file->mimetype, 'video')) {
             $thumbnailPath = $file->path->getRelativeUrl();
             $mediaType = 'video';
         } else {
             $thumbnailPath = $this->imagy->getThumbnail($file->path, 'mediumThumb');
             $mediaType = 'image';
         }
-        
+
         event(new FileWasLinked($file, $entity));
-        
+
         return Response::json([
             'error' => false,
             'message' => 'The link has been added.',
@@ -121,8 +121,8 @@ class MediaController extends Controller
 
     /**
      * Remove the record in the media__imageables table for the given id
-     * 
-     * @param Request $request            
+     *
+     * @param Request $request
      */
     public function unlinkMedia(Request $request)
     {
@@ -134,9 +134,9 @@ class MediaController extends Controller
                 'message' => 'The file was not found.'
             ]);
         }
-        
+
         event(new FileWasUnlinked($imageableId));
-        
+
         return Response::json([
             'error' => false,
             'message' => 'The link has been removed.'
