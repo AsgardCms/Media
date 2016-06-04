@@ -57,35 +57,35 @@
                             <td>{{ $file->id }}</td>
                             <td>
                                 <?php if ($file->isImage()): ?>
-                                    <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
+                                <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
                                 <?php else: ?>
-                                    <i class="fa fa-file" style="font-size: 20px;"></i>
+                                <i class="fa fa-file" style="font-size: 20px;"></i>
                                 <?php endif; ?>
                             </td>
                             <td>{{ $file->filename }}</td>
                             <td>
                                 <div class="btn-group">
-                                    <?php if ($file->isImage()): ?>
-                                        <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            {{ trans('media::media.insert') }} <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <?php foreach ($thumbnails as $thumbnail): ?>
-                                            <li data-file="{{ Imagy::getThumbnail($file->path, $thumbnail->name()) }}"
-                                                data-id="{{ $file->id }}" class="jsInsertImage">
-                                                <a href="">{{ $thumbnail->name() }} ({{ $thumbnail->size() }})</a>
-                                            </li>
-                                            <?php endforeach; ?>
-                                            <li class="divider"></li>
-                                            <li data-file="{{ $file->path }}" data-id="{{ $file->id }}" data-file-path="{{ $file->path }}" class="jsInsertImage">
-                                                <a href="">Original</a>
-                                            </li>
-                                        </ul>
+                                    <?php if ($isWysiwyg === true): ?>
+                                    <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        {{ trans('media::media.insert') }} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <?php foreach ($thumbnails as $thumbnail): ?>
+                                        <li data-file-path="{{ Imagy::getThumbnail($file->path, $thumbnail->name()) }}"
+                                            data-id="{{ $file->id }}" class="jsInsertImage">
+                                            <a href="">{{ $thumbnail->name() }} ({{ $thumbnail->size() }})</a>
+                                        </li>
+                                        <?php endforeach; ?>
+                                        <li class="divider"></li>
+                                        <li data-file-path="{{ $file->path }}" data-id="{{ $file->id }}" class="jsInsertImage">
+                                            <a href="">Original</a>
+                                        </li>
+                                    </ul>
                                     <?php else: ?>
-                                        <a href="" class="btn btn-primary jsInsertImage" data-id="{{ $file->id }}"
-                                           data-file="{{ $file->path }}">
-                                            {{ trans('media::media.insert') }}
-                                        </a>
+                                    <a href="" class="btn btn-primary jsInsertImage btn-flat" data-id="{{ $file->id }}"
+                                       data-file-path="{{ Imagy::getThumbnail($file->path, 'mediumThumb') }}">
+                                        {{ trans('media::media.insert') }}
+                                    </a>
                                     <?php endif; ?>
                                 </div>
                             </td>
