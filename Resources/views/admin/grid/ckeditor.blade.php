@@ -1,4 +1,4 @@
-@include('media::admin.grid.partials.content')
+@include('media::admin.grid.partials.content', ['isWysiwyg' => true])
 <script>
     $(document).ready(function () {
         $('.jsInsertImage').on('click', function (e) {
