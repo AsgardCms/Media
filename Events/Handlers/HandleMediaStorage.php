@@ -27,11 +27,13 @@ class HandleMediaStorage
         $this->imagy = $imagy;
     }
 
-    public function handle(StoringMedia $event)
+    public function handle($event)
     {
-        $this->handleMultiMedia($event);
+        if ($event instanceof StoringMedia) {
+            $this->handleMultiMedia($event);
 
-        $this->handleSingleMedia($event);
+            $this->handleSingleMedia($event);
+        }
     }
 
     /**

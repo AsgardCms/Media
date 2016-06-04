@@ -26,9 +26,8 @@ class MediaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->booted(function () {
-            $this->registerBindings();
-        });
+        $this->registerBindings();
+
         $this->registerCommands();
     }
 
@@ -39,12 +38,8 @@ class MediaServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'asgard.media.config');
         $this->publishes([__DIR__ . '/../Config/config.php' => config_path('asgard.media.config' . '.php'), ], 'config');
 
-        foreach (config('asgard.media.events.creating', []) as $event) {
-            $events->listen($event, HandleMediaStorage::class);
-        }
-        foreach (config('asgard.media.events.deleting', []) as $event) {
-            $events->listen($event, RemovePolymorphicLink::class);
-        }
+        $events->listen('*', HandleMediaStorage::class);
+        $events->listen('*', RemovePolymorphicLink::class);
     }
 
     /**
