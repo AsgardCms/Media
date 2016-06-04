@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.23.1":
+        changed:
+            - Set default argument to handle method on event handlers
     "1.23.0":
         changed:
             - Removing the need of adding the events in <code>events.php</code>
