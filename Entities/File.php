@@ -2,6 +2,7 @@
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Media\Image\Facade\Imagy;
 use Modules\Media\ValueObjects\MediaPath;
 
 /**
@@ -49,7 +50,7 @@ class File extends Model
     {
         return in_array(pathinfo($this->path, PATHINFO_EXTENSION), $this->imageExtensions);
     }
-    
+
     public function getThumbnail($type)
     {
         if ($this->isImage() && $this->getKey()) {
