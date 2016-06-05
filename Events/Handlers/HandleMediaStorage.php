@@ -8,17 +8,12 @@ use Modules\Media\Services\FileService;
 class HandleMediaStorage
 {
     /**
-     * @var FileRepository
-     */
-    private $file;
-    /**
      * @var Imagy
      */
     private $imagy;
 
-    public function __construct(FileRepository $file, Imagy $imagy)
+    public function __construct(Imagy $imagy)
     {
-        $this->file = $file;
         $this->imagy = $imagy;
     }
 
