@@ -8,10 +8,6 @@ use Modules\Media\Services\FileService;
 class HandleMediaStorage
 {
     /**
-     * @var FileService
-     */
-    private $fileService;
-    /**
      * @var FileRepository
      */
     private $file;
@@ -20,9 +16,8 @@ class HandleMediaStorage
      */
     private $imagy;
 
-    public function __construct(FileService $fileService, FileRepository $file, Imagy $imagy)
+    public function __construct(FileRepository $file, Imagy $imagy)
     {
-        $this->fileService = $fileService;
         $this->file = $file;
         $this->imagy = $imagy;
     }
