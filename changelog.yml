@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.24.0":
+        changed:
+            - Add thumbnail helper into File model
     "1.23.1":
         changed:
             - Set default argument to handle method on event handlers
