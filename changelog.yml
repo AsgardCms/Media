@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.25.0":
+        changed:
+            - Use <code>$router</code> variable in routes file
     "1.24.0":
         changed:
             - Add thumbnail helper into File model
