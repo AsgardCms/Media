@@ -12,7 +12,7 @@ class BaseUrlResolverTest extends MediaTestCase
         $resolver = new BaseUrlResolver();
         $resolvedPath = $resolver->resolve('/assets/media/my_image.png');
 
-        $this->assertEquals(config('app.url'). '/assets/media/my_image.png', $resolvedPath);
+        $this->assertEquals(config('app.url') . '/assets/media/my_image.png', $resolvedPath);
     }
 
     /** @test */

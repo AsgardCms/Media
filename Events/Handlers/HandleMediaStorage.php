@@ -1,9 +1,6 @@
 <?php namespace Modules\Media\Events\Handlers;
 
 use Modules\Media\Contracts\StoringMedia;
-use Modules\Media\Image\Imagy;
-use Modules\Media\Repositories\FileRepository;
-use Modules\Media\Services\FileService;
 
 class HandleMediaStorage
 {

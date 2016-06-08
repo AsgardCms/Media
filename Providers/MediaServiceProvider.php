@@ -1,5 +1,6 @@
 <?php namespace Modules\Media\Providers;
 
+use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Modules\Media\Console\RefreshThumbnailCommand;
@@ -8,7 +9,6 @@ use Modules\Media\Events\Handlers\HandleMediaStorage;
 use Modules\Media\Events\Handlers\RemovePolymorphicLink;
 use Modules\Media\Repositories\Eloquent\EloquentFileRepository;
 use Modules\Media\Repositories\FileRepository;
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 
 class MediaServiceProvider extends ServiceProvider
 {
