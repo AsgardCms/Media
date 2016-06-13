@@ -24,7 +24,7 @@ class HandleMediaStorage
 
         foreach ($postMedias as $zone => $attributes) {
             $orders = $this->getOrdersFrom($attributes);
-            foreach ($attributes['files'] as $fileId) {
+            foreach (array_get($attributes, 'files', []) as $fileId) {
                 $order = array_search($fileId, $orders);
                 $entity->files()->attach($fileId, ['imageable_type' => get_class($entity), 'zone' => $zone, 'order' => $order]);
             }
