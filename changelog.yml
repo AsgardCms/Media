@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.25.1":
+        changed:
+            - Fixing setting default to empty array of getting the files of the form
     "1.25.0":
         changed:
             - Use <code>$router</code> variable in routes file
