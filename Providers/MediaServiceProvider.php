@@ -3,6 +3,7 @@
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Media\Console\RefreshThumbnailCommand;
 use Modules\Media\Entities\File;
 use Modules\Media\Events\Handlers\HandleMediaStorage;
@@ -12,6 +13,7 @@ use Modules\Media\Repositories\FileRepository;
 
 class MediaServiceProvider extends ServiceProvider
 {
+    use CanPublishConfiguration;
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -35,8 +37,9 @@ class MediaServiceProvider extends ServiceProvider
     {
         $this->registerMaxFolderSizeValidator();
 
-        $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'asgard.media.config');
-        $this->publishes([__DIR__ . '/../Config/config.php' => config_path('asgard.media.config' . '.php'), ], 'config');
+        $this->publishConfig('media', 'config');
+        $this->publishConfig('media', 'permissions');
+        $this->publishConfig('media', 'thumbnails');
 
         $events->listen('*', HandleMediaStorage::class);
         $events->listen('*', RemovePolymorphicLink::class);
