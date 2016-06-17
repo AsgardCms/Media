@@ -12,7 +12,7 @@
 
             var funcNum = getUrlParam('CKEditorFuncNum');
 
-            window.opener.CKEDITOR.tools.callFunction(funcNum, $(this).data('file'));
+            window.opener.CKEDITOR.tools.callFunction(funcNum, $(this).data('file-path'));
             window.close();
         });
     });
