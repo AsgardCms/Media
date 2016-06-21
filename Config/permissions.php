@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'media.media' => [
+    'media.medias' => [
         'index',
         'create',
         'edit',
