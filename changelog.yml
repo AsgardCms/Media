@@ -1,5 +1,10 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "2.0@unreleased":
+        added:
+            - Laravel 5.2 compatibility
+        changed:
+            - Using new more flexible way of handle permissions via middleware
     "1.25.1":
         changed:
             - Fixing setting default to empty array of getting the files of the form
