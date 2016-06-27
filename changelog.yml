@@ -5,6 +5,8 @@ versions:
             - Laravel 5.2 compatibility
         changed:
             - Using new more flexible way of handle permissions via middleware
+        deleted:
+            - Removing laracasts/flash dependency
     "1.25.1":
         changed:
             - Fixing setting default to empty array of getting the files of the form
