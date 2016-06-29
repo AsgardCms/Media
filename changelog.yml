@@ -5,6 +5,7 @@ versions:
             - Laravel 5.2 compatibility
         changed:
             - Using new more flexible way of handle permissions via middleware
+            - Protecting api routes with api admin middleware
         deleted:
             - Removing laracasts/flash dependency
     "1.25.1":
