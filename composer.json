@@ -34,12 +34,6 @@
     "orchestra/testbench": "~3.2",
     "league/flysystem-aws-s3-v3": "~1.0"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/nWidart/modules"
-    }
-  ],
   "autoload-dev": {
     "psr-4": {
       "Modules\\Media\\": ".",
