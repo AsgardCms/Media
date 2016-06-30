@@ -35,7 +35,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                 $item->icon('fa fa-camera');
                 $item->route('admin.media.media.index');
                 $item->authorize(
-                    $this->auth->hasAccess('media.media.index')
+                    $this->auth->hasAccess('media.medias.index')
                 );
             });
         });
