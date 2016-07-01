@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Helpers;
+<?php
+
+namespace Modules\Media\Helpers;
 
 use Illuminate\Support\Str;
 

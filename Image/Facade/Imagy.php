@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Image\Facade;
+<?php
+
+namespace Modules\Media\Image\Facade;
 
 use Illuminate\Support\Facades\Facade;
 

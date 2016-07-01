@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Http\Controllers\Admin;
+<?php
+
+namespace Modules\Media\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Config\Repository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;

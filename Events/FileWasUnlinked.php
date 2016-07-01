@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Events;
+<?php
+
+namespace Modules\Media\Events;
 
 class FileWasUnlinked
 {

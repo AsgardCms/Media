@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Image;
+<?php
+
+namespace Modules\Media\Image;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;

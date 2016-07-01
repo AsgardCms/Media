@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Image\Intervention\Manipulations;
+<?php
+
+namespace Modules\Media\Image\Intervention\Manipulations;
 
 use Modules\Media\Image\ImageHandlerInterface;
 

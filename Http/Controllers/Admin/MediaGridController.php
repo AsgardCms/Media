@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Http\Controllers\Admin;
+<?php
+
+namespace Modules\Media\Http\Controllers\Admin;
 
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Media\Image\ThumbnailsManager;

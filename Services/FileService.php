@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Services;
+<?php
+
+namespace Modules\Media\Services;
 
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Foundation\Bus\DispatchesJobs;

@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Contracts;
+<?php
+
+namespace Modules\Media\Contracts;
 
 interface DeletingMedia
 {

@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Tests;
+<?php
+
+namespace Modules\Media\Tests;
 
 use Illuminate\Support\Facades\App;
 use Modules\Media\Image\Imagy;
@@ -69,7 +71,7 @@ class ImagyTest extends MediaTestCase
     {
         $path = $this->imagy->getThumbnail("{$this->mediaPath}google-map.png", 'smallThumb');
 
-        $expected = config('app.url'). DIRECTORY_SEPARATOR . config('asgard.media.config.files-path') . 'google-map_smallThumb.png';
+        $expected = config('app.url') . DIRECTORY_SEPARATOR . config('asgard.media.config.files-path') . 'google-map_smallThumb.png';
 
         $this->assertEquals($expected, $path);
     }

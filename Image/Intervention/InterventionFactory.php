@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Image\Intervention;
+<?php
+
+namespace Modules\Media\Image\Intervention;
 
 use Modules\Media\Image\ImageFactoryInterface;
 

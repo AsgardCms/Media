@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Image;
+<?php
+
+namespace Modules\Media\Image;
 
 interface ImageFactoryInterface
 {

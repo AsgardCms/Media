@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Console;
+<?php
+
+namespace Modules\Media\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;

@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\UrlResolvers;
+<?php
+
+namespace Modules\Media\UrlResolvers;
 
 use Illuminate\Contracts\Filesystem\Factory;
 use League\Flysystem\Adapter\Ftp;

@@ -1,4 +1,6 @@
-<?php namespace Modules\Tests;
+<?php
+
+namespace Modules\Tests;
 
 use Modules\Media\Image\ThumbnailsManager;
 use Modules\Media\Tests\MediaTestCase;

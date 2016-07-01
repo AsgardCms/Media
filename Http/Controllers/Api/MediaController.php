@@ -16,21 +16,17 @@ use Modules\Media\Services\FileService;
 
 class MediaController extends Controller
 {
-
     /**
-     *
      * @var FileService
      */
     private $fileService;
 
     /**
-     *
      * @var FileRepository
      */
     private $file;
 
     /**
-     *
      * @var Imagy
      */
     private $imagy;
@@ -48,7 +44,7 @@ class MediaController extends Controller
 
         return [
             'count' => $files->count(),
-            'data' => $files
+            'data' => $files,
         ];
     }
 
@@ -64,7 +60,7 @@ class MediaController extends Controller
 
         if (is_string($savedFile)) {
             return Response::json([
-                'error' => $savedFile
+                'error' => $savedFile,
             ], 409);
         }
 
@@ -90,7 +86,7 @@ class MediaController extends Controller
         $entity->files()->attach($mediaId, [
             'imageable_type' => $entityClass,
             'zone' => $zone,
-            'order' => $order
+            'order' => $order,
         ]);
         $imageable = DB::table('media__imageables')->whereFileId($mediaId)
             ->whereZone($zone)
@@ -114,8 +110,8 @@ class MediaController extends Controller
             'result' => [
                 'path' => $thumbnailPath,
                 'imageableId' => $imageable->id,
-                'mediaType' => $mediaType
-            ]
+                'mediaType' => $mediaType,
+            ],
         ]);
     }
 
@@ -131,7 +127,7 @@ class MediaController extends Controller
         if (! $deleted) {
             return Response::json([
                 'error' => true,
-                'message' => 'The file was not found.'
+                'message' => 'The file was not found.',
             ]);
         }
 
@@ -139,7 +135,7 @@ class MediaController extends Controller
 
         return Response::json([
             'error' => false,
-            'message' => 'The link has been removed.'
+            'message' => 'The link has been removed.',
         ]);
     }
 

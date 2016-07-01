@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Events\Handlers;
+<?php
+
+namespace Modules\Media\Events\Handlers;
 
 use Modules\Media\Contracts\StoringMedia;
 

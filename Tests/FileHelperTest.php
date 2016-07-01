@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Tests;
+<?php
+
+namespace Modules\Media\Tests;
 
 use Modules\Core\Tests\BaseTestCase;
 use Modules\Media\Helpers\FileHelper;

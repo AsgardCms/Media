@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Events\Handlers;
+<?php
+
+namespace Modules\Media\Events\Handlers;
 
 use Illuminate\Support\Facades\DB;
 use Modules\Media\Contracts\DeletingMedia;

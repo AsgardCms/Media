@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Jobs;
+<?php
+
+namespace Modules\Media\Jobs;
 
 use App\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;

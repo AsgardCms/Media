@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Support\Traits;
+<?php
+
+namespace Modules\Media\Support\Traits;
 
 trait MediaRelation
 {

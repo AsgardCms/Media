@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Validators;
+<?php
+
+namespace Modules\Media\Validators;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;

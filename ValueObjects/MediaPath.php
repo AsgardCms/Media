@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\ValueObjects;
+<?php
+
+namespace Modules\Media\ValueObjects;
 
 use Modules\Media\UrlResolvers\BaseUrlResolver;
 

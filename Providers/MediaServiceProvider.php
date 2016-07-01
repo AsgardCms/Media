@@ -1,4 +1,6 @@
-<?php namespace Modules\Media\Providers;
+<?php
+
+namespace Modules\Media\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Support\Facades\Validator;

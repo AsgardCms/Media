@@ -3,7 +3,6 @@
 use Illuminate\Routing\Router;
 
 /** @var Router $router */
-
 $router->bind('media', function ($id) {
     return app(\Modules\Media\Repositories\FileRepository::class)->find($id);
 });
@@ -41,12 +40,12 @@ $router->group(['prefix' => '/media'], function (Router $router) {
     ]);
 
     $router->get('media-grid/index', [
-        'uses' => 'MediaGridController@index', 
+        'uses' => 'MediaGridController@index',
         'as' => 'media.grid.select',
         'middleware' => 'can:media.medias.index',
     ]);
     $router->get('media-grid/ckIndex', [
-        'uses' => 'MediaGridController@ckIndex', 
+        'uses' => 'MediaGridController@ckIndex',
         'as' => 'media.grid.ckeditor',
         'middleware' => 'can:media.medias.index',
     ]);

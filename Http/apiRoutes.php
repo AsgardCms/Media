@@ -3,7 +3,6 @@
 use Illuminate\Routing\Router;
 
 /** @var Router $router */
-
 $router->group(['middleware' => 'api.token.admin'], function (Router $router) {
     $router->post('file', ['uses' => 'MediaController@store', 'as' => 'api.media.store']);
     $router->post('media/link', ['uses' => 'MediaController@linkMedia', 'as' => 'api.media.link']);
