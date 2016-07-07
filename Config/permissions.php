@@ -2,9 +2,9 @@
 
 return [
     'media.medias' => [
-        'index' => trans('media::media.list resource'),
-        'create' => trans('media::media.create resource'),
-        'edit' => trans('media::media.edit resource'),
-        'destroy' => trans('media::media.destroy resource'),
+        'index' => 'media::media.list resource',
+        'create' => 'media::media.create resource',
+        'edit' => 'media::media.edit resource',
+        'destroy' => 'media::media.destroy resource',
     ],
 ];
