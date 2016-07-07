@@ -5,7 +5,12 @@
             e.preventDefault();
             var mediaId = $(this).data('id'),
                 filePath = $(this).data('file-path');
-            window.opener.includeMedia(mediaId, filePath);
+            if(window.opener.single)
++           {
++               window.opener.includeMediaSingle(mediaId, filePath);
++           } else {
++               window.opener.includeMediaMultiple(mediaId, filePath);
++           }
             window.close();
         });
     });
