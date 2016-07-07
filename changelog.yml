@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.25.2":
+        changed:
+            - Ck editor inline file input not refering to proper data attribute
     "1.25.1":
         changed:
             - Fixing setting default to empty array of getting the files of the form
