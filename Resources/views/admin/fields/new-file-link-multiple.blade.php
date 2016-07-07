@@ -65,7 +65,7 @@
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
     <?php $url = route('media.grid.select') ?>
-    <a class="btn btn-primary btn-upload" onclick="openMediaWindow(event, '{{ $zone }}')"><i class="fa fa-upload"></i>
+    <a class="btn btn-primary btn-upload" onclick="openMediaWindowMultiple(event, '{{ $zone }}')"><i class="fa fa-upload"></i>
         {{ trans('media::media.Browse') }}
     </a>
     <div class="clearfix"></div>
