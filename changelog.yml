@@ -1,5 +1,7 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.25.3":
+        - Allow usage of multiple media partials on create views
     "1.25.2":
         changed:
             - Ck editor inline file input not refering to proper data attribute
