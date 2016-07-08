@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.25.5":
+        changed:
+            - Fixed edit partials for media module
     "1.25.4":
         changed:
             - Typo fixes
