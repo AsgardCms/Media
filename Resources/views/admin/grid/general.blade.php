@@ -5,12 +5,11 @@
             e.preventDefault();
             var mediaId = $(this).data('id'),
                 filePath = $(this).data('file-path');
-            if(window.opener.single)
-+           {
-+               window.opener.includeMediaSingle(mediaId, filePath);
-+           } else {
-+               window.opener.includeMediaMultiple(mediaId, filePath);
-+           }
+            if(window.opener.single) {
+               window.opener.includeMediaSingle(mediaId, filePath);
+            } else {
+               window.opener.includeMediaMultiple(mediaId, filePath);
+            }
             window.close();
         });
     });
