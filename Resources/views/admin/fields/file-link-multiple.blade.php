@@ -38,6 +38,7 @@
     if (typeof window.openMediaWindowMultiple === 'undefined') {
         window.mediaZone = '';
         window.openMediaWindowMultiple = function (event, zone) {
+            window.single = false;
             window.mediaZone = zone;
             window.zoneWrapper = $(event.currentTarget).siblings('.jsThumbnailImageWrapper');
             window.open('{!! route('media.grid.select') !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');

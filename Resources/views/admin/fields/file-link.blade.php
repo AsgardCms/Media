@@ -24,6 +24,7 @@
         window.mediaZone = '';
         window.openMediaWindowSingle = function (event, zone) {
             window.mediaZone = zone;
+            window.single = true;
             window.zoneWrapper = $(event.currentTarget).siblings('.jsThumbnailImageWrapper');
             window.open('{!! route('media.grid.select') !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');
         };
