@@ -6,6 +6,7 @@ versions:
         changed:
             - Using new more flexible way of handle permissions via middleware
             - Protecting api routes with api admin middleware
+            - Allow usage of multiple media partials on create views
         deleted:
             - Removing laracasts/flash dependency
     "1.25.1":
