@@ -35,16 +35,17 @@
     }
 </style>
 <script>
-    if (typeof window.openMediaWindow === 'undefined') {
+    if (typeof window.openMediaWindowMultiple === 'undefined') {
         window.mediaZone = '';
-        window.openMediaWindow = function (event, zone) {
+        window.openMediaWindowMultiple = function (event, zone) {
+            window.single = false;
             window.mediaZone = zone;
             window.zoneWrapper = $(event.currentTarget).siblings('.jsThumbnailImageWrapper');
             window.open('{!! route('media.grid.select') !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');
         };
     }
-    if (typeof window.includeMedia === 'undefined') {
-        window.includeMedia = function (mediaId, filePath) {
+    if (typeof window.includeMediaMultiple === 'undefined') {
+        window.includeMediaMultiple = function (mediaId, filePath) {
             var html = '<figure data-id="' + mediaId + '">' +
                     '<img src="' + filePath + '" alt=""/>' +
                     '<a class="jsRemoveLink" href="#" data-id="' + mediaId + '">' +
@@ -64,7 +65,7 @@
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
     <?php $url = route('media.grid.select') ?>
-    <a class="btn btn-primary btn-upload" onclick="openMediaWindow(event, '{{ $zone }}')"><i class="fa fa-upload"></i>
+    <a class="btn btn-primary btn-upload" onclick="openMediaWindowMultiple(event, '{{ $zone }}')"><i class="fa fa-upload"></i>
         {{ trans('media::media.Browse') }}
     </a>
     <div class="clearfix"></div>
