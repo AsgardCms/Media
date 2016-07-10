@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.25.7":
+        changed:
+            - Fixing missing <code>"</code>
     "1.25.6":
         changed:
             - Make styling consistent across media partials
