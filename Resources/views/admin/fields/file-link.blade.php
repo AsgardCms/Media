@@ -1,14 +1,15 @@
 <style>
-    figure.jsThumbnailImageWrapper {
+    .jsThumbnailImageWrapper figure {
         position: relative;
         display: inline-block;
+        margin-right: 20px;
+        margin-bottom: 20px;
         background-color: #fff;
         border: 1px solid #eee;
         padding: 3px;
         border-radius: 3px;
-        margin-top: 20px;
     }
-    figure.jsThumbnailImageWrapper i.removeIcon {
+    .jsThumbnailImageWrapper i.removeIcon {
         position: absolute;
         top:-10px;
         right:-10px;
@@ -70,18 +71,20 @@
 
     <div class="clearfix"></div>
 
-    <figure class="jsThumbnailImageWrapper">
+    <div class="jsThumbnailImageWrapper jsSingleThumbnailWrapper">
         <?php if (isset(${$zone}->path)): ?>
+            <figure data-id="{{ ${$zone}->pivot->id }}>
             <?php if (${$zone}->isImage()): ?>
                 <img src="{{ Imagy::getThumbnail(${$zone}->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ ${$zone}->alt_attribute }}"/>
             <?php else: ?>
                 <i class="fa fa-file" style="font-size: 50px;"></i>
             <?php endif; ?>
-            <a class="jsRemoveSimpleLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
-                <i class="fa fa-times-circle removeIcon"></i>
-            </a>
+                <a class="jsRemoveSimpleLink" href="#" data-id="{{ ${$zone}->pivot->id }}">
+                    <i class="fa fa-times-circle removeIcon"></i>
+                </a>
+            </figure>
         <?php endif; ?>
-    </figure>
+    </div>
 </div>
 <script>
     $( document ).ready(function() {
