@@ -19,6 +19,9 @@
             display: none;
         }
     </style>
+    <script>
+        AuthorizationHeaderValue = 'Bearer {{ $currentUser->getFirstApiKey() }}';
+    </script>
     @include('partials.asgard-globals')
 </head>
 <body>
