@@ -97,7 +97,7 @@
             }
         });
 
-        $(".jsThumbnailImageWrapper").sortable({
+        $(".jsThumbnailImageWrapper").not(".jsSingleThumbnailWrapper").sortable({
             placeholder: 'ui-state-highlight',
             cursor:'move',
             helper: 'clone',
