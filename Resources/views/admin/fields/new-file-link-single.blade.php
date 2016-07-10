@@ -55,7 +55,7 @@
 
     <div class="jsThumbnailImageWrapper jsSingleThumbnailWrapper">
         <?php if (isset(${$zone}->path)): ?>
-            <figure data-id="{{ ${$zone}->pivot->id }}>
+            <figure data-id="{{ ${$zone}->pivot->id }}">
             <?php if (${$zone}->isImage()): ?>
                 <img src="{{ Imagy::getThumbnail(${$zone}->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ ${$zone}->alt_attribute }}"/>
             <?php else: ?>
