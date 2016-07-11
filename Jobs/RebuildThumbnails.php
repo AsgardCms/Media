@@ -4,7 +4,7 @@ namespace Modules\Media\Jobs;
 
 use App\Jobs\Job;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Collection
+use Illuminate\Support\Collection;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
