@@ -3,13 +3,12 @@
 namespace Modules\Media\Jobs;
 
 use App\Jobs\Job;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class RebuildThumbnails extends Job implements SelfHandling, ShouldQueue
+class RebuildThumbnails extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
