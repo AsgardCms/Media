@@ -6,11 +6,11 @@
             var mediaId = $(this).data('id'),
                 filePath = $(this).data('file-path');
             if(window.opener.single) {
-               window.opener.includeMediaSingle(mediaId, filePath);
+                window.opener.includeMediaSingle(mediaId, filePath);
+                window.close();
             } else {
-               window.opener.includeMediaMultiple(mediaId, filePath);
+                window.opener.includeMediaMultiple(mediaId, filePath);
             }
-            window.close();
         });
     });
 </script>
