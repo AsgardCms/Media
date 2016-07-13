@@ -4,7 +4,11 @@
 </script>
 <style>
     .btn-upload {
-        margin-bottom: 20px;
+        margin-bottom: 12px;
+    }
+    .jsThumbnailImageWrapper {
+        padding-top: 8px;
+        overflow-y: auto;
     }
     .jsThumbnailImageWrapper figure {
         position: relative;
