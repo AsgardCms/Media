@@ -5,12 +5,21 @@
             e.preventDefault();
             var mediaId = $(this).data('id'),
                 filePath = $(this).data('file-path');
-            if(window.opener.single) {
-                window.opener.includeMediaSingle(mediaId, filePath);
+            if(window.opener.old) {
+                if(window.opener.single) {
+                    window.opener.includeMediaSingleOld(mediaId, filePath);
+                    window.close();
+                } else {
+                    window.opener.includeMediaMultipleOld(mediaId, filePath);
+                }
             } else {
-                window.opener.includeMediaMultiple(mediaId, filePath);
+                if(window.opener.single) {
+                    window.opener.includeMediaSingle(mediaId, filePath);
+                    window.close();
+                } else {
+                    window.opener.includeMediaMultiple(mediaId, filePath);
+                }
             }
-            window.close();
         });
     });
 </script>

@@ -1,54 +1,21 @@
 <script src="{{ Module::asset('dashboard:vendor/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>
-    $fileCount = $('.jsFileCount');
-</script>
-<style>
-    .btn-upload {
-        margin-bottom: 20px;
-    }
-    .jsThumbnailImageWrapper figure {
-        position: relative;
-        display: inline-block;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        background-color: #fff;
-        border: 1px solid #eee;
-        padding: 3px;
-        border-radius: 3px;
-        cursor: grab;
-    }
-    .jsThumbnailImageWrapper i.removeIcon {
-        position: absolute;
-        top:-10px;
-        right:-10px;
-        color: #f56954;
-        font-size: 2em;
-        background: white;
-        border-radius: 20px;
-        height: 25px;
-    }
-
-    figure.ui-state-highlight {
-        border: none;
-        width:100px;
-        height: 0;
-    }
-</style>
-<script>
-    if (typeof window.openMediaWindowMultiple === 'undefined') {
+    var $fileCount = $('.jsFileCount');
+    if (typeof window.openMediaWindowMultipleOld === 'undefined') {
         window.mediaZone = '';
-        window.openMediaWindowMultiple = function (event, zone) {
+        window.openMediaWindowMultipleOld = function (event, zone) {
             window.single = false;
+            window.old = true;
             window.mediaZone = zone;
             window.zoneWrapper = $(event.currentTarget).siblings('.jsThumbnailImageWrapper');
-            window.open('{!! route('media.grid.select') !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');
+            window.open(Asgard.mediaGridSelectUrl, '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');
         };
     }
-    if (typeof window.includeMediaMultiple === 'undefined') {
-        window.includeMediaMultiple = function (mediaId) {
+    if (typeof window.includeMediaMultipleOld === 'undefined') {
+        window.includeMediaMultipleOld = function (mediaId) {
             $.ajax({
                 type: 'POST',
-                url: '{{ route('api.media.link') }}',
+                url: Asgard.mediaLinkUrl,
                 data: {
                     'mediaId': mediaId,
                     '_token': '{{ csrf_token() }}',
@@ -81,14 +48,13 @@
 <div class="form-group">
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
-    <?php $url = route('media.grid.select') ?>
-    <a class="btn btn-primary btn-upload" onclick="openMediaWindowMultiple(event, '{{ $zone }}')"><i class="fa fa-upload"></i>
+    <a class="btn btn-primary btn-upload" onclick="openMediaWindowMultipleOld(event, '{{ $zone }}')"><i class="fa fa-upload"></i>
         {{ trans('media::media.Browse') }}
     </a>
     <div class="clearfix"></div>
     <div class="jsThumbnailImageWrapper">
         <?php $zoneVar = "{$zone}Files"  ?>
-        <?php if (isset($$zoneVar)): ?>
+        <?php if (isset($$zoneVar) && !$$zoneVar->isEmpty()): ?>
             <?php foreach ($$zoneVar as $file): ?>
                 <figure data-id="{{ $file->pivot->id }}">
                     <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
@@ -108,7 +74,7 @@
                     pictureWrapper = $(this).parent();
             $.ajax({
                 type: 'POST',
-                url: '{{ route('api.media.unlink') }}',
+                url: Asgard.mediaUnlinkUrl,
                 data: {
                     'imageableId': imageableId,
                     '_token': '{{ csrf_token() }}'
@@ -139,7 +105,7 @@
                 $.ajax({
                     global: false, /* leave it to false */
                     type: 'POST',
-                    url: '{{ route('api.media.sort') }}',
+                    url: Asgard.mediaSortUrl,
                     data: {
                         'entityClass': '{{ $entityClass }}',
                         'zone': '{{ $zone }}',

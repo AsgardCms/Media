@@ -1,40 +1,19 @@
-<style>
-    .jsThumbnailImageWrapper figure {
-        position: relative;
-        display: inline-block;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        background-color: #fff;
-        border: 1px solid #eee;
-        padding: 3px;
-        border-radius: 3px;
-    }
-    .jsThumbnailImageWrapper i.removeIcon {
-        position: absolute;
-        top:-10px;
-        right:-10px;
-        color: #f56954;
-        font-size: 2em;
-        background: white;
-        border-radius: 20px;
-        height: 25px;
-    }
-</style>
 <script>
-    if (typeof window.openMediaWindowSingle === 'undefined') {
+    if (typeof window.openMediaWindowSingleOld === 'undefined') {
         window.mediaZone = '';
-        window.openMediaWindowSingle = function (event, zone) {
+        window.openMediaWindowSingleOld = function (event, zone) {
             window.mediaZone = zone;
             window.single = true;
+            window.old = true;
             window.zoneWrapper = $(event.currentTarget).siblings('.jsThumbnailImageWrapper');
-            window.open('{!! route('media.grid.select') !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');
+            window.open(Asgard.mediaGridSelectUrl, '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');
         };
     }
-    if (typeof window.includeMediaSingle === 'undefined') {
-        window.includeMediaSingle = function (mediaId) {
+    if (typeof window.includeMediaSingleOld === 'undefined') {
+        window.includeMediaSingleOld = function (mediaId) {
             $.ajax({
                 type: 'POST',
-                url: '{{ route('api.media.link') }}',
+                url: Asgard.mediaLinkUrl,
                 data: {
                     'mediaId': mediaId,
                     '_token': '{{ csrf_token() }}',
@@ -65,7 +44,7 @@
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
 
-    <a class="btn btn-primary btn-browse" onclick="openMediaWindowSingle(event, '{{ $zone }}');" <?php echo (isset(${$zone}->path))?'style="display:none;"':'' ?>><i class="fa fa-upload"></i>
+    <a class="btn btn-primary btn-browse" onclick="openMediaWindowSingleOld(event, '{{ $zone }}');" <?php echo (isset(${$zone}->path))?'style="display:none;"':'' ?>><i class="fa fa-upload"></i>
         {{ trans('media::media.Browse') }}
     </a>
 
@@ -94,7 +73,7 @@
             var imageableId = $(this).data('id');
             $.ajax({
                 type: 'POST',
-                url: '{{ route('api.media.unlink') }}',
+                url: Asgard.mediaUnlinkUrl,
                 data: {
                     'imageableId': imageableId,
                     '_token': '{{ csrf_token() }}'

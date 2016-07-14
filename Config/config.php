@@ -38,4 +38,34 @@ return [
     | Expressed in bytes
     */
     'max-total-size' => 1000000000,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Define which assets will be available through the asset manager
+    |--------------------------------------------------------------------------
+    | These assets are registered on the asset manager
+    */
+    'media-partial-assets' => [
+        // Styles
+        'asgard.css' => ['theme' => 'css/asgard.css'],
+        // Javascript
+        'jquery-ui.js' => ['module' => 'dashboard:vendor/jquery-ui/jquery-ui.min.js'],
+        'media-partial.js' => ['module' => 'media:js/media-partial.js'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Define which default assets will always be included in your pages
+    | through the asset pipeline
+    |--------------------------------------------------------------------------
+    */
+    'media-partial-required-assets' => [
+        'css' => [
+            'asgard.css',
+        ],
+        'js' => [
+            'jquery-ui.js',
+            'media-partial.js',
+        ],
+    ],
 ];
