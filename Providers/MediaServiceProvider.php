@@ -10,6 +10,7 @@ use Modules\Media\Console\RefreshThumbnailCommand;
 use Modules\Media\Entities\File;
 use Modules\Media\Events\Handlers\HandleMediaStorage;
 use Modules\Media\Events\Handlers\RemovePolymorphicLink;
+use Modules\Media\Image\ThumbnailManager;
 use Modules\Media\Repositories\Eloquent\EloquentFileRepository;
 use Modules\Media\Repositories\FileRepository;
 use Modules\Tag\Repositories\TagManager;
@@ -48,6 +49,7 @@ class MediaServiceProvider extends ServiceProvider
         $events->listen('*', RemovePolymorphicLink::class);
 
         $this->app[TagManager::class]->registerNamespace(new File());
+        $this->registerThumbnails();
     }
 
     /**
@@ -90,5 +92,29 @@ class MediaServiceProvider extends ServiceProvider
     private function registerMaxFolderSizeValidator()
     {
         Validator::extend('max_size', '\Modules\Media\Validators\MaxFolderSizeValidator@validateMaxSize');
+    }
+
+    private function registerThumbnails()
+    {
+        $this->app[ThumbnailManager::class]->registerThumbnail('smallThumb', [
+            'resize' => [
+                'width' => 50,
+                'height' => null,
+                'callback' => function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                },
+            ],
+        ]);
+        $this->app[ThumbnailManager::class]->registerThumbnail('mediumThumb', [
+            'resize' => [
+                'width' => 180,
+                'height' => null,
+                'callback' => function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                },
+            ],
+        ]);
     }
 }
