@@ -21,6 +21,8 @@ class EloquentFileRepository extends EloquentBaseRepository implements FileRepos
     {
         $file->update($data);
 
+        $file->setTags(array_get($data, 'tags'));
+
         return $file;
     }
 

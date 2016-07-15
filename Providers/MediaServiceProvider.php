@@ -12,6 +12,7 @@ use Modules\Media\Events\Handlers\HandleMediaStorage;
 use Modules\Media\Events\Handlers\RemovePolymorphicLink;
 use Modules\Media\Repositories\Eloquent\EloquentFileRepository;
 use Modules\Media\Repositories\FileRepository;
+use Modules\Tag\Repositories\TagManager;
 
 class MediaServiceProvider extends ServiceProvider
 {
@@ -45,6 +46,8 @@ class MediaServiceProvider extends ServiceProvider
 
         $events->listen('*', HandleMediaStorage::class);
         $events->listen('*', RemovePolymorphicLink::class);
+
+        $this->app[TagManager::class]->registerNamespace(new File());
     }
 
     /**
