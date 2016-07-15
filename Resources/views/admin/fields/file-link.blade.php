@@ -22,16 +22,22 @@
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                	if (data.result.mediaType === 'image') {
-                    	var mediaPlaceholder = '<img src="' + data.result.path + '" alt=""/>';
-                	}
-                	else {
-                        var mediaPlaceholder = '<video src="' + data.result.path + '" controls width="320"></video>';
+                    var mediaPlaceholder;
+
+                    if (data.result.mediaType === 'image') {
+                        mediaPlaceholder = '<img src="' + data.result.path + '" alt=""/>';
+                    } else if (data.result.mediaType == 'video') {
+                        mediaPlaceholder = '<video src="' + data.result.path + '" controls width="320"></video>';
+                    } else if (data.result.mediaType == 'audio') {
+                        mediaPlaceholder = '<audio controls><source src="' + data.result.path + '" type="' + data.result.mimetype + '"></audio>'
+                    } else {
+                        mediaPlaceholder = '<i class="fa fa-file" style="font-size: 50px;"></i>';
                     }
-                    var html = '<figure data-id="'+ data.result.imageableId +'">' + mediaPlaceholder +
-                    	'<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
-                    	'<i class="fa fa-times-circle removeIcon"></i>' +
-                    	'</a></figure>';
+
+                    var html = '<figure data-id="' + data.result.imageableId + '">' + mediaPlaceholder +
+                            '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
+                            '<i class="fa fa-times-circle removeIcon"></i>' +
+                            '</a></figure>';
                     window.zoneWrapper.append(html).fadeIn('slow', function() {
                         toggleButton($(this));
                     });
@@ -53,8 +59,12 @@
     <div class="jsThumbnailImageWrapper jsSingleThumbnailWrapper">
         <?php if (isset(${$zone}->path)): ?>
             <figure data-id="{{ ${$zone}->pivot->id }}">
-            <?php if (${$zone}->isImage()): ?>
+            <?php if (${$zone}->media_type == 'image'): ?>
                 <img src="{{ Imagy::getThumbnail(${$zone}->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ ${$zone}->alt_attribute }}"/>
+            <?php elseif (${$zone}->media_type == 'video'): ?>
+                <video src="{{ ${$zone}->path }}"  controls width="320"></video>
+            <?php elseif (${$zone}->media_type == 'audio'): ?>
+                <audio controls><source src="{{ ${$zone}->path }}" type="{{ ${$zone}->mimetype }}"></audio>
             <?php else: ?>
                 <i class="fa fa-file" style="font-size: 50px;"></i>
             <?php endif; ?>

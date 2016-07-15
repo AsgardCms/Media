@@ -25,16 +25,22 @@
                     'order': $('.jsThumbnailImageWrapper figure').size() + 1
                 },
                 success: function (data) {
+                    var mediaPlaceholder;
+
                     if (data.result.mediaType === 'image') {
-                        var mediaPlaceholder = '<img src="' + data.result.path + '" alt=""/>';
+                        mediaPlaceholder = '<img src="' + data.result.path + '" alt=""/>';
+                    } else if (data.result.mediaType == 'video') {
+                        mediaPlaceholder = '<video src="' + data.result.path + '" controls width="320"></video>';
+                    } else if (data.result.mediaType == 'audio') {
+                        mediaPlaceholder = '<audio controls><source src="' + data.result.path + '" type="' + data.result.mimetype + '"></audio>'
+                    } else {
+                        mediaPlaceholder = '<i class="fa fa-file" style="font-size: 50px;"></i>';
                     }
-                    else {
-                        var mediaPlaceholder = '<video src="' + data.result.path + '" controls + width="320"></video>';
-                    }
+
                     var html = '<figure data-id="'+ data.result.imageableId +'">' + mediaPlaceholder +
-                    	'<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
-                    	'<i class="fa fa-times-circle removeIcon"></i>' +
-                    	'</a></figure>';
+                        '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
+                        '<i class="fa fa-times-circle removeIcon"></i>' +
+                        '</a></figure>';
                     window.zoneWrapper.append(html).fadeIn();
                     if ($fileCount.length > 0) {
                         var count = parseInt($fileCount.text());
@@ -57,7 +63,15 @@
         <?php if (isset($$zoneVar) && !$$zoneVar->isEmpty()): ?>
             <?php foreach ($$zoneVar as $file): ?>
                 <figure data-id="{{ $file->pivot->id }}">
+                    <?php if ($file->media_type == 'image'): ?>
                     <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
+                    <?php elseif ($file->media_type == 'video'): ?>
+                    <video src="{{ $file->path }}"  controls width="320"></video>
+                    <?php elseif ($file->media_type == 'audio'): ?>
+                    <audio controls><source src="{{ $file->path }}" type="{{ $file->mimetype }}"></audio>
+                    <?php else: ?>
+                    <i class="fa fa-file" style="font-size: 50px;"></i>
+                    <?php endif; ?>
                     <a class="jsRemoveLink" href="#" data-id="{{ $file->pivot->id }}">
                         <i class="fa fa-times-circle removeIcon"></i>
                     </a>
@@ -94,6 +108,7 @@
         });
 
         $(".jsThumbnailImageWrapper").not(".jsSingleThumbnailWrapper").sortable({
+            item: 'figure',
             placeholder: 'ui-state-highlight',
             cursor:'move',
             helper: 'clone',

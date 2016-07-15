@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Response;
 use Modules\Media\Events\FileWasLinked;
 use Modules\Media\Events\FileWasUnlinked;
 use Modules\Media\Events\FileWasUploaded;
+use Modules\Media\Helpers\FileHelper;
 use Modules\Media\Http\Requests\UploadMediaRequest;
 use Modules\Media\Image\Imagy;
 use Modules\Media\Repositories\FileRepository;
@@ -94,12 +95,11 @@ class MediaController extends Controller
             ->first();
         $file = $this->file->find($imageable->file_id);
 
-        if (str_contains($file->mimetype, 'video')) {
-            $thumbnailPath = $file->path->getRelativeUrl();
-            $mediaType = 'video';
-        } else {
+        $mediaType = FileHelper::getTypeByMimetype($file->mimetype);
+        if ($mediaType == 'image') {
             $thumbnailPath = $this->imagy->getThumbnail($file->path, 'mediumThumb');
-            $mediaType = 'image';
+        } else {
+            $thumbnailPath = $file->path->getRelativeUrl();
         }
 
         event(new FileWasLinked($file, $entity));
@@ -111,6 +111,7 @@ class MediaController extends Controller
                 'path' => $thumbnailPath,
                 'imageableId' => $imageable->id,
                 'mediaType' => $mediaType,
+                'mimetype' => $file->mimetype,
             ],
         ]);
     }

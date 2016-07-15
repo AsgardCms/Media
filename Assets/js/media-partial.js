@@ -15,8 +15,20 @@ $( document ).ready(function() {
 		};
 	}
 	if (typeof window.includeMediaSingle === 'undefined') {
-		window.includeMediaSingle = function (mediaId, filePath) {
-			var html = '<figure data-id="'+ mediaId +'"><img src="' + filePath + '" alt=""/>' +
+		window.includeMediaSingle = function (mediaId, filePath, mediaType, mimetype) {
+			var mediaPlaceholder;
+
+			if (mediaType === 'image') {
+				mediaPlaceholder = '<img src="' + filePath + '" alt=""/>';
+			} else if (mediaType == 'video') {
+				mediaPlaceholder = '<video src="' + filePath + '" controls width="320"></video>';
+			} else if (mediaType == 'audio') {
+				mediaPlaceholder = '<audio controls><source src="' + filePath + '" type="' + mimetype + '"></audio>'
+			} else {
+				mediaPlaceholder = '<i class="fa fa-file" style="font-size: 50px;"></i>';
+			}
+
+			var html = '<figure data-id="'+ mediaId +'">' + mediaPlaceholder +
 				'<a class="jsRemoveSimpleLink" href="#" data-id="' + mediaId + '">' +
 				'<i class="fa fa-times-circle removeIcon"></i></a>' +
 				'<input type="hidden" name="medias_single['+ window.mediaZone +']" value="' + mediaId + '">' +
@@ -39,9 +51,20 @@ $( document ).ready(function() {
 		};
 	}
 	if (typeof window.includeMediaMultiple === 'undefined') {
-		window.includeMediaMultiple = function (mediaId, filePath) {
-			var html = '<figure data-id="' + mediaId + '">' +
-				'<img src="' + filePath + '" alt=""/>' +
+		window.includeMediaMultiple = function (mediaId, filePath, mediaType, mimetype) {
+			var mediaPlaceholder;
+
+			if (mediaType === 'image') {
+				mediaPlaceholder = '<img src="' + filePath + '" alt=""/>';
+			} else if (mediaType == 'video') {
+				mediaPlaceholder = '<video src="' + filePath + '" controls width="320"></video>';
+			} else if (mediaType == 'audio') {
+				mediaPlaceholder = '<audio controls><source src="' + filePath + '" type="' + mimetype + '"></audio>'
+			} else {
+				mediaPlaceholder = '<i class="fa fa-file" style="font-size: 50px;"></i>';
+			}
+
+			var html = '<figure data-id="' + mediaId + '">' + mediaPlaceholder +
 				'<a class="jsRemoveLink" href="#" data-id="' + mediaId + '">' +
 				'<i class="fa fa-times-circle removeIcon"></i>' +
 				'</a>' +

@@ -24,7 +24,7 @@ interface FileRepository extends BaseRepository
 
     /**
      * Find multiple files for the given zone and entity
-     * @param zone $zone
+     * @param string $zone
      * @param object $entity
      * @return object
      */

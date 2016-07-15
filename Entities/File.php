@@ -4,6 +4,7 @@ namespace Modules\Media\Entities;
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Media\Helpers\FileHelper;
 use Modules\Media\Image\Facade\Imagy;
 use Modules\Media\ValueObjects\MediaPath;
 
@@ -36,7 +37,7 @@ class File extends Model
         'filesize',
         'folder_id',
     ];
-    protected $appends = ['path_string'];
+    protected $appends = ['path_string', 'media_type'];
 
     public function getPathAttribute($value)
     {
@@ -46,6 +47,11 @@ class File extends Model
     public function getPathStringAttribute()
     {
         return (string) $this->path;
+    }
+
+    public function getMediaTypeAttribute()
+    {
+        return FileHelper::getTypeByMimetype($this->mimetype);
     }
 
     public function isImage()

@@ -6,6 +6,7 @@
     {!! Theme::style('vendor/bootstrap/dist/css/bootstrap.min.css') !!}
     {!! Theme::style('vendor/admin-lte/dist/css/AdminLTE.css') !!}
     {!! Theme::style('vendor/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}
+    {!! Theme::style('vendor/font-awesome/css/font-awesome.min.css') !!}
     <link href="{!! Module::asset('media:css/dropzone.css') !!}" rel="stylesheet" type="text/css" />
     <style>
         body {
@@ -62,7 +63,7 @@
                                 <?php if ($file->isImage()): ?>
                                 <img src="{{ Imagy::getThumbnail($file->path, 'smallThumb') }}" alt=""/>
                                 <?php else: ?>
-                                <i class="fa fa-file" style="font-size: 20px;"></i>
+                                <i class="fa {{ FileHelper::getFaIcon($file->media_type) }}" style="font-size: 20px;"></i>
                                 <?php endif; ?>
                             </td>
                             <td>{{ $file->filename }}</td>
@@ -75,18 +76,21 @@
                                     <ul class="dropdown-menu" role="menu">
                                         <?php foreach ($thumbnails as $thumbnail): ?>
                                         <li data-file-path="{{ Imagy::getThumbnail($file->path, $thumbnail->name()) }}"
-                                            data-id="{{ $file->id }}" class="jsInsertImage">
+                                            data-id="{{ $file->id }}" data-media-type="{{ $file->media_type }}"
+                                            data-mimetype="{{ $file->mimetype }}" class="jsInsertImage">
                                             <a href="">{{ $thumbnail->name() }} ({{ $thumbnail->size() }})</a>
                                         </li>
                                         <?php endforeach; ?>
                                         <li class="divider"></li>
-                                        <li data-file-path="{{ $file->path }}" data-id="{{ $file->id }}" class="jsInsertImage">
+                                        <li data-file-path="{{ $file->path }}" data-id="{{ $file->id }}"
+                                            data-media-type="{{ $file->media_type }}" data-mimetype="{{ $file->mimetype }}" class="jsInsertImage">
                                             <a href="">Original</a>
                                         </li>
                                     </ul>
                                     <?php else: ?>
                                     <a href="" class="btn btn-primary jsInsertImage btn-flat" data-id="{{ $file->id }}"
-                                       data-file-path="{{ Imagy::getThumbnail($file->path, 'mediumThumb') }}">
+                                       data-file-path="{{ Imagy::getThumbnail($file->path, 'mediumThumb') }}"
+                                       data-media-type="{{ $file->media_type }}" data-mimetype="{{ $file->mimetype }}">
                                         {{ trans('media::media.insert') }}
                                     </a>
                                     <?php endif; ?>
