@@ -20,7 +20,7 @@ class Imagy
      */
     private $imageFactory;
     /**
-     * @var ThumbnailManagerRepository
+     * @var ThumbnailManager
      */
     private $manager;
 
@@ -36,9 +36,9 @@ class Imagy
 
     /**
      * @param ImageFactoryInterface $imageFactory
-     * @param ThumbnailManagerRepository $manager
+     * @param ThumbnailManager $manager
      */
-    public function __construct(ImageFactoryInterface $imageFactory, ThumbnailManagerRepository $manager)
+    public function __construct(ImageFactoryInterface $imageFactory, ThumbnailManager $manager)
     {
         $this->image = app(ImageManager::class);
         $this->filesystem = app(Factory::class);
