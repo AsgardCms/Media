@@ -2,25 +2,25 @@
 
 namespace Modules\Tests;
 
-use Modules\Media\Image\ThumbnailManagerRepository;
+use Modules\Media\Image\ThumbnailManager;
 use Modules\Media\Tests\MediaTestCase;
 
 class ThumbnailsManagerTest extends MediaTestCase
 {
     /**
-     * @var \Modules\Media\Image\ThumbnailManagerRepository
+     * @var ThumbnailManager
      */
     private $thumbnailManager;
 
     public function setUp()
     {
         parent::setUp();
-        $this->thumbnailManager = new ThumbnailManagerRepository(app('config'));
+        $this->thumbnailManager = app(ThumbnailManager::class);
     }
 
     /** @test */
-    public function it_is_true()
+    public function it_initialises_empty_array()
     {
-        $this->assertTrue(true);
+        $this->assertEquals([], $this->thumbnailManager->all());
     }
 }
