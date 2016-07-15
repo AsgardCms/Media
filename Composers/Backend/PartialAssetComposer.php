@@ -39,7 +39,7 @@ class PartialAssetComposer
      */
     private function addAssets()
     {
-        foreach (config('asgard.media.config.media-partial-assets', []) as $assetName => $path) {
+        foreach (config('asgard.media.assets.media-partial-assets', []) as $assetName => $path) {
             $path = $this->assetFactory->make($path)->url();
             $this->assetManager->addAsset($assetName, $path);
         }
@@ -50,7 +50,15 @@ class PartialAssetComposer
      */
     private function requireAssets()
     {
-        $this->assetPipeline->requireCss(config('asgard.media.config.media-partial-required-assets.css'));
-        $this->assetPipeline->requireJs(config('asgard.media.config.media-partial-required-assets.js'));
+        $css = config('asgard.media.assets.media-partial-required-assets.css');
+        $js  = config('asgard.media.assets.media-partial-required-assets.js');
+
+        if (!empty($css)) {
+            $this->assetPipeline->requireCss($css);
+        }
+
+        if (!empty($js)) {
+            $this->assetPipeline->requireJs($js);
+        }
     }
 }
