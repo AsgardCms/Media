@@ -19,7 +19,7 @@ class ImageServiceProvider extends ServiceProvider
 
         $this->app['imagy'] = $this->app->share(function ($app) {
             $factory = new InterventionFactory();
-            $thumbnailManager = new ThumbnailsManager($app['config'], $app['modules']);
+            $thumbnailManager = new ThumbnailManagerRepository($app['config'], $app['modules']);
 
             return new Imagy($factory, $thumbnailManager, $app['config']);
         });

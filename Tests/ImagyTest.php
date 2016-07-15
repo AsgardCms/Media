@@ -5,7 +5,7 @@ namespace Modules\Media\Tests;
 use Illuminate\Support\Facades\App;
 use Modules\Media\Image\Imagy;
 use Modules\Media\Image\Intervention\InterventionFactory;
-use Modules\Media\Image\ThumbnailsManager;
+use Modules\Media\Image\ThumbnailManagerRepository;
 use Modules\Media\ValueObjects\MediaPath;
 
 class ImagyTest extends MediaTestCase
@@ -37,7 +37,7 @@ class ImagyTest extends MediaTestCase
         $this->config = App::make('Illuminate\Contracts\Config\Repository');
         $module = App::make('modules');
         $this->finder = App::make('Illuminate\Filesystem\Filesystem');
-        $this->imagy = new Imagy(new InterventionFactory(), new ThumbnailsManager($this->config, $module), $this->config);
+        $this->imagy = new Imagy(new InterventionFactory(), new ThumbnailManagerRepository($this->config, $module), $this->config);
 
         $this->testbenchPublicPath = __DIR__ . '/../vendor/orchestra/testbench/fixture/public/';
         $this->mediaPath = __DIR__ . '/Fixtures/';

@@ -4,7 +4,7 @@ namespace Modules\Media\Image;
 
 use Illuminate\Contracts\Config\Repository;
 
-class ThumbnailsManager
+class ThumbnailManagerRepository
 {
     /**
      * @var Module
@@ -14,6 +14,10 @@ class ThumbnailsManager
      * @var Repository
      */
     private $config;
+    /**
+     * @var array
+     */
+    private $thumbnails = [];
 
     /**
      * @param Repository $config
@@ -22,6 +26,11 @@ class ThumbnailsManager
     {
         $this->module = app('modules');
         $this->config = $config;
+    }
+
+    public function registerThumbnail($name, array $filters)
+    {
+        $this->thumbnails[] = Thumbnail::make([$name => $filters]);
     }
 
     /**
