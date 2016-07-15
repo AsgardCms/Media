@@ -48,4 +48,10 @@ class ThumbnailsManagerTest extends MediaTestCase
 
         $this->assertEquals($expected, $this->thumbnailManager->find('mediumThumb'));
     }
+
+    /** @test */
+    public function it_returns_empty_array_if_no_thumbnail_found()
+    {
+        $this->assertEquals([], $this->thumbnailManager->find('someRandomThumb'));
+    }
 }
