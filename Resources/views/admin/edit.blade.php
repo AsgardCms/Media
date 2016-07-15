@@ -25,6 +25,8 @@
                         @include('media::admin.partials.edit-fields', ['lang' => $locale])
                     </div>
                 <?php endforeach; ?>
+                <hr>
+                @tags('asgardcms/media', $file)
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary btn-flat">{{ trans('core::core.button.update') }}</button>
                     <button class="btn btn-default btn-flat" name="button" type="reset">{{ trans('core::core.button.reset') }}</button>

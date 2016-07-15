@@ -27,8 +27,12 @@ class RebuildThumbnails extends Job implements ShouldQueue
         $imagy = app('imagy');
 
         foreach ($this->paths as $path) {
-            app('log')->info('Generating thumbnails for path: ' . $path);
-            $imagy->createAll($path);
+            try {
+                $imagy->createAll($path);
+                app('log')->info('Generating thumbnails for path: ' . $path);
+            } catch (\Exception $e) {
+                app('log')->warning('File not found: ' . $path);
+            }
         }
     }
 }

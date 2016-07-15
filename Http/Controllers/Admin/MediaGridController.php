@@ -3,7 +3,7 @@
 namespace Modules\Media\Http\Controllers\Admin;
 
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
-use Modules\Media\Image\ThumbnailsManager;
+use Modules\Media\Image\ThumbnailManager;
 use Modules\Media\Repositories\FileRepository;
 
 class MediaGridController extends AdminBaseController
@@ -13,11 +13,11 @@ class MediaGridController extends AdminBaseController
      */
     private $file;
     /**
-     * @var ThumbnailsManager
+     * @var ThumbnailManager
      */
     private $thumbnailsManager;
 
-    public function __construct(FileRepository $file, ThumbnailsManager $thumbnailsManager)
+    public function __construct(FileRepository $file, ThumbnailManager $thumbnailsManager)
     {
         parent::__construct();
 

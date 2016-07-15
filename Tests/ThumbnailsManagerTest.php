@@ -2,25 +2,50 @@
 
 namespace Modules\Tests;
 
-use Modules\Media\Image\ThumbnailsManager;
+use Modules\Media\Image\ThumbnailManager;
 use Modules\Media\Tests\MediaTestCase;
 
 class ThumbnailsManagerTest extends MediaTestCase
 {
     /**
-     * @var \Modules\Media\Image\ThumbnailsManager
+     * @var ThumbnailManager
      */
     private $thumbnailManager;
 
     public function setUp()
     {
         parent::setUp();
-        $this->thumbnailManager = new ThumbnailsManager(app('config'));
+        $this->thumbnailManager = app(ThumbnailManager::class);
     }
 
     /** @test */
-    public function it_is_true()
+    public function it_initialises_empty_array()
     {
-        $this->assertTrue(true);
+        $this->assertCount(2, $this->thumbnailManager->all());
+    }
+
+    /** @test */
+    public function it_can_add_a_thumbnail()
+    {
+        $this->thumbnailManager->registerThumbnail('coolThumb', []);
+
+        $this->assertCount(3, $this->thumbnailManager->all());
+    }
+
+    /** @test */
+    public function it_can_find_a_thumbnail()
+    {
+        $expected = [
+            'resize' => [
+                'width' => 180,
+                'height' => null,
+                'callback' => function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                },
+            ],
+        ];
+
+        $this->assertEquals($expected, $this->thumbnailManager->find('mediumThumb'));
     }
 }

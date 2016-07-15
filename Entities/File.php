@@ -7,15 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Media\Helpers\FileHelper;
 use Modules\Media\Image\Facade\Imagy;
 use Modules\Media\ValueObjects\MediaPath;
+use Modules\Tag\Contracts\TaggableInterface;
+use Modules\Tag\Traits\NamespacedEntity;
+use Modules\Tag\Traits\TaggableTrait;
 
 /**
  * Class File
  * @package Modules\Media\Entities
  * @property \Modules\Media\ValueObjects\MediaPath path
  */
-class File extends Model
+class File extends Model implements TaggableInterface
 {
-    use Translatable;
+    use Translatable, NamespacedEntity, TaggableTrait;
     /**
      * All the different images types where thumbnails should be created
      * @var array
@@ -38,6 +41,7 @@ class File extends Model
         'folder_id',
     ];
     protected $appends = ['path_string', 'media_type'];
+    protected static $entityNamespace = 'asgardcms/media';
 
     public function getPathAttribute($value)
     {
