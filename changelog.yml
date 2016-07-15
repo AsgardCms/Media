@@ -3,6 +3,7 @@ versions:
     "2.0@unreleased":
         added:
             - Laravel 5.2 compatibility
+            - New way to define thumbnails, no more via a config file but via a class.
         changed:
             - Using new more flexible way of handle permissions via middleware
             - Protecting api routes with api admin middleware
