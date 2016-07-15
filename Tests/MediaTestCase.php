@@ -13,6 +13,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider;
 use Modules\Core\Providers\CoreServiceProvider;
 use Modules\Media\Providers\MediaServiceProvider;
+use Modules\Tag\Providers\TagServiceProvider;
 use Nwidart\Modules\LaravelModulesServiceProvider;
 use Nwidart\Modules\Providers\BootstrapServiceProvider;
 use Orchestra\Testbench\TestCase;
@@ -26,6 +27,8 @@ abstract class MediaTestCase extends TestCase
             LaravelModulesServiceProvider::class,
             BootstrapServiceProvider::class,
             CoreServiceProvider::class,
+            TagServiceProvider::class,
+            \Modules\Media\Image\ImageServiceProvider::class,
             MediaServiceProvider::class,
             ImageServiceProvider::class,
             LaravelLocalizationServiceProvider::class,
@@ -46,20 +49,8 @@ abstract class MediaTestCase extends TestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $conf = [
-            'smallThumb' => [
-                'fit' => [
-                    'width' => 50,
-                    'height' => 50,
-                    'callback' => function ($constraint) {
-                        $constraint->upsize();
-                    },
-                ],
-            ],
-        ];
         $app['path.base'] = __DIR__ . '/..';
         $app['config']->set('asgard.media.config', ['filesystem' => 'local']);
-        $app['config']->set('asgard.media.thumbnails', $conf);
         $app['config']->set('modules', [
             'namespace' => 'Modules',
         ]);
