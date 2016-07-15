@@ -17,11 +17,14 @@ class ImageServiceProvider extends ServiceProvider
     {
         $this->app->bind(ImageFactoryInterface::class, InterventionFactory::class);
 
+        $this->app->singleton(ThumbnailManager::class, function() {
+            return new ThumbnailManagerRepository();
+        });
+
         $this->app['imagy'] = $this->app->share(function ($app) {
             $factory = new InterventionFactory();
-            $thumbnailManager = new ThumbnailManagerRepository($app['config'], $app['modules']);
 
-            return new Imagy($factory, $thumbnailManager, $app['config']);
+            return new Imagy($factory, $app[ThumbnailManager::class], $app['config']);
         });
 
         $this->app->booting(function () {
