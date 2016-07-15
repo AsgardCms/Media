@@ -43,7 +43,6 @@ class MediaServiceProvider extends ServiceProvider
 
         $this->publishConfig('media', 'config');
         $this->publishConfig('media', 'permissions');
-        $this->publishConfig('media', 'thumbnails');
 
         $events->listen('*', HandleMediaStorage::class);
         $events->listen('*', RemovePolymorphicLink::class);
