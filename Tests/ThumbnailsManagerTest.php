@@ -21,6 +21,31 @@ class ThumbnailsManagerTest extends MediaTestCase
     /** @test */
     public function it_initialises_empty_array()
     {
-        $this->assertEquals([], $this->thumbnailManager->all());
+        $this->assertCount(2, $this->thumbnailManager->all());
+    }
+
+    /** @test */
+    public function it_can_add_a_thumbnail()
+    {
+        $this->thumbnailManager->registerThumbnail('coolThumb', []);
+
+        $this->assertCount(3, $this->thumbnailManager->all());
+    }
+
+    /** @test */
+    public function it_can_find_a_thumbnail()
+    {
+        $expected = [
+            'resize' => [
+                'width' => 180,
+                'height' => null,
+                'callback' => function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                },
+            ],
+        ];
+
+        $this->assertEquals($expected, $this->thumbnailManager->find('mediumThumb'));
     }
 }
