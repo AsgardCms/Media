@@ -1,40 +1,19 @@
-<style>
-    .jsThumbnailImageWrapper figure {
-        position: relative;
-        display: inline-block;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        background-color: #fff;
-        border: 1px solid #eee;
-        padding: 3px;
-        border-radius: 3px;
-    }
-    .jsThumbnailImageWrapper i.removeIcon {
-        position: absolute;
-        top:-10px;
-        right:-10px;
-        color: #f56954;
-        font-size: 2em;
-        background: white;
-        border-radius: 20px;
-        height: 25px;
-    }
-</style>
 <script>
-    if (typeof window.openMediaWindowSingle === 'undefined') {
+    if (typeof window.openMediaWindowSingleOld === 'undefined') {
         window.mediaZone = '';
-        window.openMediaWindowSingle = function (event, zone) {
+        window.openMediaWindowSingleOld = function (event, zone) {
             window.mediaZone = zone;
             window.single = true;
+            window.old = true;
             window.zoneWrapper = $(event.currentTarget).siblings('.jsThumbnailImageWrapper');
-            window.open('{!! route('media.grid.select') !!}', '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');
+            window.open(Asgard.mediaGridSelectUrl, '_blank', 'menubar=no,status=no,toolbar=no,scrollbars=yes,height=500,width=1000');
         };
     }
-    if (typeof window.includeMediaSingle === 'undefined') {
-        window.includeMediaSingle = function (mediaId) {
+    if (typeof window.includeMediaSingleOld === 'undefined') {
+        window.includeMediaSingleOld = function (mediaId) {
             $.ajax({
                 type: 'POST',
-                url: '{{ route('api.media.link') }}',
+                url: Asgard.mediaLinkUrl,
                 data: {
                     'mediaId': mediaId,
                     '_token': '{{ csrf_token() }}',
@@ -43,16 +22,22 @@
                     'zone': window.mediaZone
                 },
                 success: function (data) {
-                	if (data.result.mediaType === 'image') {
-                    	var mediaPlaceholder = '<img src="' + data.result.path + '" alt=""/>';
-                	}
-                	else {
-                        var mediaPlaceholder = '<video src="' + data.result.path + '" controls width="320"></video>';
+                    var mediaPlaceholder;
+
+                    if (data.result.mediaType === 'image') {
+                        mediaPlaceholder = '<img src="' + data.result.path + '" alt=""/>';
+                    } else if (data.result.mediaType == 'video') {
+                        mediaPlaceholder = '<video src="' + data.result.path + '" controls width="320"></video>';
+                    } else if (data.result.mediaType == 'audio') {
+                        mediaPlaceholder = '<audio controls><source src="' + data.result.path + '" type="' + data.result.mimetype + '"></audio>'
+                    } else {
+                        mediaPlaceholder = '<i class="fa fa-file" style="font-size: 50px;"></i>';
                     }
-                    var html = '<figure data-id="'+ data.result.imageableId +'">' + mediaPlaceholder +
-                    	'<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
-                    	'<i class="fa fa-times-circle removeIcon"></i>' +
-                    	'</a></figure>';
+
+                    var html = '<figure data-id="' + data.result.imageableId + '">' + mediaPlaceholder +
+                            '<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
+                            '<i class="fa fa-times-circle removeIcon"></i>' +
+                            '</a></figure>';
                     window.zoneWrapper.append(html).fadeIn('slow', function() {
                         toggleButton($(this));
                     });
@@ -65,7 +50,7 @@
     {!! Form::label($zone, ucwords(str_replace('_', ' ', $zone)) . ':') !!}
     <div class="clearfix"></div>
 
-    <a class="btn btn-primary btn-browse" onclick="openMediaWindowSingle(event, '{{ $zone }}');" <?php echo (isset(${$zone}->path))?'style="display:none;"':'' ?>><i class="fa fa-upload"></i>
+    <a class="btn btn-primary btn-browse" onclick="openMediaWindowSingleOld(event, '{{ $zone }}');" <?php echo (isset(${$zone}->path))?'style="display:none;"':'' ?>><i class="fa fa-upload"></i>
         {{ trans('media::media.Browse') }}
     </a>
 
@@ -74,8 +59,12 @@
     <div class="jsThumbnailImageWrapper jsSingleThumbnailWrapper">
         <?php if (isset(${$zone}->path)): ?>
             <figure data-id="{{ ${$zone}->pivot->id }}">
-            <?php if (${$zone}->isImage()): ?>
+            <?php if (${$zone}->media_type == 'image'): ?>
                 <img src="{{ Imagy::getThumbnail(${$zone}->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ ${$zone}->alt_attribute }}"/>
+            <?php elseif (${$zone}->media_type == 'video'): ?>
+                <video src="{{ ${$zone}->path }}"  controls width="320"></video>
+            <?php elseif (${$zone}->media_type == 'audio'): ?>
+                <audio controls><source src="{{ ${$zone}->path }}" type="{{ ${$zone}->mimetype }}"></audio>
             <?php else: ?>
                 <i class="fa fa-file" style="font-size: 50px;"></i>
             <?php endif; ?>
@@ -94,7 +83,7 @@
             var imageableId = $(this).data('id');
             $.ajax({
                 type: 'POST',
-                url: '{{ route('api.media.unlink') }}',
+                url: Asgard.mediaUnlinkUrl,
                 data: {
                     'imageableId': imageableId,
                     '_token': '{{ csrf_token() }}'

@@ -25,11 +25,15 @@ class HandleMediaStorage
         $postMedias = array_get($event->getSubmissionData(), 'medias_multi', []);
 
         foreach ($postMedias as $zone => $attributes) {
+            $sync_list = [];
             $orders = $this->getOrdersFrom($attributes);
             foreach (array_get($attributes, 'files', []) as $fileId) {
-                $order = array_search($fileId, $orders);
-                $entity->files()->attach($fileId, ['imageable_type' => get_class($entity), 'zone' => $zone, 'order' => $order]);
+                $sync_list[$fileId] = [];
+                $sync_list[$fileId]['imageable_type'] = get_class($entity);
+                $sync_list[$fileId]['zone'] = $zone;
+                $sync_list[$fileId]['order'] = (int) array_search($fileId, $orders);
             }
+            $entity->filesByZone($zone)->sync($sync_list);
         }
     }
 
@@ -43,7 +47,7 @@ class HandleMediaStorage
         $postMedia = array_get($event->getSubmissionData(), 'medias_single', []);
 
         foreach ($postMedia as $zone => $fileId) {
-            $entity->files()->attach($fileId, ['imageable_type' => get_class($entity), 'zone' => $zone, 'order' => null]);
+            $entity->filesByZone($zone)->sync([$fileId => ['imageable_type' => get_class($entity), 'zone' => $zone, 'order' => null]]);
         }
     }
 

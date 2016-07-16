@@ -83,7 +83,10 @@ class Imagy
     public function getThumbnail($originalImage, $thumbnail)
     {
         if (!$this->isImage($originalImage)) {
-            return $originalImage;
+            if ($originalImage instanceof MediaPath) {
+                return $originalImage->getUrl();
+            }
+            return (new MediaPath($originalImage))->getRelativeUrl();
         }
 
         $path = config('asgard.media.config.files-path') . $this->newFilename($originalImage, $thumbnail);

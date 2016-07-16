@@ -4,6 +4,7 @@ namespace Modules\Media\Entities;
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Media\Helpers\FileHelper;
 use Modules\Media\Image\Facade\Imagy;
 use Modules\Media\ValueObjects\MediaPath;
 use Modules\Tag\Contracts\TaggableInterface;
@@ -39,7 +40,7 @@ class File extends Model implements TaggableInterface
         'filesize',
         'folder_id',
     ];
-    protected $appends = ['path_string'];
+    protected $appends = ['path_string', 'media_type'];
     protected static $entityNamespace = 'asgardcms/media';
 
     public function getPathAttribute($value)
@@ -50,6 +51,11 @@ class File extends Model implements TaggableInterface
     public function getPathStringAttribute()
     {
         return (string) $this->path;
+    }
+
+    public function getMediaTypeAttribute()
+    {
+        return FileHelper::getTypeByMimetype($this->mimetype);
     }
 
     public function isImage()

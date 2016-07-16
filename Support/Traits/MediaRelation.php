@@ -12,4 +12,18 @@ trait MediaRelation
     {
         return $this->morphToMany('Modules\Media\Entities\File', 'imageable', 'media__imageables')->withPivot('zone', 'id')->withTimestamps()->orderBy('order');
     }
+
+    /**
+     * Make the Many to Many Morph to Relation with specific zone
+     * @param string $zone
+     * @return object
+     */
+    public function filesByZone($zone)
+    {
+        return $this->morphToMany('Modules\Media\Entities\File', 'imageable', 'media__imageables')
+            ->withPivot('zone', 'id')
+            ->wherePivot('zone', '=', $zone)
+            ->withTimestamps()
+            ->orderBy('order');
+    }
 }
