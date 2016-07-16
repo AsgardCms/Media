@@ -33,7 +33,8 @@
   "require-dev": {
     "phpunit/phpunit": "~4.0",
     "orchestra/testbench": "~3.2",
-    "league/flysystem-aws-s3-v3": "~1.0"
+    "league/flysystem-aws-s3-v3": "~1.0",
+    "mockery/mockery": "^0.9.5"
   },
   "autoload-dev": {
     "psr-4": {
