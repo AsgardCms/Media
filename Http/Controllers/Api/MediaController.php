@@ -96,7 +96,7 @@ class MediaController extends Controller
         $file = $this->file->find($imageable->file_id);
 
         $mediaType = FileHelper::getTypeByMimetype($file->mimetype);
-        if ($mediaType == 'image') {
+        if ($mediaType === 'image') {
             $thumbnailPath = $this->imagy->getThumbnail($file->path, 'mediumThumb');
         } else {
             $thumbnailPath = $file->path->getRelativeUrl();
