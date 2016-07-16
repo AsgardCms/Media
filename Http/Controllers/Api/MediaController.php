@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
+use Modules\Media\Entities\File;
 use Modules\Media\Events\FileWasLinked;
 use Modules\Media\Events\FileWasUnlinked;
 use Modules\Media\Events\FileWasUploaded;
@@ -96,11 +97,8 @@ class MediaController extends Controller
         $file = $this->file->find($imageable->file_id);
 
         $mediaType = FileHelper::getTypeByMimetype($file->mimetype);
-        if ($mediaType === 'image') {
-            $thumbnailPath = $this->imagy->getThumbnail($file->path, 'mediumThumb');
-        } else {
-            $thumbnailPath = $file->path->getRelativeUrl();
-        }
+
+        $thumbnailPath = $this->getThumbnailPathFor($mediaType, $file);
 
         event(new FileWasLinked($file, $entity));
 
@@ -156,5 +154,20 @@ class MediaController extends Controller
         }
 
         return Response::json(['error' => false, 'message' => 'The items have been reorder.']);
+    }
+
+    /**
+     * Get the path for the given file and type
+     * @param string $mediaType
+     * @param File $file
+     * @return string
+     */
+    private function getThumbnailPathFor($mediaType, File $file)
+    {
+        if ($mediaType === 'image') {
+            return $this->imagy->getThumbnail($file->path, 'mediumThumb');
+        }
+
+        return $file->path->getRelativeUrl();
     }
 }
