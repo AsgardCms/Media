@@ -55,5 +55,12 @@ abstract class MediaTestCase extends TestCase
             'namespace' => 'Modules',
         ]);
         $app['config']->set('modules.paths.modules', realpath(__DIR__ . '/../Modules'));
+        $app['config']->set('database.default', 'sqlite');
+        $app['config']->set('database.connections.sqlite', array(
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ));
+        $app['config']->set('translatable.locales', ['en', 'fr']);
     }
 }
