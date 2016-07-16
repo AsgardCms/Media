@@ -2,7 +2,6 @@
 
 namespace Modules\Media\Tests;
 
-use Illuminate\Contracts\Console\Kernel;
 use Modules\Media\Entities\File;
 use Modules\Media\Repositories\FileRepository;
 use Modules\Media\ValueObjects\MediaPath;
@@ -98,18 +97,17 @@ class FileTest extends MediaTestCase
     {
         // Relative to the testbench app folder: vendors/orchestra/testbench/src/fixture
         $migrationsPath = 'Database/Migrations';
-        $artisan = $this->app->make(Kernel::class);
         // Makes sure the migrations table is created
-        $artisan->call('migrate', [
+        $this->artisan('migrate', [
             '--database' => 'sqlite',
             '--path'     => $migrationsPath,
         ]);
         // We empty all tables
-        $artisan->call('migrate:reset', [
+        $this->artisan('migrate:reset', [
             '--database' => 'sqlite',
         ]);
         // Migrate
-        $artisan->call('migrate', [
+        $this->artisan('migrate', [
             '--database' => 'sqlite',
             '--path'     => $migrationsPath,
         ]);
