@@ -2,6 +2,8 @@
 
 namespace Modules\Media\Support\Traits;
 
+use Modules\Media\Entities\File;
+
 trait MediaRelation
 {
     /**
@@ -10,7 +12,7 @@ trait MediaRelation
      */
     public function files()
     {
-        return $this->morphToMany('Modules\Media\Entities\File', 'imageable', 'media__imageables')->withPivot('zone', 'id')->withTimestamps()->orderBy('order');
+        return $this->morphToMany(File::class, 'imageable', 'media__imageables')->withPivot('zone', 'id')->withTimestamps()->orderBy('order');
     }
 
     /**
@@ -20,7 +22,7 @@ trait MediaRelation
      */
     public function filesByZone($zone)
     {
-        return $this->morphToMany('Modules\Media\Entities\File', 'imageable', 'media__imageables')
+        return $this->morphToMany(File::class, 'imageable', 'media__imageables')
             ->withPivot('zone', 'id')
             ->wherePivot('zone', '=', $zone)
             ->withTimestamps()
