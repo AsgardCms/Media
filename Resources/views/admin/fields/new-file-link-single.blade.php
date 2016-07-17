@@ -24,6 +24,9 @@
                 <i class="fa fa-times-circle removeIcon"></i>
             </a>
         </figure>
+        <input type="hidden" name="medias_single[{{ $zone }}]" value="{{ ${$zone}->pivot->id }}">
+        <?php else: ?>
+        <input type="hidden" name="medias_single[{{ $zone }}]" value="">
         <?php endif; ?>
     </div>
 </div>
