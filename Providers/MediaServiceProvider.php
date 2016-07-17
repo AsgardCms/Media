@@ -6,6 +6,7 @@ use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\Traits\CanPublishConfiguration;
+use Modules\Media\Blade\MediaSingleDirective;
 use Modules\Media\Console\RefreshThumbnailCommand;
 use Modules\Media\Entities\File;
 use Modules\Media\Events\Handlers\HandleMediaStorage;
@@ -35,6 +36,10 @@ class MediaServiceProvider extends ServiceProvider
         $this->registerBindings();
 
         $this->registerCommands();
+
+        $this->app->singleton('media.single.directive', function ($app) {
+            return new MediaSingleDirective($app[FileRepository::class]);
+        });
     }
 
     public function boot(DispatcherContract $events)
@@ -50,6 +55,7 @@ class MediaServiceProvider extends ServiceProvider
 
         $this->app[TagManager::class]->registerNamespace(new File());
         $this->registerThumbnails();
+        $this->registerBladeTags();
     }
 
     /**
@@ -116,5 +122,15 @@ class MediaServiceProvider extends ServiceProvider
                 },
             ],
         ]);
+    }
+
+    private function registerBladeTags()
+    {
+        if (app()->environment() === 'testing') {
+            return;
+        }
+        $this->app['blade.compiler']->directive('mediaSingle', function ($value) {
+            return "<?php echo MediaSingleDirective::show(array$value); ?>";
+        });
     }
 }

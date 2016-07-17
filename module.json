@@ -15,7 +15,8 @@
     "aliases": {
         "Image": "Intervention\\Image\\Facades\\Image",
         "Imagy": "Modules\\Media\\Image\\Facade\\Imagy",
-        "FileHelper": "Modules\\Media\\Helpers\\FileHelper"
+        "FileHelper": "Modules\\Media\\Helpers\\FileHelper",
+        "MediaSingleDirective": "Modules\\Media\\Blade\\Facades\\MediaSingleDirective"
     },
     "files": [
         "composers.php"
