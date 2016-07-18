@@ -11,11 +11,11 @@
             <?php foreach ($media as $file): ?>
                 <?php $order_list[$zone][] = $file->id; ?>
                 <figure data-id="{{ $file->id }}">
-                    <?php if ($file->media_type == 'image'): ?>
+                    <?php if ($file->media_type === 'image'): ?>
                     <img src="{{ Imagy::getThumbnail($file->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ $file->alt_attribute }}"/>
-                    <?php elseif ($file->media_type == 'video'): ?>
+                    <?php elseif ($file->media_type === 'video'): ?>
                     <video src="{{ $file->path }}"  controls width="320"></video>
-                    <?php elseif ($file->media_type == 'audio'): ?>
+                    <?php elseif ($file->media_type === 'audio'): ?>
                     <audio controls><source src="{{ $file->path }}" type="{{ $file->mimetype }}"></audio>
                     <?php else: ?>
                     <i class="fa fa-file" style="font-size: 50px;"></i>
