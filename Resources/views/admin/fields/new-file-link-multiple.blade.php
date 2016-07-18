@@ -6,10 +6,9 @@
     </a>
     <div class="clearfix"></div>
     <div class="jsThumbnailImageWrapper">
-        <?php $zoneVar = "{$zone}Files" ?>
-        <?php if (isset($$zoneVar) && !$$zoneVar->isEmpty()): ?>
+        <?php if (isset($media) && !$media->isEmpty()): ?>
             <?php $order_list = [] ?>
-            <?php foreach ($$zoneVar as $file): ?>
+            <?php foreach ($media as $file): ?>
                 <?php $order_list[$zone][] = $file->id; ?>
                 <figure data-id="{{ $file->id }}">
                     <?php if ($file->media_type == 'image'): ?>
