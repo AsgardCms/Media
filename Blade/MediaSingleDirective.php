@@ -2,8 +2,6 @@
 
 namespace Modules\Media\Blade;
 
-use Modules\Media\Repositories\FileRepository;
-
 class MediaSingleDirective
 {
     /**
