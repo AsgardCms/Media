@@ -10,7 +10,7 @@
 
     <div class="jsThumbnailImageWrapper jsSingleThumbnailWrapper">
         <?php if (isset($media->path)): ?>
-        <figure data-id="{{ $media->pivot->id }}">
+        <figure data-id="{{ $media->id }}">
             <?php if ($media->media_type === 'image'): ?>
             <img src="{{ Imagy::getThumbnail($media->path, (isset($thumbnailSize) ? $thumbnailSize : 'mediumThumb')) }}" alt="{{ $media->alt_attribute }}"/>
             <?php elseif ($media->media_type === 'video'): ?>
@@ -24,7 +24,7 @@
                 <i class="fa fa-times-circle removeIcon"></i>
             </a>
         </figure>
-        <input type="hidden" name="medias_single[{{ $zone }}]" value="{{ $media->pivot->id }}">
+        <input type="hidden" name="medias_single[{{ $zone }}]" value="{{ $media->id }}">
         <?php else: ?>
         <input type="hidden" name="medias_single[{{ $zone }}]" value="">
         <?php endif; ?>
