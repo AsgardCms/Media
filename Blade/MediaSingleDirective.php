@@ -18,16 +18,6 @@ class MediaSingleDirective
      * @var string|null
      */
     private $view;
-    /**
-     * @var FileRepository
-     */
-    private $file;
-
-    public function __construct(FileRepository $file)
-    {
-        $this->file = $file;
-    }
-
 
     public function show($arguments)
     {
@@ -37,7 +27,7 @@ class MediaSingleDirective
         $zone = $this->zone;
 
         if ($this->entity !== null) {
-            $media = $this->file->findFileByZoneForEntity($this->zone, $this->entity);
+            $media = $this->entity->filesByZone($this->zone)->first();
         }
 
         return view($view, compact('media', 'zone'));

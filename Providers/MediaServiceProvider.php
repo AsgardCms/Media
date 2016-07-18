@@ -38,7 +38,7 @@ class MediaServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->app->singleton('media.single.directive', function ($app) {
-            return new MediaSingleDirective($app[FileRepository::class]);
+            return new MediaSingleDirective();
         });
     }
 
