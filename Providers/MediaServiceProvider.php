@@ -6,6 +6,7 @@ use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\Traits\CanPublishConfiguration;
+use Modules\Media\Blade\MediaMultipleDirective;
 use Modules\Media\Blade\MediaSingleDirective;
 use Modules\Media\Console\RefreshThumbnailCommand;
 use Modules\Media\Entities\File;
@@ -37,8 +38,11 @@ class MediaServiceProvider extends ServiceProvider
 
         $this->registerCommands();
 
-        $this->app->singleton('media.single.directive', function ($app) {
+        $this->app->bind('media.single.directive', function () {
             return new MediaSingleDirective();
+        });
+        $this->app->bind('media.multiple.directive', function () {
+            return new MediaMultipleDirective();
         });
     }
 
@@ -131,6 +135,9 @@ class MediaServiceProvider extends ServiceProvider
         }
         $this->app['blade.compiler']->directive('mediaSingle', function ($value) {
             return "<?php echo MediaSingleDirective::show(array$value); ?>";
+        });
+        $this->app['blade.compiler']->directive('mediaMultiple', function ($value) {
+            return "<?php echo MediaMultipleDirective::show(array$value); ?>";
         });
     }
 }
