@@ -4,11 +4,11 @@ namespace Modules\Media\Entities;
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Traits\NamespacedEntity;
 use Modules\Media\Helpers\FileHelper;
 use Modules\Media\Image\Facade\Imagy;
 use Modules\Media\ValueObjects\MediaPath;
 use Modules\Tag\Contracts\TaggableInterface;
-use Modules\Tag\Traits\NamespacedEntity;
 use Modules\Tag\Traits\TaggableTrait;
 
 /**
