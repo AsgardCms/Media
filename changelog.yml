@@ -1,5 +1,8 @@
 url: https://github.com/AsgardCms/Media
 versions:
+    "1.25.8"
+        changed:
+            - Using correct class to remove a file
     "1.25.7":
         changed:
             - Fixing missing <code>"</code>
