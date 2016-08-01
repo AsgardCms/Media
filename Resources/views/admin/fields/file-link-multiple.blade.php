@@ -69,7 +69,7 @@
                         var mediaPlaceholder = '<video src="' + data.result.path + '" controls + width="320"></video>';
                     }
                     var html = '<figure data-id="'+ data.result.imageableId +'">' + mediaPlaceholder +
-                    	'<a class="jsRemoveSimpleLink" href="#" data-id="' + data.result.imageableId + '">' +
+                    	'<a class="jsRemoveLink" href="#" data-id="' + data.result.imageableId + '">' +
                     	'<i class="fa fa-times-circle removeIcon"></i>' +
                     	'</a></figure>';
                     window.zoneWrapper.append(html).fadeIn();
