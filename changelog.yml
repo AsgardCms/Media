@@ -1,6 +1,9 @@
 url: https://github.com/AsgardCms/Media
 versions:
-    "1.25.8"
+    "1.26.0":
+        added:
+            - Option to set the image quality of thumbnails
+    "1.25.8":
         changed:
             - Using correct class to remove a file
     "1.25.7":
