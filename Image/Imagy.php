@@ -110,7 +110,7 @@ class Imagy
             foreach ($thumbnail->filters() as $manipulation => $options) {
                 $image = $this->imageFactory->make($manipulation)->handle($image, $options);
             }
-            $image = $image->stream(pathinfo($path, PATHINFO_EXTENSION));
+            $image = $image->stream(pathinfo($path, PATHINFO_EXTENSION), array_get($thumbnail->filters(), 'quality', 90));
             $this->writeImage($filename, $image);
         }
     }
