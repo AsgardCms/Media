@@ -17,7 +17,7 @@ class ImageServiceProvider extends ServiceProvider
     {
         $this->app->bind(ImageFactoryInterface::class, InterventionFactory::class);
 
-        $this->app->singleton(ThumbnailManager::class, function() {
+        $this->app->singleton(ThumbnailManager::class, function () {
             return new ThumbnailManagerRepository();
         });
 

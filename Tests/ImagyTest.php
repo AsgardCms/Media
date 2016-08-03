@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\App;
 use Modules\Media\Image\Imagy;
 use Modules\Media\Image\Intervention\InterventionFactory;
 use Modules\Media\Image\ThumbnailManager;
-use Modules\Media\Image\ThumbnailManagerRepository;
 use Modules\Media\ValueObjects\MediaPath;
 
 class ImagyTest extends MediaTestCase

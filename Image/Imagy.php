@@ -86,6 +86,7 @@ class Imagy
             if ($originalImage instanceof MediaPath) {
                 return $originalImage->getUrl();
             }
+
             return (new MediaPath($originalImage))->getRelativeUrl();
         }
 
