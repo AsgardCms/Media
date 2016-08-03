@@ -34,7 +34,9 @@
     "phpunit/phpunit": "~4.0",
     "orchestra/testbench": "~3.2",
     "league/flysystem-aws-s3-v3": "~1.0",
-    "mockery/mockery": "^0.9.5"
+    "mockery/mockery": "^0.9.5",
+    "phpro/grumphp": "^0.9.1",
+    "friendsofphp/php-cs-fixer": "^1.11"
   },
   "autoload-dev": {
     "psr-4": {
