@@ -76,12 +76,16 @@ class Imagy
 
     /**
      * Return the thumbnail path
-     * @param  string $originalImage
+     * @param  string|File $originalImage
      * @param  string $thumbnail
      * @return string
      */
     public function getThumbnail($originalImage, $thumbnail)
     {
+        if ($originalImage instanceof File) {
+            $originalImage = $originalImage->path;
+        }
+
         if (!$this->isImage($originalImage)) {
             if ($originalImage instanceof MediaPath) {
                 return $originalImage->getUrl();
