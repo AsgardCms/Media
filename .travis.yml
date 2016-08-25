@@ -3,7 +3,6 @@ language: php
 php:
   - 7
   - 5.6
-  - hhvm
 
 env:
   - LARAVEL_VERSION="~5.2" TESTBENCH_VERSION="~3.2"
@@ -21,7 +20,3 @@ notifications:
   email:
     - n.widart@gmail.com
     - josh@joshbrown.me
-
-matrix:
-  allow_failures:
-    - php: hhvm
