@@ -60,6 +60,8 @@ class MediaServiceProvider extends ServiceProvider
         $this->app[TagManager::class]->registerNamespace(new File());
         $this->registerThumbnails();
         $this->registerBladeTags();
+
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
 
     /**
