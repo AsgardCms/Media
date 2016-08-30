@@ -133,7 +133,6 @@ class FileRepositoryTest extends MediaTestCase
         // Makes sure the migrations table is created
         $this->artisan('migrate', [
             '--database' => 'sqlite',
-            '--path'     => $migrationsPath,
         ]);
         // We empty all tables
         $this->artisan('migrate:reset', [
@@ -142,7 +141,6 @@ class FileRepositoryTest extends MediaTestCase
         // Migrate
         $this->artisan('migrate', [
             '--database' => 'sqlite',
-            '--path'     => $migrationsPath,
         ]);
 
         $this->artisan('migrate', [
