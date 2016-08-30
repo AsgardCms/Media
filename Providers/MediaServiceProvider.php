@@ -134,10 +134,10 @@ class MediaServiceProvider extends ServiceProvider
             return;
         }
         $this->app['blade.compiler']->directive('mediaSingle', function ($value) {
-            return "<?php echo MediaSingleDirective::show(array$value); ?>";
+            return "<?php echo MediaSingleDirective::show([$value]); ?>";
         });
         $this->app['blade.compiler']->directive('mediaMultiple', function ($value) {
-            return "<?php echo MediaMultipleDirective::show(array$value); ?>";
+            return "<?php echo MediaMultipleDirective::show([$value]); ?>";
         });
     }
 }
