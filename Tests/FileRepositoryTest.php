@@ -128,8 +128,6 @@ class FileRepositoryTest extends MediaTestCase
 
     private function resetDatabase()
     {
-        // Relative to the testbench app folder: vendors/orchestra/testbench/src/fixture
-        $migrationsPath = 'Database/Migrations';
         // Makes sure the migrations table is created
         $this->artisan('migrate', [
             '--database' => 'sqlite',
