@@ -37,7 +37,8 @@
         <?php if ($file->isImage()): ?>
             <img src="{{ $file->path }}" alt="" style="width: 100%;"/>
         <?php else: ?>
-            <i class="fa fa-file" style="font-size: 50px;"></i>
+            <i class="fa fa-file" style="font-size: 50px;"></i><br>
+            <a target="_blank" href="{{url($file->path)}}">{{$file->filename}}</a>
         <?php endif; ?>
     </div>
 </div>
