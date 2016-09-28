@@ -11,6 +11,8 @@ class AwsS3UrlResolver
      */
     public function resolve(AwsS3Adapter $adapter, $path)
     {
-        return $adapter->getClient()->getObjectUrl(config('filesystems.disks.s3.bucket'), ltrim($path, '/'));
+        $s3Config = config('asgard.media.config.filesystem', 's3');
+
+        return $adapter->getClient()->getObjectUrl(config("filesystems.disks.$s3Config.bucket"), ltrim($path, '/'));
     }
 }
