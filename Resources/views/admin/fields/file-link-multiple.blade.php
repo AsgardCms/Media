@@ -91,7 +91,7 @@
     </a>
     <div class="clearfix"></div>
     <div class="jsThumbnailImageWrapper">
-        <?php $zoneVar = "{$zone}Files"  ?>
+        <?php $zoneVar = "{$zone}"  ?>
         <?php if (isset($$zoneVar)): ?>
             <?php foreach ($$zoneVar as $file): ?>
                 <figure data-id="{{ $file->pivot->id }}">
