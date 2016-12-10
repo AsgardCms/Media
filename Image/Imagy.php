@@ -166,7 +166,7 @@ class Imagy
         foreach ($this->manager->find($thumbnail) as $manipulation => $options) {
             $image = $this->imageFactory->make($manipulation)->handle($image, $options);
         }
-        $image = $image->stream(pathinfo($path, PATHINFO_EXTENSION));
+        $image = $image->stream(pathinfo($path, PATHINFO_EXTENSION), array_get($options, 'quality', 90));
 
         $this->writeImage($filename, $image);
     }
