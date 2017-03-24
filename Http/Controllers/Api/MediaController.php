@@ -15,6 +15,10 @@ use Modules\Media\Http\Requests\UploadMediaRequest;
 use Modules\Media\Image\Imagy;
 use Modules\Media\Repositories\FileRepository;
 use Modules\Media\Services\FileService;
+use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
+use Pion\Laravel\ChunkUpload\Handler\AbstractHandler;
+use Pion\Laravel\ChunkUpload\Handler\ResumableJSUploadHandler;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class MediaController extends Controller
 {
@@ -56,19 +60,37 @@ class MediaController extends Controller
      * @param UploadMediaRequest $request
      * @return Response
      */
-    public function store(UploadMediaRequest $request)
+    public function store(Request $request)
     {
-        $savedFile = $this->fileService->store($request->file('file'));
-
-        if (is_string($savedFile)) {
-            return Response::json([
-                'error' => $savedFile,
-            ], 409);
+        $receiver = new FileReceiver("file", $request, ResumableJSUploadHandler::class);
+    
+        if ($receiver->isUploaded()) {
+            $save = $receiver->receive();
+    
+            if ($save->isFinished()) {
+                $savedFile = $this->fileService->store($save->getFile());
+    
+                if (is_string($savedFile)) {
+                    return Response::json([
+                        'error' => $savedFile,
+                    ], 409);
+                }
+    
+                event(new FileWasUploaded($savedFile));
+    
+                return Response::json($savedFile->toArray());
+            }
+            else {
+                $handler = $save->handler();
+    
+                return response()->json([
+                    "done" => $handler->getPercentageDone()
+                ]);
+            }
         }
-
-        event(new FileWasUploaded($savedFile));
-
-        return Response::json($savedFile->toArray());
+        else {
+            throw new UploadMissingFileException();
+        }
     }
 
     /**
